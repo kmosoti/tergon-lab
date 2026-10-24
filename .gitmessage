@@ -1,0 +1,4 @@
+# type(scope): concrete change
+# Types: feat, fix, test, docs, exp, refactor, build, ci, chore
+# Explain the problem and evidence when the subject is insufficient.
+# Refs #issue; breaking contracts require an ADR and owner approval.

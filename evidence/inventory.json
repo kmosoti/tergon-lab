@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "files": [
+    {
+      "path": "experiments/quantization-v1.json",
+      "bytes": 430,
+      "sha256": "094c7db94ae11197f19fad870e03147e41dffd9e3909327309d3e48c92e3f093"
+    },
+    {
+      "path": "research/history/active-analysis.json",
+      "bytes": 292725,
+      "sha256": "401374fafb60cc9c0d2dba82d8a0ec892ce80f61ee3d28af59e1809aa2421131"
+    },
+    {
+      "path": "research/history/active-verification.json",
+      "bytes": 3273,
+      "sha256": "aa2bdef55e1b52504df4c130fd7c070ab1f8a4f5ec770c1d950b9874d92d3ac3"
+    },
+    {
+      "path": "research/history/artifact-inventory.json",
+      "bytes": 26102,
+      "sha256": "653d05ed143d4ee3b8cf45c7a10c5b439d5f7f8bed48e0e12405d9b0aec2eb22"
+    },
+    {
+      "path": "research/history/OBSERVATIONS.md",
+      "bytes": 6627,
+      "sha256": "bde83374e55273c28e1ed90f3b9bdb4d8ca37adaa97a2be9ab4942431847b2a9"
+    }
+  ]
+}
