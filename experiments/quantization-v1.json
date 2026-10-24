@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "hypothesis": "The native packed representation round-trips and the CPU bridge preserves decoded values exactly.",
+  "baseline": "Scalar decoding of the same quantized weights; this does not test model quality or speed.",
+  "seeds": [17, 29, 43],
+  "weights_per_seed": 1025,
+  "group_size": 256,
+  "budget": "Three deterministic CPU fixtures; no training, GPU work, or timing comparison.",
+  "tolerance": 0.0
+}

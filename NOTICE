@@ -1,0 +1,17 @@
+Tergon Lab
+Copyright 2026 Kennedy Mosoti and contributors.
+
+New implementation code in this repository is licensed under Apache-2.0.
+Historical documents/data under research/history retain their original
+provenance; importing them does not relicense any upstream dependencies or code.
+
+Burn 0.22.1 is an external dependency, MIT OR Apache-2.0. Cargo.lock records
+resolved dependencies; each dependency retains its own license and notices.
+
+The absmean ternary research direction builds on the BitNet family. The native
+two-bit layout in tergon-math is a project definition, not an implementation of
+GGUF TQ1_0/TQ2_0, I2_S, or TL kernels. It makes no lossless-FP-model claim.
+
+Future Muon work must attribute Keller Jordan's original algorithm and relevant
+scaling/distributed adaptations. No Muon implementation is included yet.
+See docs/wiki/References.md for sources and their limits.

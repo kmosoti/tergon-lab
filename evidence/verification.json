@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "source_revision": "90493482f08089b565cc9dadbc6915fed4f12d87",
+  "date_utc": "2026-10-24",
+  "hardware": {
+    "architecture": "x86_64",
+    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "cpu_cgroup_quota": "400000 100000",
+    "memory_cgroup_bytes": 17179869184,
+    "usable_nvidia_gpu": false,
+    "energy_measurement": null
+  },
+  "checks": [
+    {
+      "command": "cargo fmt --all -- --check",
+      "result": "passed"
+    },
+    {
+      "command": "cargo clippy --locked --workspace --all-targets -- -D warnings",
+      "result": "passed"
+    },
+    {
+      "command": "cargo test --locked --workspace",
+      "result": "passed",
+      "tests": 10
+    },
+    {
+      "command": "RUSTDOCFLAGS=\"-D warnings\" cargo doc --locked --workspace --no-deps",
+      "result": "passed"
+    },
+    {
+      "command": "cargo xtask check",
+      "result": "passed",
+      "note": "Rechecked after evidence inventory update."
+    },
+    {
+      "command": "actionlint 1.7.7 -shellcheck= .github/workflows/*.yml",
+      "result": "passed",
+      "note": "No shellcheck executable; workflow validation only."
+    },
+    {
+      "command": "bash -n scripts/publish.sh",
+      "result": "passed",
+      "note": "Remote administrative operations were not executed."
+    },
+    {
+      "command": "cargo run --locked -p tergon-lab -- smoke experiments/quantization-v1.json <new-output>",
+      "result": "passed",
+      "fixtures": 3,
+      "receipt": "evidence/quantization-cpu.json"
+    },
+    {
+      "command": "cargo check --locked -p tergon-engine --features cuda",
+      "result": "blocked",
+      "exit_code": 101,
+      "log": "evidence/cuda-compile-failure.log",
+      "reason": "Upstream tracel-llvm-bundler downloader rejected proxy certificate: InvalidCertificate(UnknownIssuer). GPU execution also unavailable."
+    }
+  ],
+  "publication": {
+    "repository": "kmosoti/tergon-lab",
+    "status": "blocked",
+    "http_status": 403,
+    "message": "Resource not accessible by integration",
+    "attempted": [
+      "GraphQL createRepository",
+      "REST POST /user/repos"
+    ],
+    "remote_repo_created": false,
+    "remote_pr_created": false,
+    "remote_protections_applied": false
+  },
+  "limits": [
+    "Component correctness only; no model training or optimizer comparison.",
+    "No throughput, whole-process memory, energy, or GPU claim.",
+    "GitHub App isolation, scoped merges, and native Wiki initialization remain pending."
+  ]
+}

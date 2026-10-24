@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "installation_permissions": {
+    "contents": "write", "pull_requests": "write", "issues": "write",
+    "checks": "write", "actions": "read", "metadata": "read"
+  },
+  "profiles": {
+    "contributor": {"contents": "write", "pull_requests": "write", "issues": "write", "metadata": "read"},
+    "verifier": {"contents": "read", "pull_requests": "read", "checks": "write", "actions": "read", "metadata": "read"},
+    "merger": {"contents": "write", "pull_requests": "write", "checks": "read", "actions": "read", "metadata": "read"}
+  },
+  "constraints": [
+    "Narrow each token to the selected repository and listed profile.",
+    "Private key stays in a trusted broker, never an agent environment.",
+    "Contributor must never receive checks:write or a verifier token.",
+    "No administration, workflows, secrets, or ruleset bypass permission.",
+    "Expected check source is this App; token profiles share an App identity and rely on broker isolation."
+  ]
+}

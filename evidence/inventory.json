@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "files": [
+    {
+      "path": "experiments/quantization-v1.json",
+      "bytes": 430,
+      "sha256": "094c7db94ae11197f19fad870e03147e41dffd9e3909327309d3e48c92e3f093"
+    },
+    {
+      "path": "docs/VERIFICATION.md",
+      "bytes": 2688,
+      "sha256": "c5854bfa77357cb5423f4f3af7b2ca4c84f4053b9717db137c2a8613ff639288"
+    },
+    {
+      "path": "research/history/active-analysis.json",
+      "bytes": 292725,
+      "sha256": "401374fafb60cc9c0d2dba82d8a0ec892ce80f61ee3d28af59e1809aa2421131"
+    },
+    {
+      "path": "research/history/active-verification.json",
+      "bytes": 3273,
+      "sha256": "aa2bdef55e1b52504df4c130fd7c070ab1f8a4f5ec770c1d950b9874d92d3ac3"
+    },
+    {
+      "path": "research/history/artifact-inventory.json",
+      "bytes": 26102,
+      "sha256": "653d05ed143d4ee3b8cf45c7a10c5b439d5f7f8bed48e0e12405d9b0aec2eb22"
+    },
+    {
+      "path": "research/history/OBSERVATIONS.md",
+      "bytes": 6627,
+      "sha256": "bde83374e55273c28e1ed90f3b9bdb4d8ca37adaa97a2be9ab4942431847b2a9"
+    },
+    {
+      "path": "evidence/cuda-compile-failure.log",
+      "bytes": 1014,
+      "sha256": "ff6981567b0959134875d83049263771093fd2a0e979f944741808920d0072b0"
+    },
+    {
+      "path": "evidence/quantization-cpu.json",
+      "bytes": 2174,
+      "sha256": "a558f538d81bf704ab81a4f1dc579fa21d3f63811f42ae1282b2cd57a46249f8"
+    },
+    {
+      "path": "evidence/verification.json",
+      "bytes": 2468,
+      "sha256": "c66e7594c4e9a71cef2c6a6041451cdd2f226164137cf7552a4ab82b0f90d4a2"
+    },
+    {
+      "path": "evidence/publication.json",
+      "bytes": 504,
+      "sha256": "b5e97be70b8570091625117d7ba59d60f369c9d58521c46aa57ebfb8f8ee296c"
+    }
+  ]
+}

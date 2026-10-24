@@ -1,0 +1,18 @@
+[package]
+name = "tergon-engine"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[features]
+default = []
+cuda = ["burn/cuda"]
+
+[dependencies]
+tergon-math = { path = "../tergon-math" }
+burn.workspace = true
+
+[lints]
+workspace = true

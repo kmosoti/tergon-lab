@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "kind": "quantization-smoke",
+  "source_revision": "90493482f08089b565cc9dadbc6915fed4f12d87",
+  "source_dirty": false,
+  "config_sha256": "094c7db94ae11197f19fad870e03147e41dffd9e3909327309d3e48c92e3f093",
+  "rustc": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+  "device": "burn-flex-cpu-f32",
+  "architecture": "x86_64",
+  "energy_joules": null,
+  "limitations": [
+    "CPU component correctness only; no training or throughput conclusion",
+    "Payload bytes exclude allocator, tensor, and runtime overhead",
+    "No energy sensor available to this command"
+  ],
+  "results": [
+    {
+      "seed": 17,
+      "input_sha256": "4e2d2e506e88ca939d625656574f9d8ccbdcf00cf98e4d1b756849ab36a20a87",
+      "decoded_sha256": "3927a2a08014d5b8cccae6500058baa3a8ccbd36eef11498051321e6011ea467",
+      "materialized_sha256": "3927a2a08014d5b8cccae6500058baa3a8ccbd36eef11498051321e6011ea467",
+      "weights": 1025,
+      "packed_weight_bytes": 257,
+      "scale_bytes": 20,
+      "dense_f32_bytes": 4100,
+      "max_quantization_error": 17318.0908203125,
+      "max_bridge_error": 0.0,
+      "passed": true
+    },
+    {
+      "seed": 29,
+      "input_sha256": "ed91d3a979a176db90e93412e26f21858fb1b357997a568bb4aa47463e1e73bc",
+      "decoded_sha256": "b607fbf3b97112d92b6318bb61bab2e43ffd1adf2917579c17f242ccb8bdba0a",
+      "materialized_sha256": "b607fbf3b97112d92b6318bb61bab2e43ffd1adf2917579c17f242ccb8bdba0a",
+      "weights": 1025,
+      "packed_weight_bytes": 257,
+      "scale_bytes": 20,
+      "dense_f32_bytes": 4100,
+      "max_quantization_error": 16990.5029296875,
+      "max_bridge_error": 0.0,
+      "passed": true
+    },
+    {
+      "seed": 43,
+      "input_sha256": "6993c0ffe4b60063906f8dc6e24d9fc7e75d44176f50c83f55eb1fedf24a2ecf",
+      "decoded_sha256": "a630c1b805815ff9f948e293f48000af782a4d8e65a9feb40613040061ca9fce",
+      "materialized_sha256": "a630c1b805815ff9f948e293f48000af782a4d8e65a9feb40613040061ca9fce",
+      "weights": 1025,
+      "packed_weight_bytes": 257,
+      "scale_bytes": 20,
+      "dense_f32_bytes": 4100,
+      "max_quantization_error": 16577.251953125,
+      "max_bridge_error": 0.0,
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "owner": "kmosoti",
+  "default_classification": "owner-required",
+  "agent_merge_line_limit": 300,
+  "owner_required": [
+    "architecture or new public API", "numerical contract or oracle changes",
+    "tolerance changes", "dependencies or unsafe code", "formats or backends",
+    "CI, permissions, governance, release", "new experimental defaults"
+  ],
+  "required_checks": ["rust", "architecture", "numerics", "evidence", "docs", "contribution", "owner-gate"],
+  "gpu_policy": "GPU-sensitive changes additionally require a receipt from the named GPU; CPU checks cannot substitute.",
+  "evidence_policy": "Predeclare hypothesis, baseline, budget, seeds, and tolerances; preserve negative results.",
+  "ambiguous_change": "owner-required"
+}

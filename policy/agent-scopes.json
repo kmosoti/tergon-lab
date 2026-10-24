@@ -1,0 +1,6 @@
+{
+  "schema": 1,
+  "enabled": false,
+  "reason": "No GitHub App installation or tested contributor/verifier/merger identity boundary yet.",
+  "scopes": []
+}
