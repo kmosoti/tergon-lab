@@ -40,6 +40,7 @@ struct FixtureResult {
     seed: u64,
     input_sha256: String,
     decoded_sha256: String,
+    materialized_sha256: String,
     weights: usize,
     packed_weight_bytes: usize,
     scale_bytes: usize,
@@ -134,6 +135,7 @@ fn smoke(config: &Path, out: &Path) -> Result<(), Box<dyn Error>> {
             seed,
             input_sha256: float_hash(&input),
             decoded_sha256: float_hash(&decoded),
+            materialized_sha256: float_hash(&actual),
             weights: input.len(),
             packed_weight_bytes: packed.bytes().len(),
             scale_bytes: std::mem::size_of_val(packed.scales()),
@@ -144,7 +146,11 @@ fn smoke(config: &Path, out: &Path) -> Result<(), Box<dyn Error>> {
                 .map(|(&a, &b)| (a as f64 - b as f64).abs())
                 .fold(0.0, f64::max),
             max_bridge_error,
-            passed: actual == decoded,
+            passed: actual.len() == decoded.len()
+                && actual
+                    .iter()
+                    .zip(&decoded)
+                    .all(|(a, b)| a.to_bits() == b.to_bits()),
         });
     }
     output.write_all(&serde_json::to_vec_pretty(&manifest)?)?;
