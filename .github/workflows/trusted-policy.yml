@@ -1,0 +1,35 @@
+name: Trusted owner policy
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
+permissions:
+  contents: read
+  pull-requests: read
+concurrency:
+  group: trusted-policy-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  owner-gate:
+    if: ${{ !github.event.pull_request.draft }}
+    environment: owner-review
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      # No checkout, head scripts, artifacts, caches, or PR-controlled commands.
+      # This workflow is evaluated from the base branch. All changes require
+      # owner approval until the separate App boundary has been validated.
+      - name: Bind environment approval to this head and base
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+          EXPECTED_BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          current=$(gh api "repos/$REPOSITORY/pulls/$PR_NUMBER")
+          test "$(jq -r .head.sha <<< "$current")" = "$EXPECTED_HEAD"
+          test "$(jq -r .base.sha <<< "$current")" = "$EXPECTED_BASE"
+          test "$(jq -r .state <<< "$current")" = open
+          test "$(jq -r .draft <<< "$current")" = false
+          echo "Owner approved this head and base; scoped agent merging remains disabled."
