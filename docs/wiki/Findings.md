@@ -7,6 +7,13 @@ receipts belong in evidence and identify the source/configuration. They do not
 establish neural training quality, packed-kernel speed, GPU operation, or biological
 efficiency. Muon has not yet been implemented or compared in this project.
 
+The first verification passed ten tests and three deterministic CPU fixtures.
+For each 1,025-weight fixture, 257 packed bytes and 20 scale bytes represented the
+quantized values; the decoded and Burn-materialized bytes agreed exactly. This is
+payload size and component correctness, not total runtime memory or model quality.
+The optional CUDA build was blocked by the LLVM downloader's certificate rejection
+in the cloud proxy environment; GPU execution is still unverified.
+
 ## Earlier symbolic-learning study
 
 The preserved study ran 24 world blocks and 12,954 tasks. The EPIG/change learner

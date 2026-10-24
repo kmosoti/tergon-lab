@@ -7,6 +7,11 @@
       "sha256": "094c7db94ae11197f19fad870e03147e41dffd9e3909327309d3e48c92e3f093"
     },
     {
+      "path": "docs/VERIFICATION.md",
+      "bytes": 2679,
+      "sha256": "758d967b727c2f2540730fe9e63f1df724e6f73bcf2a719814669868a5646984"
+    },
+    {
       "path": "research/history/active-analysis.json",
       "bytes": 292725,
       "sha256": "401374fafb60cc9c0d2dba82d8a0ec892ce80f61ee3d28af59e1809aa2421131"
@@ -25,6 +30,21 @@
       "path": "research/history/OBSERVATIONS.md",
       "bytes": 6627,
       "sha256": "bde83374e55273c28e1ed90f3b9bdb4d8ca37adaa97a2be9ab4942431847b2a9"
+    },
+    {
+      "path": "evidence/cuda-compile-failure.log",
+      "bytes": 1014,
+      "sha256": "ff6981567b0959134875d83049263771093fd2a0e979f944741808920d0072b0"
+    },
+    {
+      "path": "evidence/quantization-cpu.json",
+      "bytes": 2174,
+      "sha256": "a558f538d81bf704ab81a4f1dc579fa21d3f63811f42ae1282b2cd57a46249f8"
+    },
+    {
+      "path": "evidence/verification.json",
+      "bytes": 2468,
+      "sha256": "c66e7594c4e9a71cef2c6a6041451cdd2f226164137cf7552a4ab82b0f90d4a2"
     }
   ]
 }

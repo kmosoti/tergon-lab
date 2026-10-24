@@ -24,6 +24,7 @@ never overwritten. This smoke run tests correctness, not model quality or speed.
 - [Architecture](docs/wiki/Architecture.md) and [mathematical contract](docs/wiki/Mathematics.md)
 - [Component roadmap](docs/wiki/Component-development.md)
 - [Reproduction](docs/wiki/Reproduce-experiments.md) and [findings](docs/wiki/Findings.md)
+- [Foundation verification](docs/VERIFICATION.md): ten tests and three CPU fixtures passed
 - [Contributing](CONTRIBUTING.md), [agent agreement](AGENTS.md), and [GitHub App setup](docs/wiki/GitHub-App-setup.md)
 - [Historical evidence and source](research/history/README.md)
 
