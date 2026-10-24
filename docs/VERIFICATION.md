@@ -39,6 +39,6 @@ Evidence: [machine-readable verification](../evidence/verification.json),
 and dependency code before the lab receipt's bit-comparison correction.
 
 Neural training, AdamW/Muon comparison, packed GEMM, offload, and distribution are
-future milestones. Scoped merges remain disabled. The App, native Wiki, remote
-PR/issues, and branch protections have not been provisioned; see
+future milestones. Scoped merges remain disabled. The App and remote
+branch protections remain pending. Source, issues, and PR #9 are now published; see
 [publication recovery](PUBLISHING.md).

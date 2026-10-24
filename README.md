@@ -32,6 +32,6 @@ Rust 1.99.1 and Burn 0.22.1 are pinned. CPU uses Burn Flex; CUDA is an explicit
 optional feature and has not been executed in this cloud environment. New code
 is Apache-2.0; attribution and historical exceptions are in [NOTICE](NOTICE).
 
-Publication is currently blocked by the connected GitHub integration's repository
-creation permission. The source and history are local; see
-[publication recovery](docs/PUBLISHING.md) for the prepared push, PR, and setup steps.
+The implementation is published in [foundation PR #9](https://github.com/kmosoti/tergon-lab/pull/9).
+Repository protection settings still require owner administration access; see
+[publication status](docs/PUBLISHING.md).

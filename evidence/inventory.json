@@ -8,8 +8,8 @@
     },
     {
       "path": "docs/VERIFICATION.md",
-      "bytes": 2679,
-      "sha256": "758d967b727c2f2540730fe9e63f1df724e6f73bcf2a719814669868a5646984"
+      "bytes": 2688,
+      "sha256": "c5854bfa77357cb5423f4f3af7b2ca4c84f4053b9717db137c2a8613ff639288"
     },
     {
       "path": "research/history/active-analysis.json",
@@ -45,6 +45,11 @@
       "path": "evidence/verification.json",
       "bytes": 2468,
       "sha256": "c66e7594c4e9a71cef2c6a6041451cdd2f226164137cf7552a4ab82b0f90d4a2"
+    },
+    {
+      "path": "evidence/publication.json",
+      "bytes": 504,
+      "sha256": "b5e97be70b8570091625117d7ba59d60f369c9d58521c46aa57ebfb8f8ee296c"
     }
   ]
 }

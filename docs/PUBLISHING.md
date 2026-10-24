@@ -1,40 +1,33 @@
-# Publication status and recovery
+# Publication status and remaining setup
 
-The implementation is committed locally. On 2026-10-24, both GitHub GraphQL
-`createRepository` and REST `POST /user/repos` returned HTTP 403, "Resource not
-accessible by integration", for kmosoti/tergon-lab. The public repository, remote
-PR, issues, ruleset, and environment were therefore not created in this session.
-Repository/admin permission must be available before those steps can succeed.
+The owner created the public repository and Wiki on 2026-10-24. Source and
+history are pushed, eight component/experiment issues are open, and the
+[foundation PR #9](https://github.com/kmosoti/tergon-lab/pull/9) is ready for review.
+The original GitHub initialization commit is preserved. The Wiki initialization
+commit is also preserved; full pages publish from reviewed main after merge.
 
-The owner can create an **empty public** repository named `tergon-lab`, without
-a generated README or license, and grant the publishing credential access. The
-publisher also needs permission to configure repository settings, environments,
-and rulesets. This one-time administrative credential must not be reused as the
-future contributor agent token.
+The connected integration can push branches and create PRs/issues. Repository
+settings PATCH, environment PUT, and ruleset POST each returned HTTP 403,
+"Resource not accessible by integration". No branch ruleset or protected
+owner-review environment has been applied. A passing Actions job alone does not
+establish owner approval while these settings are missing.
 
-From the clean local checkout, inspect and run:
+The owner must apply policy/repository-settings.json, policy/github-ruleset.json,
+and an owner-review environment with kmosoti as required reviewer and administrator
+bypass disabled. Use a separately authorized administrative credential; keep it
+out of contributor agent sessions. The prepared bootstrap script stops on API
+errors and never merges or releases. Running it again with administration access
+will reconcile settings and existing exact-title issues.
 
-```bash
-bash -n scripts/publish.sh
-bash scripts/publish.sh
-```
+The ruleset configuration requires a code-owner review plus seven checks. GitHub
+forbids an author approving their own PR. Once the contributor App is installed,
+reopen the unchanged implementation branch as an App-authored PR so the solo owner
+can approve it, retaining the original PR link. Scoped merging remains disabled.
 
-The script publishes the bootstrap main and foundation branch, applies squash-only
-settings and the no-bypass main ruleset, configures owner-review, creates bounded
-milestone issues without duplicating exact titles, and opens the foundation PR.
-It stops on any API error, does not force-push, rejects a conflicting remote main,
-and never merges or releases. These remote operations remain untested because
-repository creation was denied; review returned settings after execution.
-
-The baseline workflow and CODEOWNERS are already in the local bootstrap commit.
-The ruleset requires a code-owner review in addition to seven checks, so an
-owner-authored PR cannot be self-approved. Use the App contributor identity to
-reopen the same branch after setup, preserving the initial PR link and commit
-history. Keep scoped merging disabled until the identity tests pass.
-
-[App registration](wiki/GitHub-App-setup.md) and
-[Wiki initialization](wiki/Wiki-contributions.md) are separate owner setup steps.
-No App key, App installation, native Wiki, or remote protection is claimed to exist.
+[App registration](wiki/GitHub-App-setup.md) is still pending. The native Wiki is
+initialized. Its [publication workflow](wiki/Wiki-contributions.md) becomes usable
+from main after the foundation is reviewed and merged. No App installation or
+remote protection is claimed to exist.
 
 An offline Git bundle can preserve every local branch and commit:
 
