@@ -1,0 +1,20 @@
+    Blocking waiting for file lock on build directory
+   Compiling tergon-engine v0.1.0 (/home/kmosoti/Projects/tergon-lab/scratch/issue3/crates/tergon-engine)
+    Finished `release` profile [optimized] target(s) in 4m 29s
+     Running tests/training_state.rs (/home/kmosoti/Projects/tergon-lab/target/release/deps/training_state-e99088c1559b1623)
+
+running 1 test
+
+thread 'cuda_optimizer_resume_matches' (4053025) panicked at crates/tergon-engine/tests/training_state.rs:29:37:
+called `Result::unwrap()` on an `Err` value: Data
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test cuda_optimizer_resume_matches ... FAILED
+
+failures:
+
+failures:
+    cuda_optimizer_resume_matches
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 2 filtered out; finished in 4.47s
+
+error: test failed, to rerun pass `-p tergon-engine --test training_state`

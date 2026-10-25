@@ -1,0 +1,10 @@
+   Compiling tergon-engine v0.1.0 (/home/kmosoti/Projects/tergon-lab/scratch/issue3/crates/tergon-engine)
+    Finished `release` profile [optimized] target(s) in 2.37s
+     Running tests/training_state.rs (/home/kmosoti/Projects/tergon-lab/target/release/deps/training_state-e99088c1559b1623)
+
+running 1 test
+CUDA boolean reduction dtype Bool(U8); strict bool read Err(DTypeMismatch { expected: Bool(Native), actual: Bool(U8) })
+test cuda_boolean_reduction_storage_is_converted ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 2.23s
+

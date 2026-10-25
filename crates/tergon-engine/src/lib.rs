@@ -4,7 +4,9 @@
 //! a reference path; it does not implement packed GEMM.
 
 mod ternary;
+mod training;
 pub use ternary::TernaryLinear;
+pub use training::{ClassifierSnapshot, ParameterSnapshot, TinyClassifier};
 
 use burn::tensor::{Device, Tensor, TensorData};
 use std::{error::Error, fmt};

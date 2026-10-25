@@ -1,0 +1,83 @@
+ternary-17 epoch1 validation0.9420 elapsed5.1s
+ternary-17 epoch2 validation0.9542 elapsed7.5s
+ternary-17 epoch3 validation0.9650 elapsed9.8s
+ternary-17 epoch4 validation0.9672 elapsed12.1s
+ternary-17 epoch5 validation0.9666 elapsed14.4s
+ternary-17 epoch6 validation0.9694 elapsed16.8s
+ternary-17 epoch7 validation0.9712 elapsed19.1s
+ternary-17 epoch8 validation0.9694 elapsed21.4s
+ternary-17 epoch9 validation0.9710 elapsed23.8s
+ternary-17 epoch10 validation0.9704 elapsed26.1s
+float-17 epoch1 validation0.9592 elapsed2.0s
+float-17 epoch2 validation0.9694 elapsed3.6s
+float-17 epoch3 validation0.9714 elapsed5.2s
+float-17 epoch4 validation0.9768 elapsed6.8s
+float-17 epoch5 validation0.9768 elapsed8.4s
+float-17 epoch6 validation0.9754 elapsed10.0s
+float-17 epoch7 validation0.9770 elapsed11.7s
+float-17 epoch8 validation0.9786 elapsed13.3s
+float-17 epoch9 validation0.9796 elapsed14.9s
+float-17 epoch10 validation0.9810 elapsed16.6s
+ternary-29 epoch1 validation0.9374 elapsed2.8s
+ternary-29 epoch2 validation0.9516 elapsed5.2s
+ternary-29 epoch3 validation0.9630 elapsed7.5s
+ternary-29 epoch4 validation0.9650 elapsed9.9s
+ternary-29 epoch5 validation0.9670 elapsed12.2s
+ternary-29 epoch6 validation0.9694 elapsed14.6s
+ternary-29 epoch7 validation0.9714 elapsed16.9s
+ternary-29 epoch8 validation0.9702 elapsed19.2s
+ternary-29 epoch9 validation0.9744 elapsed21.5s
+ternary-29 epoch10 validation0.9750 elapsed23.9s
+float-29 epoch1 validation0.9514 elapsed1.9s
+float-29 epoch2 validation0.9664 elapsed3.6s
+float-29 epoch3 validation0.9720 elapsed5.2s
+float-29 epoch4 validation0.9740 elapsed6.8s
+float-29 epoch5 validation0.9766 elapsed8.4s
+float-29 epoch6 validation0.9762 elapsed10.1s
+float-29 epoch7 validation0.9750 elapsed11.7s
+float-29 epoch8 validation0.9770 elapsed13.4s
+float-29 epoch9 validation0.9780 elapsed15.0s
+float-29 epoch10 validation0.9784 elapsed16.7s
+ternary-43 epoch1 validation0.9398 elapsed2.8s
+ternary-43 epoch2 validation0.9520 elapsed5.4s
+ternary-43 epoch3 validation0.9614 elapsed8.1s
+ternary-43 epoch4 validation0.9638 elapsed10.7s
+ternary-43 epoch5 validation0.9678 elapsed13.3s
+ternary-43 epoch6 validation0.9690 elapsed15.8s
+ternary-43 epoch7 validation0.9712 elapsed18.4s
+ternary-43 epoch8 validation0.9718 elapsed21.0s
+ternary-43 epoch9 validation0.9704 elapsed23.5s
+ternary-43 epoch10 validation0.9748 elapsed26.1s
+float-43 epoch1 validation0.9550 elapsed2.1s
+float-43 epoch2 validation0.9666 elapsed4.0s
+float-43 epoch3 validation0.9736 elapsed5.8s
+float-43 epoch4 validation0.9744 elapsed7.6s
+float-43 epoch5 validation0.9794 elapsed9.4s
+float-43 epoch6 validation0.9800 elapsed11.3s
+float-43 epoch7 validation0.9792 elapsed13.1s
+float-43 epoch8 validation0.9786 elapsed14.9s
+float-43 epoch9 validation0.9774 elapsed16.8s
+float-43 epoch10 validation0.9784 elapsed18.6s
+	Command being timed: "timeout 10980 /home/kmosoti/Projects/tergon-lab/target/release/tergon-lab train experiments/mnist-adamw-v1.json /home/kmosoti/Projects/tergon-lab/scratch/mnist /home/kmosoti/Projects/tergon-lab/runs/mnist-adamw-v1"
+	User time (seconds): 155.82
+	System time (seconds): 19.20
+	Percent of CPU this job got: 133%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:11.18
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 414788
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 3
+	Minor (reclaiming a frame) page faults: 6998166
+	Voluntary context switches: 1284834
+	Involuntary context switches: 2568
+	Swaps: 0
+	File system inputs: 2896
+	File system outputs: 563072
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
