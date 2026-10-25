@@ -13,7 +13,7 @@ flowchart LR
 | Crate | Owns | Boundary |
 | --- | --- | --- |
 | tergon-math | QuantSpec, PackedTernary, scalar definitions | Standard library only; no tensor backend, files, processes, or networking |
-| tergon-engine | PlacementPlan, Burn tensor bridge; later layers and optimizers | No external I/O; no implicit device fallback |
+| tergon-engine | PlacementPlan, Burn tensor bridge, trainable ternary layer; later optimizers | No external I/O; no implicit device fallback |
 | tergon-lab | CLI, RunManifest receipts; later datasets, checkpoints, reports | All external I/O belongs here |
 | xtask | Architecture, evidence, documentation, contribution checks | Never a runtime dependency |
 
@@ -27,7 +27,7 @@ requested device. This allocates buffers; it is not a packed kernel or zero-copy
 path. Default execution is Flex CPU. `cuda` is a compile-time opt-in and runtime
 device selection is explicit. A missing backend is an error, never a fallback.
 
-Later seams are a real ternary layer, OptimizerSpec, and versioned checkpoint I/O.
+Later seams are an optimizer and versioned checkpoint I/O.
 Add them when their consumers exist. Prefer functions and concrete data types
 until multiple implementations or a test seam justify a trait.
 

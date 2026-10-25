@@ -35,7 +35,29 @@ words, malformed encodings, threshold ties, zero/subnormal/extreme inputs, and
 shape overflow. The CPU matrix reference uses absolute plus relative tolerance
 `1e-6 + 1e-6*abs(expected)`; exact decoded values must match bit-for-bit.
 
-No gradient is implemented yet. The true derivative of discrete quantization is
-not the straight-through surrogate used in training. The next component must
-state the surrogate explicitly and test it independently; a finite-difference
-check of the discontinuous quantizer cannot validate a chosen surrogate.
+## Trainable ternary linear contract
+
+`TernaryLinear` owns latent finite f32 weights `[out, in]` and finite f32 bias
+`[out]`, with positive dimensions and one scale per output row (`group_size=in`).
+Finite f32 inputs have shape `[batch, in]`, with positive batch size. The forward
+is `Y = X Q(W)^T + b`; activations and bias are floating point. Packed exports
+are immutable snapshots, separate from the trainable latent parameters.
+
+For upstream `G = dL/dY`, the identity straight-through training surrogate is
+`dW = G^T X`, `dX = G Q(W)`, and `db = sum_batch G`. No gradient flows through
+scales or ternary codes; no clipping is applied. This chosen surrogate is not
+the true derivative of discrete quantization. Independent analytic equations,
+not finite differences of the discontinuous quantizer, validate backward.
+
+The implementation quantizes a synchronized host copy using the existing f64
+contract, uploads the decoded values to the selected device, and computes
+`Qdet + (W - stop_gradient(W))`. The subtraction happens before addition to
+preserve finite forward values without rounding `Q+W-W`. Matrix products and
+autodiff run on the explicitly selected device. This introduces host transfers
+and decoded buffers every forward, plus a synchronized host input read for
+nonfinite validation; it is not a packed training kernel.
+
+The bounded layer fixture fixes CPU tolerance at `1e-6 + 1e-6*abs(expected)`
+and NVIDIA GPU tolerance at `1e-5 + 1e-5*abs(expected)` before execution.
+These new backward/forward fixtures do not relax existing bridge tolerances.
+
