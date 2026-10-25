@@ -1,0 +1,32 @@
+   Compiling tergon-engine v0.1.0 (/home/kmosoti/Projects/tergon-lab/scratch/issue14/crates/tergon-engine)
+    Finished `test` profile [unoptimized] target(s) in 1.95s
+     Running unittests src/lib.rs (/home/kmosoti/Projects/tergon-lab/target/debug/deps/tergon_engine-081787b1236655cf)
+
+running 11 tests
+test state_reasoner::tests::cuda_stage_precision_probe ... ignored, development precision probe; run explicitly before numerical freeze
+test state_reasoner::tests::encoder_rejects_unsupported_id_and_time ... ok
+test state_reasoner::tests::tf32_halfway_rounds_away_from_zero ... ok
+test state_reasoner::tests::null_only_and_masked_gradients_cpu ... ok
+test state_reasoner::tests::partial_mask_gradients_cpu ... ok
+test state_reasoner::tests::scalar_forward_backward_cpu ... ok
+test state_reasoner::tests::mixed_batch_and_mean_loss_cpu ... ok
+test state_reasoner::tests::partial_mask_gradients_cuda ... FAILED
+test state_reasoner::tests::null_only_and_masked_gradients_cuda ... ok
+test state_reasoner::tests::scalar_forward_backward_cuda ... ok
+test state_reasoner::tests::mixed_batch_and_mean_loss_cuda ... ok
+
+failures:
+
+---- state_reasoner::tests::partial_mask_gradients_cuda stdout ----
+
+thread 'state_reasoner::tests::partial_mask_gradients_cuda' (4088416) panicked at crates/tergon-engine/src/state_reasoner_tests.rs:102:9:
+0: 3.3303223 vs 3.3310147535769428 tol0.00004331014753576943
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    state_reasoner::tests::partial_mask_gradients_cuda
+
+test result: FAILED. 9 passed; 1 failed; 1 ignored; 0 measured; 0 filtered out; finished in 10.89s
+
+error: test failed, to rerun pass `-p tergon-engine --lib`

@@ -1,0 +1,8 @@
+Development check, dirty source, prior to formal source/data freeze.
+Command: source scratch/cuda-env.sh; cargo test --locked -p tergon-engine --features cuda --lib
+RTX3060 Laptop GPU, pinned Burn0.22.1/CubeK0.3.1.
+null_only_and_masked_gradients_cuda: pass.
+scalar_forward_backward_cuda: FAIL index0 actual0.11828445 expected0.11829812188870174 tolerance0.000011182981218887018.
+mixed_batch_and_mean_loss_cuda: FAIL index3 actual0.13706739 expected0.13704656468125936 tolerance0.000011370465646812595.
+CPU corresponding fixtures: pass.
+No existing layer/bridge tolerance changed. No measured training outcome.

@@ -1,0 +1,9 @@
+{
+  "source_revision": "4144184b1a83986f44feee36bcef3bfc0a086c84",
+  "binary_sha256": "2cbc1f5106f048d7429eeb3b6b0d7f92ab2dba06fa29aecfc4324d843bdfa2cf",
+  "config_sha256": "cdf7bd0e58c27e998c2528dc01ccf6f85def4438457f9d97438eea2bb1efb75b",
+  "started_utc": "2026-10-25T20:39:04.114705+00:00",
+  "execution": "one fresh process per condition; sequential on cuda:0",
+  "runner_sha256": "af9589c046224435c8a7fa5ee8db72a964071736384efa8e57cff9d2db8f2154",
+  "process_wall_boundary": "includes dataset audit/generation; experiment elapsed in each receipt excludes them"
+}

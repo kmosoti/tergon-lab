@@ -1,0 +1,89 @@
+   Compiling tergon-engine v0.1.0 (/home/kmosoti/Projects/tergon-lab/scratch/issue14/crates/tergon-engine)
+    Finished `test` profile [unoptimized] target(s) in 2.51s
+     Running unittests src/lib.rs (/home/kmosoti/Projects/tergon-lab/target/debug/deps/tergon_engine-081787b1236655cf)
+
+running 1 test
+mode=false policy=MetadataOnly linear0 dtype=F32 direct_max_abs=4.7901888378e-5
+mode=false policy=MetadataOnly linear1 dtype=F32 direct_max_abs=4.8764234409e-5
+mode=false policy=MetadataOnly linear2 dtype=F32 direct_max_abs=1.5014782548e-5
+mode=false policy=MetadataOnly linear3 dtype=F32 direct_max_abs=1.4893710613e-5
+mode=false policy=MetadataOnly attention hop0 direct_max_abs=4.0310557142e-5
+mode=false policy=MetadataOnly linear4 dtype=F32 direct_max_abs=2.6199727889e-5
+mode=false policy=MetadataOnly linear3 dtype=F32 direct_max_abs=1.3425946236e-5
+mode=false policy=MetadataOnly attention hop1 direct_max_abs=3.9967876257e-5
+mode=false policy=MetadataOnly linear4 dtype=F32 direct_max_abs=4.5539174245e-5
+mode=false policy=MetadataOnly linear3 dtype=F32 direct_max_abs=1.4893710613e-5
+mode=false policy=MetadataOnly attention hop2 direct_max_abs=3.0649030216e-5
+mode=false policy=MetadataOnly linear4 dtype=F32 direct_max_abs=3.1239335251e-5
+mode=false policy=MetadataOnly linear5 dtype=F32 direct_max_abs=2.3569949508e-5
+mode=false policy=MetadataOnly composed_max_abs=2.6270733651e-5
+mode=false policy=Enforced linear0 dtype=F32 direct_max_abs=4.7901888378e-5
+mode=false policy=Enforced linear1 dtype=F32 direct_max_abs=4.8764234409e-5
+mode=false policy=Enforced linear2 dtype=F32 direct_max_abs=1.5014782548e-5
+mode=false policy=Enforced linear3 dtype=F32 direct_max_abs=1.4893710613e-5
+mode=false policy=Enforced attention hop0 direct_max_abs=7.3039500377e-5
+mode=false policy=Enforced linear4 dtype=F32 direct_max_abs=2.6199727889e-5
+mode=false policy=Enforced linear3 dtype=F32 direct_max_abs=1.3425946236e-5
+mode=false policy=Enforced attention hop1 direct_max_abs=5.9047209865e-5
+mode=false policy=Enforced linear4 dtype=F32 direct_max_abs=3.5445857606e-5
+mode=false policy=Enforced linear3 dtype=F32 direct_max_abs=1.4893710613e-5
+mode=false policy=Enforced attention hop2 direct_max_abs=5.7369470596e-5
+mode=false policy=Enforced linear4 dtype=F32 direct_max_abs=4.2517714169e-5
+mode=false policy=Enforced linear5 dtype=F32 direct_max_abs=2.6735524197e-5
+mode=false policy=Enforced composed_max_abs=1.7984431108e-5
+mode=true policy=MetadataOnly linear0 dtype=F32 direct_max_abs=4.4334679842e-5
+mode=true policy=MetadataOnly linear1 dtype=F32 direct_max_abs=4.4334679842e-5
+mode=true policy=MetadataOnly linear2 dtype=F32 direct_max_abs=1.4942139387e-5
+mode=true policy=MetadataOnly linear3 dtype=F32 direct_max_abs=7.4952840805e-6
+mode=true policy=MetadataOnly attention hop0 direct_max_abs=2.2968173673e-5
+mode=true policy=MetadataOnly linear4 dtype=F32 direct_max_abs=1.9799717194e-5
+mode=true policy=MetadataOnly linear3 dtype=F32 direct_max_abs=7.4952840805e-6
+mode=true policy=MetadataOnly attention hop1 direct_max_abs=2.6035005029e-5
+mode=true policy=MetadataOnly linear4 dtype=F32 direct_max_abs=3.1619326098e-5
+mode=true policy=MetadataOnly linear3 dtype=F32 direct_max_abs=7.4952840805e-6
+mode=true policy=MetadataOnly attention hop2 direct_max_abs=4.2433557726e-5
+mode=true policy=MetadataOnly linear4 dtype=F32 direct_max_abs=3.2752916703e-5
+mode=true policy=MetadataOnly linear5 dtype=F32 direct_max_abs=1.8688604615e-5
+mode=true policy=MetadataOnly composed_max_abs=1.9937021167e-5
+mode=true policy=Enforced linear0 dtype=F32 direct_max_abs=4.4334679842e-5
+mode=true policy=Enforced linear1 dtype=F32 direct_max_abs=4.4334679842e-5
+mode=true policy=Enforced linear2 dtype=F32 direct_max_abs=1.4942139387e-5
+mode=true policy=Enforced linear3 dtype=F32 direct_max_abs=7.4952840805e-6
+mode=true policy=Enforced attention hop0 direct_max_abs=4.0679776268e-5
+mode=true policy=Enforced linear4 dtype=F32 direct_max_abs=1.9799717194e-5
+mode=true policy=Enforced linear3 dtype=F32 direct_max_abs=7.4952840805e-6
+mode=true policy=Enforced attention hop1 direct_max_abs=4.7191977501e-5
+mode=true policy=Enforced linear4 dtype=F32 direct_max_abs=3.8067488736e-5
+mode=true policy=Enforced linear3 dtype=F32 direct_max_abs=7.4952840805e-6
+mode=true policy=Enforced attention hop2 direct_max_abs=2.6851892471e-5
+mode=true policy=Enforced linear4 dtype=F32 direct_max_abs=1.8606331997e-5
+mode=true policy=Enforced linear5 dtype=F32 direct_max_abs=1.1502118884e-5
+mode=true policy=Enforced composed_max_abs=1.3821857868e-5
+test state_reasoner::tests::cuda_stage_precision_probe ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 9 filtered out; finished in 3.18s
+
+     Running tests/reference_bridge.rs (/home/kmosoti/Projects/tergon-lab/target/debug/deps/reference_bridge-430c74f74fe20446)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+     Running tests/state_contract.rs (/home/kmosoti/Projects/tergon-lab/target/debug/deps/state_contract-ae5e85c5bbd251d9)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 4 filtered out; finished in 0.00s
+
+     Running tests/ternary_layer.rs (/home/kmosoti/Projects/tergon-lab/target/debug/deps/ternary_layer-69c53765b442fd49)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.00s
+
+     Running tests/training_state.rs (/home/kmosoti/Projects/tergon-lab/target/debug/deps/training_state-1039e4f06e8bb604)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+

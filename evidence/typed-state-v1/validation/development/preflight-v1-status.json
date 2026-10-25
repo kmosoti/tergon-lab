@@ -1,0 +1,1 @@
+{"schema":1,"artifact":"../typed-state-audit-v1-preflight","status":"development only","source_dirty":true,"limitations":["generated before fairness hardening and primitive coverage review","receipt predates explicit dirty/config/generator fields","must not be used as formal corpus or comparison evidence"],"preserved_unchanged":true}

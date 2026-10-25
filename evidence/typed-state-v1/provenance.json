@@ -1,0 +1,106 @@
+{
+  "schema": 1,
+  "source_revision": "4144184b1a83986f44feee36bcef3bfc0a086c84",
+  "release_binary_sha256": "2cbc1f5106f048d7429eeb3b6b0d7f92ab2dba06fa29aecfc4324d843bdfa2cf",
+  "config_sha256": "cdf7bd0e58c27e998c2528dc01ccf6f85def4438457f9d97438eea2bb1efb75b",
+  "dataset_sha256": [
+    "2c02e9aee3d14ff8d69ce3a8b8574840806f8685892e39574d4809d9a666a5d1",
+    "fa9773cffab444f14248d8957928e7c67117033267c5f5d9a3681b60313ab703",
+    "0521144392e97633d2e6b015797a4e0fc55bbd878c69bea35c50b71e71600041",
+    "d43dd5841232977a66336c79d146de8abb9d3fc1def5f816be6e0594805a3b9c",
+    "2cd0667bd9f26a4972167b7226b29c6c22d4b5213ae4c7e71aeb62d8ec522cd5",
+    "964b3812dadce1e791d1dd4516de4c41f7c5ca15e80a18c97657c34fd203e692",
+    "0a18c63e30133031d3dd4f8008788a59d9236b92b6c9f5c9a410816084d325de"
+  ],
+  "source_files": [
+    {
+      "path": "Cargo.toml",
+      "bytes": 616,
+      "sha256": "56a66c3ec24d6bfaf7303d6cff88c26ce0f610ac7115f1b1a11f6e5536fe778d"
+    },
+    {
+      "path": "Cargo.lock",
+      "bytes": 171341,
+      "sha256": "919ed3d489c841fcdb8bf4752dadbebb14adb3ae92469f718c3bf3a11d59fb54"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "bytes": 86,
+      "sha256": "b9c8d2d59f6f46474c0cfa0b8b77bea21d94fc73a30ad93d5bf6385c422197d2"
+    },
+    {
+      "path": "experiments/typed-state-v1.json",
+      "bytes": 2402,
+      "sha256": "cdf7bd0e58c27e998c2528dc01ccf6f85def4438457f9d97438eea2bb1efb75b"
+    },
+    {
+      "path": "crates/tergon-engine/src/state.rs",
+      "bytes": 11110,
+      "sha256": "5437b3d10d10e38287249953d26ab43047fbae107ded553ea310ddc9f9c9b956"
+    },
+    {
+      "path": "crates/tergon-engine/src/state_reasoner.rs",
+      "bytes": 10011,
+      "sha256": "c5d0b261dba095ba666d63ff6c4a8b5287f176d4b8794eae9a0b2c0d4806031e"
+    },
+    {
+      "path": "crates/tergon-engine/src/state_reasoner_tests.rs",
+      "bytes": 26716,
+      "sha256": "f6c9bb1e11460542d1a7c4ca9e15e45fc3782c0b3968d8dce75cb8edf43204b9"
+    },
+    {
+      "path": "crates/tergon-engine/src/training.rs",
+      "bytes": 10765,
+      "sha256": "86ffa9e751ea8db4fabc0c7c81afc98eeea3620f0f9c4dad8e44b2b6c01ae0ea"
+    },
+    {
+      "path": "crates/tergon-engine/src/ternary.rs",
+      "bytes": 4634,
+      "sha256": "9078994d891ed98bdb19c28d1ce0207216cd3696afd311ffc4422e392606a867"
+    },
+    {
+      "path": "crates/tergon-lab/src/state_data.rs",
+      "bytes": 27442,
+      "sha256": "917fe13d7bb5fa832f218a34e2827b93300199da400d1ca829797fcb22f4e3cd"
+    },
+    {
+      "path": "crates/tergon-lab/src/state_training.rs",
+      "bytes": 41516,
+      "sha256": "be754b0ed2c90518ef7f73aa9b2ac6d43f44a106e74501faa9b36fafaaa8858e"
+    },
+    {
+      "path": "crates/tergon-lab/src/state_analysis.rs",
+      "bytes": 17969,
+      "sha256": "ddec402dbfae8b9101fc7a129a259175041f0e27b1cc7f098726f8be1b129dae"
+    },
+    {
+      "path": "crates/tergon-lab/src/main.rs",
+      "bytes": 6763,
+      "sha256": "98254d0384057ef3e6a0b8ff63c38eb821fb777292723eb0dacf1d5960b8f5a2"
+    },
+    {
+      "path": "docs/wiki/Typed-state-experiment.md",
+      "bytes": 12558,
+      "sha256": "49e918644889531cc573cf45613ae6f6ab897fcac159ec8ac26421f7f4effefa"
+    },
+    {
+      "path": "docs/wiki/Typed-state-ADR.md",
+      "bytes": 1518,
+      "sha256": "a56847b2c779333b757cd5aca6362c69b2a06380d94fe8a08a08fb154f5c2a28"
+    }
+  ],
+  "bundler_python": "3.14.8 (main, Oct  1 2026, 00:00:00) [GCC 16.2.1 20260819 (Red Hat 16.2.1-2)]",
+  "bundler_platform": "Linux-7.2.9-201.fc44.x86_64-x86_64-with-glibc2.43",
+  "bundled_utc": "2026-10-25T20:57:19.718361+00:00",
+  "formal_execution": {
+    "source_revision": "4144184b1a83986f44feee36bcef3bfc0a086c84",
+    "binary_sha256": "2cbc1f5106f048d7429eeb3b6b0d7f92ab2dba06fa29aecfc4324d843bdfa2cf",
+    "config_sha256": "cdf7bd0e58c27e998c2528dc01ccf6f85def4438457f9d97438eea2bb1efb75b",
+    "started_utc": "2026-10-25T20:39:04.114705+00:00",
+    "execution": "one fresh process per condition; sequential on cuda:0",
+    "runner_sha256": "af9589c046224435c8a7fa5ee8db72a964071736384efa8e57cff9d2db8f2154",
+    "process_wall_boundary": "includes dataset audit/generation; experiment elapsed in each receipt excludes them"
+  },
+  "official_analysis_sha256": "c6c10df4df45b48126131135a8bde6b056bc382104ec908a6a9c9d6508597418",
+  "original_failure_preservation": "all development files copied byte-for-byte; first ideal-f64 GPU failures not replaced"
+}

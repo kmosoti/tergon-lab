@@ -1,0 +1,2 @@
+    Checking tergon-lab v0.1.0 (/home/kmosoti/Projects/tergon-lab/scratch/issue14/crates/tergon-lab)
+    Finished `dev` profile [unoptimized] target(s) in 0.81s

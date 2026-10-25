@@ -1,0 +1,63 @@
+   Compiling tergon-engine v0.1.0 (/home/kmosoti/Projects/tergon-lab/scratch/issue14/crates/tergon-engine)
+    Finished `release` profile [optimized] target(s) in 3.26s
+     Running unittests src/lib.rs (/home/kmosoti/Projects/tergon-lab/target/release/deps/tergon_engine-88f2611cb4b58094)
+
+running 11 tests
+test state_reasoner::tests::cuda_stage_precision_probe ... ignored, development precision probe; run explicitly before numerical freeze
+test state_reasoner::tests::encoder_rejects_unsupported_id_and_time ... ok
+test state_reasoner::tests::tf32_halfway_rounds_away_from_zero ... ok
+test state_reasoner::tests::null_only_and_masked_gradients_cpu ... ok
+test state_reasoner::tests::partial_mask_gradients_cpu ... ok
+test state_reasoner::tests::scalar_forward_backward_cpu ... ok
+test state_reasoner::tests::mixed_batch_and_mean_loss_cpu ... ok
+test state_reasoner::tests::partial_mask_gradients_cuda ... ok
+test state_reasoner::tests::null_only_and_masked_gradients_cuda ... ok
+test state_reasoner::tests::scalar_forward_backward_cuda ... ok
+test state_reasoner::tests::mixed_batch_and_mean_loss_cuda ... ok
+
+test result: ok. 10 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 6.12s
+
+     Running tests/reference_bridge.rs (/home/kmosoti/Projects/tergon-lab/target/release/deps/reference_bridge-027962ca9aaaf200)
+
+running 2 tests
+test shape_mismatch_and_overflow_fail_before_backend_work ... ok
+test cpu_matrix_product_agrees_with_scalar_f64 ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/state_contract.rs (/home/kmosoti/Projects/tergon-lab/target/release/deps/state_contract-ab675bc964b54867)
+
+running 4 tests
+test malformed_boundaries ... ok
+test missing_conflict_duplicates_and_hypotheses ... ok
+test relation_signatures_and_order_invariance ... ok
+test replacement_retraction_are_explicit_and_id_specific ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ternary_layer.rs (/home/kmosoti/Projects/tergon-lab/target/release/deps/ternary_layer-a3e54b9f7e4cc3fe)
+
+running 5 tests
+test cuda_forward_and_identity_surrogate_match_independent_references ... ignored, requires an explicitly provisioned NVIDIA GPU; record named-device execution
+test invalid_parameters_fail_before_backend_work ... ok
+test forward_rejects_wrong_shape_and_preserves_export ... ok
+test nonfinite_and_empty_inputs_are_rejected ... ok
+test cpu_forward_and_identity_surrogate_match_independent_references ... ok
+
+test result: ok. 4 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/training_state.rs (/home/kmosoti/Projects/tergon-lab/target/release/deps/training_state-e99088c1559b1623)
+
+running 3 tests
+test cuda_optimizer_resume_matches ... ignored, requires named NVIDIA GPU
+test malformed_optimizer_state_is_rejected ... ok
+test cpu_optimizer_resume_is_bitwise ... ok
+
+test result: ok. 2 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+   Doc-tests tergon_engine
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
