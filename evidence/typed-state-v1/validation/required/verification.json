@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "branch": "exp/14-state-evidence",
+  "measured_source_revision": "4144184b1a83986f44feee36bcef3bfc0a086c84",
+  "verification_parent_revision": "4144184b1a83986f44feee36bcef3bfc0a086c84",
+  "runtime_and_config_diff_from_measured_source": false,
+  "working_tree_scope": "final evidence/documentation payload; check outputs and hash inventories finalized after capture",
+  "status": "passed",
+  "checks": [
+    {
+      "name": "fmt",
+      "command": "cargo fmt --all -- --check",
+      "exit_code": 0,
+      "started_utc": "2026-10-25T21:03:28.767076+00:00",
+      "finished_utc": "2026-10-25T21:03:28.956984+00:00",
+      "wall_seconds": 0.18989231903105974,
+      "log": "fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "clippy",
+      "command": "cargo clippy --locked --workspace --all-targets -- -D warnings",
+      "exit_code": 0,
+      "started_utc": "2026-10-25T21:03:29.357887+00:00",
+      "finished_utc": "2026-10-25T21:03:29.801666+00:00",
+      "wall_seconds": 0.4437786879716441,
+      "log": "clippy.log",
+      "sha256": "661da8b8caaccac419f4800ccb28357681229cf3c42cda4aa5176b9e56497a3f"
+    },
+    {
+      "name": "tests",
+      "command": "cargo test --locked --workspace",
+      "exit_code": 0,
+      "started_utc": "2026-10-25T21:03:30.218202+00:00",
+      "finished_utc": "2026-10-25T21:04:58.708359+00:00",
+      "wall_seconds": 88.49015274306294,
+      "log": "tests.log",
+      "sha256": "c09e8c9897ce27289f89429d77b875bb982ff7f35ec74bda5791e33f23cad343"
+    },
+    {
+      "name": "rustdoc",
+      "command": "RUSTDOCFLAGS=\"-D warnings\" cargo doc --locked --workspace --no-deps",
+      "exit_code": 0,
+      "started_utc": "2026-10-25T21:04:59.359178+00:00",
+      "finished_utc": "2026-10-25T21:04:59.801136+00:00",
+      "wall_seconds": 0.44195070897694677,
+      "log": "rustdoc.log",
+      "sha256": "c169bcca5f67dc9d4a5f1e8436ff08f88c4ac82b519537ec1beaffc50695eb1a"
+    },
+    {
+      "name": "xtask",
+      "command": "cargo xtask check",
+      "exit_code": 0,
+      "started_utc": "2026-10-25T21:05:00.267901+00:00",
+      "finished_utc": "2026-10-25T21:05:01.908399+00:00",
+      "wall_seconds": 1.6405058410018682,
+      "log": "xtask.log",
+      "sha256": "6ce1faaf382e8e8d1691bbaf2fad9961342383ef1446e9c28d68157201d2dda2"
+    }
+  ],
+  "bookkeeping_after_commands": "Only actual check logs, this receipt and their hash inventories were finalized after the five commands; runtime, recipe, scientific payloads and prose were unchanged. Final inventory bytes were independently verified by Python."
+}

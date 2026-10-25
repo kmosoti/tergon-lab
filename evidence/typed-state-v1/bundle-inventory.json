@@ -1,0 +1,2162 @@
+{
+  "schema": 1,
+  "root_in_repository": "evidence/typed-state-v1",
+  "source_revision": "4144184b1a83986f44feee36bcef3bfc0a086c84",
+  "files": [
+    {
+      "path": "README.md",
+      "role": "authored final artifact map and reproduction boundaries",
+      "bytes": 4697,
+      "sha256": "bfe37126fc229295950b58f3bd5b7c9b4f93b4c9421f4d455fbbda86589f5f65"
+    },
+    {
+      "path": "analysis.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/analysis.json",
+      "role": "predeclared Rust aggregate result",
+      "bytes": 2515,
+      "sha256": "c6c10df4df45b48126131135a8bde6b056bc382104ec908a6a9c9d6508597418"
+    },
+    {
+      "path": "analysis.sha256",
+      "bytes": 65,
+      "sha256": "6ab2289eae8fc80cff692ba6af0e202031631a473126beee1185b22811f0fd06"
+    },
+    {
+      "path": "checkpoint-inventory.json",
+      "bytes": 40053,
+      "sha256": "318f66c1a3c42a806a1c9b2d000ef58bbaef48339415908c81b803946cd7b449"
+    },
+    {
+      "path": "conditions/17-enforced-float/17-enforced-float/conflicts-hypotheses-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/17-enforced-float/conflicts-hypotheses-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 412460,
+      "sha256": "e71dcf83681e8bd1eea55c86abb4c1f6746ec1748804dc09eae47205424ca161"
+    },
+    {
+      "path": "conditions/17-enforced-float/17-enforced-float/conflicts-hypotheses-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/17-enforced-float/conflicts-hypotheses-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "66c661fcf43fc862582f083f6dc1f05faa9a0cfd6418362e7366dfbf2532d122"
+    },
+    {
+      "path": "conditions/17-enforced-float/17-enforced-float/distractors-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/17-enforced-float/distractors-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 410698,
+      "sha256": "2fbaab1b2e22e285642f4f69c0a0ae3b8483cc9efae445e56c143dfffae1316a"
+    },
+    {
+      "path": "conditions/17-enforced-float/17-enforced-float/distractors-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/17-enforced-float/distractors-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "489ac40152ebfa4089b9ff31880bf2a47bbbe0fa232894a5667f96155a50e2ca"
+    },
+    {
+      "path": "conditions/17-enforced-float/17-enforced-float/ordinary-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/17-enforced-float/ordinary-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 411130,
+      "sha256": "21e09ade66fdcc69fb5aa67dd1732d75682202eef6660ea783e87e6e22dd3ebf"
+    },
+    {
+      "path": "conditions/17-enforced-float/17-enforced-float/ordinary-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/17-enforced-float/ordinary-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "914223e326bc2f94e481c4aa6a14bdaf759157c756efda92237f7541549dfc35"
+    },
+    {
+      "path": "conditions/17-enforced-float/17-enforced-float/replace-retract-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/17-enforced-float/replace-retract-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 411595,
+      "sha256": "2530391016f38fa5d6ee2cd9e55e608a25be9ad9e08e4270ac78cfda072a44f9"
+    },
+    {
+      "path": "conditions/17-enforced-float/17-enforced-float/replace-retract-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/17-enforced-float/replace-retract-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "2d2b372f672b097e92831bc8a5ee1b9515354c0d9f594f39d13db68f29c30182"
+    },
+    {
+      "path": "conditions/17-enforced-float/17-enforced-float/replay.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/17-enforced-float/replay.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 754,
+      "sha256": "b0ca77824329f3dfaffa3717710bd35c831d70096ec781a275fa6fa6f33e0756"
+    },
+    {
+      "path": "conditions/17-enforced-float/17-enforced-float/replay.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/17-enforced-float/replay.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "5398ab857250535435a635bc40d6f4b0797187a468938a09d892a06f87fe780e"
+    },
+    {
+      "path": "conditions/17-enforced-float/17-enforced-float/run.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/17-enforced-float/run.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 82061,
+      "sha256": "fa3c744063452f7ad1fd657be94356d3767743c2b3013d4205c4524c200f3f55"
+    },
+    {
+      "path": "conditions/17-enforced-float/17-enforced-float/run.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/17-enforced-float/run.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "f48c48246ece1f6c14fcc66a8e2bb7c0136468632ab089588f6e1352c8230f1a"
+    },
+    {
+      "path": "conditions/17-enforced-float/17-enforced-float/unseen-composition-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/17-enforced-float/unseen-composition-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 410793,
+      "sha256": "5082e8e573fbcc8cacc67781a14ec5f6fd75f65e85aa5a82c68ca061e7cbf9a5"
+    },
+    {
+      "path": "conditions/17-enforced-float/17-enforced-float/unseen-composition-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/17-enforced-float/unseen-composition-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "504bb0c15ff756a3938cedf68900c12ed6b94bef8fb36d059790dee96ae13569"
+    },
+    {
+      "path": "conditions/17-enforced-float/config.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/config.json",
+      "role": "condition input/audit provenance",
+      "bytes": 2402,
+      "sha256": "cdf7bd0e58c27e998c2528dc01ccf6f85def4438457f9d97438eea2bb1efb75b"
+    },
+    {
+      "path": "conditions/17-enforced-float/config.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/config.sha256",
+      "role": "condition input/audit provenance",
+      "bytes": 65,
+      "sha256": "07a9af8b4f81a71105a49ae72877c97fa57f801c09ea802c9fdc3f1122a2786d"
+    },
+    {
+      "path": "conditions/17-enforced-float/data/audit.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/data/audit.json",
+      "role": "condition input/audit provenance",
+      "bytes": 58886,
+      "sha256": "463ea850a3dc3e73f0cb748172ccbf148fe8012cc6fecf399c980dc3f4bbc75b"
+    },
+    {
+      "path": "conditions/17-enforced-float/process.log",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float.log",
+      "role": "formal condition stdout/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "conditions/17-enforced-float/receipt-after-1.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/receipt-after-1.json",
+      "role": "immutable intermediate outer receipt",
+      "bytes": 83828,
+      "sha256": "a0cb5fd3e9d319681f026ba2961e33132ce3eef630ba8f57f977b6140166e1a7"
+    },
+    {
+      "path": "conditions/17-enforced-float/receipt-after-1.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/receipt-after-1.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "38b066e0e794dd5639bdda1d323ac4e6584630b0ab33daf4b6b202d87e5347d2"
+    },
+    {
+      "path": "conditions/17-enforced-float/receipt.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/receipt.json",
+      "role": "full formal receipt: all metrics/curves/telemetry/replay",
+      "bytes": 83828,
+      "sha256": "a0cb5fd3e9d319681f026ba2961e33132ce3eef630ba8f57f977b6140166e1a7"
+    },
+    {
+      "path": "conditions/17-enforced-float/receipt.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-float/receipt.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "38b066e0e794dd5639bdda1d323ac4e6584630b0ab33daf4b6b202d87e5347d2"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/17-enforced-ternary/conflicts-hypotheses-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/17-enforced-ternary/conflicts-hypotheses-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 397451,
+      "sha256": "2f1a265d66a5b48f24e2f9ac0f62b6b6098fc41eb47c37cedfb6bcf1baf3aa65"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/17-enforced-ternary/conflicts-hypotheses-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/17-enforced-ternary/conflicts-hypotheses-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "8a010e453359943011fd6ec3688e54488a93320157b273f6601373cc4c3db7c8"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/17-enforced-ternary/distractors-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/17-enforced-ternary/distractors-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 394455,
+      "sha256": "18b4f2813b90f9f8042e9da29b44a13d2661134b524363578752ed7908c0be0e"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/17-enforced-ternary/distractors-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/17-enforced-ternary/distractors-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "875f1621ebc5cda9283d542b57f8cae22e1be7cfdabb77f637bedbecbbd1cf89"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/17-enforced-ternary/ordinary-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/17-enforced-ternary/ordinary-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 396294,
+      "sha256": "33711201094df5391bce832fe59da3757b0295e923265bcbb2a861674a10a436"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/17-enforced-ternary/ordinary-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/17-enforced-ternary/ordinary-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "d808bb69678cefb0511ac2c05e96aa2990ab01549f2d9e5da121ce5aaeadcbca"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/17-enforced-ternary/replace-retract-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/17-enforced-ternary/replace-retract-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 397495,
+      "sha256": "7c1c4a1d2fa80c7e81754a01409a9417f8241afe82cc6754a5c16eca0ab35cb8"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/17-enforced-ternary/replace-retract-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/17-enforced-ternary/replace-retract-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "426736e1623828a7f0654e0fc832c91441b7ff75708e2a2aa0c73d23392198bb"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/17-enforced-ternary/replay.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/17-enforced-ternary/replay.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 753,
+      "sha256": "7f23b0098fa856bf39aa0bd0704696f18f6d1ca1368f1fb266c7ede6c70c9c43"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/17-enforced-ternary/replay.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/17-enforced-ternary/replay.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "2d571dda921c9cc81d4b95fba44211c13b0789ed894e1bbcbe46d9725e2e5448"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/17-enforced-ternary/run.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/17-enforced-ternary/run.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 82490,
+      "sha256": "35af6e7fbf496fae2e456540756adb49f8657e5ca412daff40eb1b625c54228c"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/17-enforced-ternary/run.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/17-enforced-ternary/run.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "8f4467c5afa562879c1ff4f94b8635def279edb55fd2a39af618df296ec46a69"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/17-enforced-ternary/unseen-composition-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/17-enforced-ternary/unseen-composition-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 392521,
+      "sha256": "4ab3068a24d95a8d014d84b9a6959a84d9a3f2fcfb750201903f70130a165e3b"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/17-enforced-ternary/unseen-composition-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/17-enforced-ternary/unseen-composition-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "5b8ea06a421c710c97ccfe1da810aeedf1ab099da81b49d2e683d1728310285a"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/config.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/config.json",
+      "role": "condition input/audit provenance",
+      "bytes": 2402,
+      "sha256": "cdf7bd0e58c27e998c2528dc01ccf6f85def4438457f9d97438eea2bb1efb75b"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/config.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/config.sha256",
+      "role": "condition input/audit provenance",
+      "bytes": 65,
+      "sha256": "07a9af8b4f81a71105a49ae72877c97fa57f801c09ea802c9fdc3f1122a2786d"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/data/audit.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/data/audit.json",
+      "role": "condition input/audit provenance",
+      "bytes": 58886,
+      "sha256": "10d64f5eba1ca7f45a404d9c78125eacb0d3eda6b891a864cce407256b193a28"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/process.log",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary.log",
+      "role": "formal condition stdout/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/receipt-after-1.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/receipt-after-1.json",
+      "role": "immutable intermediate outer receipt",
+      "bytes": 84261,
+      "sha256": "e723940511684b7ba870d1a23e567bc12edf2df7139d4ba7070b26810d30df54"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/receipt-after-1.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/receipt-after-1.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "445ce2fafa191d1e18d321e2e3f05374a1c8be49a76b104fda5b95b658592fab"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/receipt.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/receipt.json",
+      "role": "full formal receipt: all metrics/curves/telemetry/replay",
+      "bytes": 84261,
+      "sha256": "e723940511684b7ba870d1a23e567bc12edf2df7139d4ba7070b26810d30df54"
+    },
+    {
+      "path": "conditions/17-enforced-ternary/receipt.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-enforced-ternary/receipt.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "445ce2fafa191d1e18d321e2e3f05374a1c8be49a76b104fda5b95b658592fab"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/17-metadata-only-float/conflicts-hypotheses-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/17-metadata-only-float/conflicts-hypotheses-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 409866,
+      "sha256": "69a613fee7e27e8b97de9dad1e1cd6c7ad24aae7ae34b651d8bb1606c96a9f66"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/17-metadata-only-float/conflicts-hypotheses-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/17-metadata-only-float/conflicts-hypotheses-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "f3d632396f551a513fa489bfcfb42da26778f3d695192b9b6da2561f7377d593"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/17-metadata-only-float/distractors-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/17-metadata-only-float/distractors-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 408200,
+      "sha256": "82253199622cba066e94952e0035104cf00a571fa24e7b935363245b4b89a1ae"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/17-metadata-only-float/distractors-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/17-metadata-only-float/distractors-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "e12e621aea29570799db788c11d7c11c7be3379a1474993de89aa6bcb0b4cc95"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/17-metadata-only-float/ordinary-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/17-metadata-only-float/ordinary-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 408662,
+      "sha256": "24bf488f14c708f92ccc19e4961849c2f856f9c4f85229215fabad1a855bf666"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/17-metadata-only-float/ordinary-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/17-metadata-only-float/ordinary-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "58d1a2dc1707c44fa49f61f3e13bc3008b20020624edb5e4aac23a5e4c89d06d"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/17-metadata-only-float/replace-retract-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/17-metadata-only-float/replace-retract-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 408935,
+      "sha256": "46187b503949a2494f5706b5803df99d62fa1676a30d74481e7ddcd3afd84867"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/17-metadata-only-float/replace-retract-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/17-metadata-only-float/replace-retract-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "9ab307244131c6eefeb82d7c3821ddeb6c2153e042ddfe8e8b2ce9dde471f779"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/17-metadata-only-float/replay.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/17-metadata-only-float/replay.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 753,
+      "sha256": "e819aea7028611a885d6f1b92f8b27ee3694936fc98a0451f20afda34e07e207"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/17-metadata-only-float/replay.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/17-metadata-only-float/replay.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "75c7c67e08fb2341b30decfecc8ef6c2d4c32787f671a05ee27bdcf070478570"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/17-metadata-only-float/run.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/17-metadata-only-float/run.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 82610,
+      "sha256": "055dffd61ec96828a4e1e6641c61ed9c106341253155207cdb42b73a5df2b9e7"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/17-metadata-only-float/run.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/17-metadata-only-float/run.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "f057110222e82eb8260b4f6400efbe25cd290192894e8a36cf0338d9c7f0e8e0"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/17-metadata-only-float/unseen-composition-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/17-metadata-only-float/unseen-composition-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 408260,
+      "sha256": "af6a7edb0c1d60b09b4d1c05d9d8bae1b8dafc4c55b5ba6c7ff21c827f413d58"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/17-metadata-only-float/unseen-composition-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/17-metadata-only-float/unseen-composition-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "706c275c0f64e91820191fbf33aa9014d79d3e25dfa504600a64fe8c7d94b82d"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/config.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/config.json",
+      "role": "condition input/audit provenance",
+      "bytes": 2402,
+      "sha256": "cdf7bd0e58c27e998c2528dc01ccf6f85def4438457f9d97438eea2bb1efb75b"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/config.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/config.sha256",
+      "role": "condition input/audit provenance",
+      "bytes": 65,
+      "sha256": "07a9af8b4f81a71105a49ae72877c97fa57f801c09ea802c9fdc3f1122a2786d"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/data/audit.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/data/audit.json",
+      "role": "condition input/audit provenance",
+      "bytes": 58887,
+      "sha256": "f91e05b672db9eae7c3f956c1bd35719dee789bb67ea370fa287b7ff88356952"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/process.log",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float.log",
+      "role": "formal condition stdout/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/receipt-after-1.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/receipt-after-1.json",
+      "role": "immutable intermediate outer receipt",
+      "bytes": 84387,
+      "sha256": "a55f8d9f6e845dba24a2acc4da683ff1ebef9f8758e34b7c1fcf9e4abd1b1917"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/receipt-after-1.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/receipt-after-1.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "b3f01abccaa7f27f8c034b06155f1d671daa0a61bd34d52322010c84c57121c2"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/receipt.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/receipt.json",
+      "role": "full formal receipt: all metrics/curves/telemetry/replay",
+      "bytes": 84387,
+      "sha256": "a55f8d9f6e845dba24a2acc4da683ff1ebef9f8758e34b7c1fcf9e4abd1b1917"
+    },
+    {
+      "path": "conditions/17-metadata-only-float/receipt.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-float/receipt.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "b3f01abccaa7f27f8c034b06155f1d671daa0a61bd34d52322010c84c57121c2"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/17-metadata-only-ternary/conflicts-hypotheses-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/17-metadata-only-ternary/conflicts-hypotheses-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 395129,
+      "sha256": "b021bec5b5a183819765697476cc419c3192dce24de9c954bbeca4e3cdbaa383"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/17-metadata-only-ternary/conflicts-hypotheses-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/17-metadata-only-ternary/conflicts-hypotheses-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "0b3086c672a781964707a04591c135fd8068bed1c55ace0c026ab8276ee71e7b"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/17-metadata-only-ternary/distractors-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/17-metadata-only-ternary/distractors-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 392403,
+      "sha256": "985e77a04b3180dab6affeef111f36117a13c382f671e2b6196095d2d5403b96"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/17-metadata-only-ternary/distractors-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/17-metadata-only-ternary/distractors-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "232950fdcb9f3511775b63f0551be80176c8d53e43d44db29d37f45722e1d6ad"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/17-metadata-only-ternary/ordinary-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/17-metadata-only-ternary/ordinary-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 394180,
+      "sha256": "8220b3dc1005911c5c483beb5f06ec58309b5d77932f54d8e143777c6a736053"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/17-metadata-only-ternary/ordinary-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/17-metadata-only-ternary/ordinary-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "a6b445c69bf3c4d8549532e1d2ee1fe5624301ddcaa03cf75704f863022b7356"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/17-metadata-only-ternary/replace-retract-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/17-metadata-only-ternary/replace-retract-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 394831,
+      "sha256": "bdd87dd94de6b2469dafd27fce707fe13dff8ec6a6e1ef8a0cf4a1848497d4fb"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/17-metadata-only-ternary/replace-retract-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/17-metadata-only-ternary/replace-retract-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "e830a24579e6579729bd0044309f45fae0c67c66bc74df0eda7cd7bf9d73949a"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/17-metadata-only-ternary/replay.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/17-metadata-only-ternary/replay.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 753,
+      "sha256": "e65030cc3d63a07ff783d5740efbf09ad71d01a734590d8f803604a425483d58"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/17-metadata-only-ternary/replay.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/17-metadata-only-ternary/replay.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "58e95cb87f62eaaef367ebd53c1ae61626486875299feb249e701bd8498bc406"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/17-metadata-only-ternary/run.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/17-metadata-only-ternary/run.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 82545,
+      "sha256": "7940840deb959d1fe1e32b33eae77c7eb7cb84f0b79b81e2bf113ac7613e6ba3"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/17-metadata-only-ternary/run.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/17-metadata-only-ternary/run.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "305cc1597fec551f0553b4205814e101bea6e03fb9e7779835111fefd9dd1795"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/17-metadata-only-ternary/unseen-composition-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/17-metadata-only-ternary/unseen-composition-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 391177,
+      "sha256": "5a4c53a4be535d17d781bf4f744db3ae636f16b372da0a06eab8a621117a196f"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/17-metadata-only-ternary/unseen-composition-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/17-metadata-only-ternary/unseen-composition-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "e1c8657db2cca181a4a884243c1d581401864e7de3bb5545c34db33a1d15a395"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/config.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/config.json",
+      "role": "condition input/audit provenance",
+      "bytes": 2402,
+      "sha256": "cdf7bd0e58c27e998c2528dc01ccf6f85def4438457f9d97438eea2bb1efb75b"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/config.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/config.sha256",
+      "role": "condition input/audit provenance",
+      "bytes": 65,
+      "sha256": "07a9af8b4f81a71105a49ae72877c97fa57f801c09ea802c9fdc3f1122a2786d"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/data/audit.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/data/audit.json",
+      "role": "condition input/audit provenance",
+      "bytes": 58886,
+      "sha256": "333ead3c47dc0aab0aff8cc258522deef0a94cc663872461768fc7ad187b9883"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/process.log",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary.log",
+      "role": "formal condition stdout/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/receipt-after-1.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/receipt-after-1.json",
+      "role": "immutable intermediate outer receipt",
+      "bytes": 84326,
+      "sha256": "5dbc2645430d386dc7ce3a92ad7d6ef05c6df42215ad8684a523c3922e75fa51"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/receipt-after-1.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/receipt-after-1.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "fbe4e977cf084820b851671ba507edf0022c8068082ba9047318fda8503de2e9"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/receipt.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/receipt.json",
+      "role": "full formal receipt: all metrics/curves/telemetry/replay",
+      "bytes": 84326,
+      "sha256": "5dbc2645430d386dc7ce3a92ad7d6ef05c6df42215ad8684a523c3922e75fa51"
+    },
+    {
+      "path": "conditions/17-metadata-only-ternary/receipt.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/17-metadata-only-ternary/receipt.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "fbe4e977cf084820b851671ba507edf0022c8068082ba9047318fda8503de2e9"
+    },
+    {
+      "path": "conditions/29-enforced-float/29-enforced-float/conflicts-hypotheses-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/29-enforced-float/conflicts-hypotheses-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 411437,
+      "sha256": "8e98be418a821b91247f24d2b40872bd20cdb5485ce8eed956ea8b09fc8aeff0"
+    },
+    {
+      "path": "conditions/29-enforced-float/29-enforced-float/conflicts-hypotheses-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/29-enforced-float/conflicts-hypotheses-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "a0a639943e3b8c647d9ac42efe3852e71c9384a5cdb5a3e26580a486da808b7b"
+    },
+    {
+      "path": "conditions/29-enforced-float/29-enforced-float/distractors-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/29-enforced-float/distractors-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 410384,
+      "sha256": "e3f75d2428869067595eee2d92b2ec0bc895a4a2485e4631e71ec3c6759f71a3"
+    },
+    {
+      "path": "conditions/29-enforced-float/29-enforced-float/distractors-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/29-enforced-float/distractors-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "4bbe63b084bd96dc7a8063d4d95944845c07a0a90753585925fa6c81f76cfd87"
+    },
+    {
+      "path": "conditions/29-enforced-float/29-enforced-float/ordinary-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/29-enforced-float/ordinary-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 410436,
+      "sha256": "3dd39d8a55a28f1b60fedbb7f06094a2840f80a904fff3f0ac04774307026040"
+    },
+    {
+      "path": "conditions/29-enforced-float/29-enforced-float/ordinary-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/29-enforced-float/ordinary-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "ddb2092fc142e553de43a1fa9d5b7cdf9a36aab4fca222242926f829e4c5666f"
+    },
+    {
+      "path": "conditions/29-enforced-float/29-enforced-float/replace-retract-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/29-enforced-float/replace-retract-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 411456,
+      "sha256": "7b92093139af37280281e51aad09f3d2d8ceec2beb06dfc8106e0e3b2d3dc2a9"
+    },
+    {
+      "path": "conditions/29-enforced-float/29-enforced-float/replace-retract-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/29-enforced-float/replace-retract-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "d2c2f526ce9bb45a8f0ef4957fda6712a4732f5c0d501ae0fd7a80fd4673d465"
+    },
+    {
+      "path": "conditions/29-enforced-float/29-enforced-float/replay.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/29-enforced-float/replay.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 745,
+      "sha256": "2b06a3d55cbc693de4b27aa14ab90b5766da2eb4e9bf2556796efa1d023dd6fe"
+    },
+    {
+      "path": "conditions/29-enforced-float/29-enforced-float/replay.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/29-enforced-float/replay.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "68c9ac9cc26acefcb3f496f31172e94883dd4aea5d70c378f91dcd4f2d7ef409"
+    },
+    {
+      "path": "conditions/29-enforced-float/29-enforced-float/run.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/29-enforced-float/run.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 81946,
+      "sha256": "3edc4fd27000783fe2fa0451c0e0bd98e30ea146faa74b90095060b376c5aaea"
+    },
+    {
+      "path": "conditions/29-enforced-float/29-enforced-float/run.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/29-enforced-float/run.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "e242e951a81af80680c7d5f4a07d1890d010532479657710e7835e8617291781"
+    },
+    {
+      "path": "conditions/29-enforced-float/29-enforced-float/unseen-composition-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/29-enforced-float/unseen-composition-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 410561,
+      "sha256": "678b2e4d84e7db3d307675b9ce21634dfb4fb7fc536a63f160185369b5407a89"
+    },
+    {
+      "path": "conditions/29-enforced-float/29-enforced-float/unseen-composition-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/29-enforced-float/unseen-composition-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "c1d8a3206ef17bc2ae6fd32d3928ffd0fdc5262c21e8979ea74fd19992477fa7"
+    },
+    {
+      "path": "conditions/29-enforced-float/config.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/config.json",
+      "role": "condition input/audit provenance",
+      "bytes": 2402,
+      "sha256": "cdf7bd0e58c27e998c2528dc01ccf6f85def4438457f9d97438eea2bb1efb75b"
+    },
+    {
+      "path": "conditions/29-enforced-float/config.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/config.sha256",
+      "role": "condition input/audit provenance",
+      "bytes": 65,
+      "sha256": "07a9af8b4f81a71105a49ae72877c97fa57f801c09ea802c9fdc3f1122a2786d"
+    },
+    {
+      "path": "conditions/29-enforced-float/data/audit.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/data/audit.json",
+      "role": "condition input/audit provenance",
+      "bytes": 58888,
+      "sha256": "abe4543dc90aa2ea90c88b068bfdd4a429a4a0a9f462bddc4268cee5a49ca2dd"
+    },
+    {
+      "path": "conditions/29-enforced-float/process.log",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float.log",
+      "role": "formal condition stdout/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "conditions/29-enforced-float/receipt-after-1.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/receipt-after-1.json",
+      "role": "immutable intermediate outer receipt",
+      "bytes": 83713,
+      "sha256": "d46f4998324ce674f476e6154d6bba6eafd84d78a62f2e4c01d956e35f637c2a"
+    },
+    {
+      "path": "conditions/29-enforced-float/receipt-after-1.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/receipt-after-1.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "230230ec527a21da7546de6356ceeb4e01d69d7152593715c67b4e9c5ee2bd7e"
+    },
+    {
+      "path": "conditions/29-enforced-float/receipt.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/receipt.json",
+      "role": "full formal receipt: all metrics/curves/telemetry/replay",
+      "bytes": 83713,
+      "sha256": "d46f4998324ce674f476e6154d6bba6eafd84d78a62f2e4c01d956e35f637c2a"
+    },
+    {
+      "path": "conditions/29-enforced-float/receipt.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-float/receipt.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "230230ec527a21da7546de6356ceeb4e01d69d7152593715c67b4e9c5ee2bd7e"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/29-enforced-ternary/conflicts-hypotheses-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/29-enforced-ternary/conflicts-hypotheses-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 396582,
+      "sha256": "64d54400a5fcbbef9ddc72a9058d60075162754268f379f58ba61cc9f0e4443a"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/29-enforced-ternary/conflicts-hypotheses-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/29-enforced-ternary/conflicts-hypotheses-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "2999f1cfbca50f9c63264263527b6386c5b284458670c21d076fa8538464b716"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/29-enforced-ternary/distractors-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/29-enforced-ternary/distractors-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 393994,
+      "sha256": "6a124eaacfd47883569b4ed1779fd661083f97c080f35d116b094d59c617f4b9"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/29-enforced-ternary/distractors-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/29-enforced-ternary/distractors-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "650e12c567a288635b543022827eb6cc00e899060f98b801f165de446bcedaf5"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/29-enforced-ternary/ordinary-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/29-enforced-ternary/ordinary-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 395582,
+      "sha256": "14dab5983d1b58e4cf0ea211f1d5b52517be6b6ea4f19e9099905438d55f60e5"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/29-enforced-ternary/ordinary-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/29-enforced-ternary/ordinary-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "323b51eb9b55155bb0b75276a10bb53a2188048279908c78342793e72b5d34ad"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/29-enforced-ternary/replace-retract-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/29-enforced-ternary/replace-retract-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 395992,
+      "sha256": "152f10a6475449350116c85920c7201a0c8dea0586624b70dd9765f15f80c40f"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/29-enforced-ternary/replace-retract-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/29-enforced-ternary/replace-retract-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "5fd179dbc4c6affb447bebeb5e160a12da3ad0e15dbad810cffd21733e370e6a"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/29-enforced-ternary/replay.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/29-enforced-ternary/replay.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 752,
+      "sha256": "af7e6c2a6eff8fbcafd83349b3c5c68686afedf6fd7fa8adf54fc4e1d85ec355"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/29-enforced-ternary/replay.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/29-enforced-ternary/replay.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "c48a6276daadbb6cc2c4bdeb0461510413a3c92b28530c53f370f912daa4a620"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/29-enforced-ternary/run.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/29-enforced-ternary/run.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 82782,
+      "sha256": "8eb7b4d9024142651c11243270408056c145fcbf7bdce98a3c55add217d0aaad"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/29-enforced-ternary/run.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/29-enforced-ternary/run.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "5013f0d43763ab261ea620c629c64d5a831a5de9bf683168dda49467caed1171"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/29-enforced-ternary/unseen-composition-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/29-enforced-ternary/unseen-composition-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 389395,
+      "sha256": "49e8640fa665d4aa8b570a45c54a05db1fac1ad60ceea74b83ab9681e575d6d3"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/29-enforced-ternary/unseen-composition-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/29-enforced-ternary/unseen-composition-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "94ac53adc09adf1898e3656e4c0da53f3a03f0b6477c29d3f27a6ce602db8a62"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/config.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/config.json",
+      "role": "condition input/audit provenance",
+      "bytes": 2402,
+      "sha256": "cdf7bd0e58c27e998c2528dc01ccf6f85def4438457f9d97438eea2bb1efb75b"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/config.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/config.sha256",
+      "role": "condition input/audit provenance",
+      "bytes": 65,
+      "sha256": "07a9af8b4f81a71105a49ae72877c97fa57f801c09ea802c9fdc3f1122a2786d"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/data/audit.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/data/audit.json",
+      "role": "condition input/audit provenance",
+      "bytes": 58886,
+      "sha256": "95b5edea7b2a90e7ee931cbc9a159f2a332c88d351f149ebe96f0fafb4da64ce"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/process.log",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary.log",
+      "role": "formal condition stdout/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/receipt-after-1.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/receipt-after-1.json",
+      "role": "immutable intermediate outer receipt",
+      "bytes": 84553,
+      "sha256": "3297944560d13e91a45dbeca71de26fc6148123964da2e113a48903a0a85508f"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/receipt-after-1.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/receipt-after-1.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "2666f1443f02b8c4aafe72fb01500524ed5b65ab704dc837037514bdd275ca25"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/receipt.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/receipt.json",
+      "role": "full formal receipt: all metrics/curves/telemetry/replay",
+      "bytes": 84553,
+      "sha256": "3297944560d13e91a45dbeca71de26fc6148123964da2e113a48903a0a85508f"
+    },
+    {
+      "path": "conditions/29-enforced-ternary/receipt.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-enforced-ternary/receipt.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "2666f1443f02b8c4aafe72fb01500524ed5b65ab704dc837037514bdd275ca25"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/29-metadata-only-float/conflicts-hypotheses-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/29-metadata-only-float/conflicts-hypotheses-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 409128,
+      "sha256": "3011cf10403cbaeb13c4cb550e43a106fc4412b0171990bb5edf7caeea0c09c1"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/29-metadata-only-float/conflicts-hypotheses-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/29-metadata-only-float/conflicts-hypotheses-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "e754ae991288505ccd37164b58de427cdc67548ea888f044a3dd2a0d0037e92f"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/29-metadata-only-float/distractors-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/29-metadata-only-float/distractors-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 407614,
+      "sha256": "8ee93170cb280a443f4f34a0681726d008febcc8274f18e9f8fbf72a0f989307"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/29-metadata-only-float/distractors-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/29-metadata-only-float/distractors-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "d136ac7130af3d90493654135bda932b9f4c81d154d49fe32e75c49a8f62c857"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/29-metadata-only-float/ordinary-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/29-metadata-only-float/ordinary-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 408323,
+      "sha256": "b36db4f2d5b3e11fae6ead18ab8830d0dd6d802e6462697d163b4b4cb5f3f011"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/29-metadata-only-float/ordinary-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/29-metadata-only-float/ordinary-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "a6458b64fb91e6e47bc1b2478b24f8a58fba56a7794bdd57229c9de6dc184ef4"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/29-metadata-only-float/replace-retract-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/29-metadata-only-float/replace-retract-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 408785,
+      "sha256": "6e1c75732d7fb312b3ef897140886249d244b6b4614b7b725fa9d0d6d8251712"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/29-metadata-only-float/replace-retract-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/29-metadata-only-float/replace-retract-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "d0f3a5f23ba9893e32237f02a1a160e41b5863d1dbedd17cfee2c22befe30a11"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/29-metadata-only-float/replay.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/29-metadata-only-float/replay.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 752,
+      "sha256": "9acf5616100f38afb634e7cbc7394c539ac9b0452c1e2a0ab9b27848c4241838"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/29-metadata-only-float/replay.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/29-metadata-only-float/replay.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "1d7c0517634ffeac171baba76f4ed969c845ae1b64385fbe9991f983cf126310"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/29-metadata-only-float/run.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/29-metadata-only-float/run.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 82635,
+      "sha256": "c757c327c19bbd46de38573342f20fbcbd862ad83b4034687f158d44d68c275c"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/29-metadata-only-float/run.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/29-metadata-only-float/run.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "0cae768c1e3d72b5278a14a21e99d2c0379c5baf401b8c0c7a8580af9eb0da2d"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/29-metadata-only-float/unseen-composition-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/29-metadata-only-float/unseen-composition-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 408008,
+      "sha256": "7a46c5c599bd4782f8dceab4f272975e300ae2da70c6a8f5ffbca917032b8d98"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/29-metadata-only-float/unseen-composition-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/29-metadata-only-float/unseen-composition-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "efc08d4f49a048063c864271d7cf096ffe898c1d8f93f1bd1266e9a3c4cf2388"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/config.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/config.json",
+      "role": "condition input/audit provenance",
+      "bytes": 2402,
+      "sha256": "cdf7bd0e58c27e998c2528dc01ccf6f85def4438457f9d97438eea2bb1efb75b"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/config.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/config.sha256",
+      "role": "condition input/audit provenance",
+      "bytes": 65,
+      "sha256": "07a9af8b4f81a71105a49ae72877c97fa57f801c09ea802c9fdc3f1122a2786d"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/data/audit.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/data/audit.json",
+      "role": "condition input/audit provenance",
+      "bytes": 58888,
+      "sha256": "5d5576c470f739f974557485186c893b1105752234209e4d45df8160f3476306"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/process.log",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float.log",
+      "role": "formal condition stdout/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/receipt-after-1.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/receipt-after-1.json",
+      "role": "immutable intermediate outer receipt",
+      "bytes": 84412,
+      "sha256": "572420dc6b3fe2670db8be60b9e52d78586207d03db7ff92b5fcf56a1c424eef"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/receipt-after-1.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/receipt-after-1.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "40fbfe64f4fc43f20e567f3b3f44fd1aebe70384dd3c0b9378096a8ccc5de625"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/receipt.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/receipt.json",
+      "role": "full formal receipt: all metrics/curves/telemetry/replay",
+      "bytes": 84412,
+      "sha256": "572420dc6b3fe2670db8be60b9e52d78586207d03db7ff92b5fcf56a1c424eef"
+    },
+    {
+      "path": "conditions/29-metadata-only-float/receipt.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-float/receipt.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "40fbfe64f4fc43f20e567f3b3f44fd1aebe70384dd3c0b9378096a8ccc5de625"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/29-metadata-only-ternary/conflicts-hypotheses-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/29-metadata-only-ternary/conflicts-hypotheses-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 393887,
+      "sha256": "45331445bfc198bb88359bd1aa97125793077ef6e265a033e01c1b9ed6dcbdfa"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/29-metadata-only-ternary/conflicts-hypotheses-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/29-metadata-only-ternary/conflicts-hypotheses-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "911c206a519db62ad195bdaa89ffb176eec04db14ab666821fc031abb1f04381"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/29-metadata-only-ternary/distractors-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/29-metadata-only-ternary/distractors-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 391021,
+      "sha256": "b0c07d82162c35276533d0fb4934f1939609bd6a26f2bba82cfaf09ac35877f6"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/29-metadata-only-ternary/distractors-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/29-metadata-only-ternary/distractors-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "c3c23c8a5db369f9b858deca5db007089445cff94ef72e1c963b98f0c0b60108"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/29-metadata-only-ternary/ordinary-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/29-metadata-only-ternary/ordinary-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 393428,
+      "sha256": "15d55c858044c9d92239be08b25f2760d4e28019598934d6a8d0304c064f8366"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/29-metadata-only-ternary/ordinary-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/29-metadata-only-ternary/ordinary-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "d63c310b617fdc682d57178a9ae64eab0783762754386512866b7f5175558094"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/29-metadata-only-ternary/replace-retract-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/29-metadata-only-ternary/replace-retract-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 394196,
+      "sha256": "4d39ca6215292964752d6ddd6bb3fe1c9ce80d2563a1f3a6b9bc8d592b45ad68"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/29-metadata-only-ternary/replace-retract-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/29-metadata-only-ternary/replace-retract-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "e3395547eeb00ea5d48bc00553d8d5620d683527c9f80bb3dbd0b522d3eed519"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/29-metadata-only-ternary/replay.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/29-metadata-only-ternary/replay.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 752,
+      "sha256": "d7dca894316aa7d47b1715668171b92fd39a78cb2523a75949a1469092853493"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/29-metadata-only-ternary/replay.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/29-metadata-only-ternary/replay.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "7819d24ecb8b36a54f091a47b76278fcc557de7c4e3a9c7aa2fe6812ab637ff0"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/29-metadata-only-ternary/run.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/29-metadata-only-ternary/run.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 82721,
+      "sha256": "a3cbcb7445e46a5b6e2c1be4db6026f27be738dc62716a1e1f5bff6e7b58775e"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/29-metadata-only-ternary/run.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/29-metadata-only-ternary/run.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "177accafaac104d8fae1887c9fbc8a1b5da502c8fa352a5267f8eee786a41fac"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/29-metadata-only-ternary/unseen-composition-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/29-metadata-only-ternary/unseen-composition-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 389457,
+      "sha256": "3614bf111ca24d9798ceff978003173f2541b8bfbe4e5de131c601b7ede623bf"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/29-metadata-only-ternary/unseen-composition-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/29-metadata-only-ternary/unseen-composition-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "9efd8d870e982ed94c8f8498fbd672f285c34579b01e0357e29d08dfeed16a25"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/config.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/config.json",
+      "role": "condition input/audit provenance",
+      "bytes": 2402,
+      "sha256": "cdf7bd0e58c27e998c2528dc01ccf6f85def4438457f9d97438eea2bb1efb75b"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/config.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/config.sha256",
+      "role": "condition input/audit provenance",
+      "bytes": 65,
+      "sha256": "07a9af8b4f81a71105a49ae72877c97fa57f801c09ea802c9fdc3f1122a2786d"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/data/audit.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/data/audit.json",
+      "role": "condition input/audit provenance",
+      "bytes": 58884,
+      "sha256": "1dd6f01b9ad3f5d91bacec30354c80c2894f22f65d173a0a21ccbe69dc3f32f8"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/process.log",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary.log",
+      "role": "formal condition stdout/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/receipt-after-1.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/receipt-after-1.json",
+      "role": "immutable intermediate outer receipt",
+      "bytes": 84502,
+      "sha256": "8e0a8b8dd75d4d099b92e96ed2bb0235268a573c9b0f91c9d006d64319b2a7f9"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/receipt-after-1.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/receipt-after-1.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "c393eb8fa5b91c91a9e3d7ef8cc893e0f1cb1fdf18d0b1fb81522da9a95ff76f"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/receipt.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/receipt.json",
+      "role": "full formal receipt: all metrics/curves/telemetry/replay",
+      "bytes": 84502,
+      "sha256": "8e0a8b8dd75d4d099b92e96ed2bb0235268a573c9b0f91c9d006d64319b2a7f9"
+    },
+    {
+      "path": "conditions/29-metadata-only-ternary/receipt.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/29-metadata-only-ternary/receipt.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "c393eb8fa5b91c91a9e3d7ef8cc893e0f1cb1fdf18d0b1fb81522da9a95ff76f"
+    },
+    {
+      "path": "conditions/43-enforced-float/43-enforced-float/conflicts-hypotheses-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/43-enforced-float/conflicts-hypotheses-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 411427,
+      "sha256": "d3f8cfa69b168b076c737c46724bc661e94b4127d4c3e3358eacb12557598df4"
+    },
+    {
+      "path": "conditions/43-enforced-float/43-enforced-float/conflicts-hypotheses-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/43-enforced-float/conflicts-hypotheses-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "bff299ab90859bb6a98cf3b3098948fa270f17ab62700dc6289e59dc9e2a5482"
+    },
+    {
+      "path": "conditions/43-enforced-float/43-enforced-float/distractors-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/43-enforced-float/distractors-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 409569,
+      "sha256": "e47b33fdf7008748dd786259f0ee793ca262ac6451efba0c7c11dd61bde5c4fa"
+    },
+    {
+      "path": "conditions/43-enforced-float/43-enforced-float/distractors-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/43-enforced-float/distractors-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "5b6701665e73d31b953c7c3946372eec11243861e191d640fe242bf88b238339"
+    },
+    {
+      "path": "conditions/43-enforced-float/43-enforced-float/ordinary-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/43-enforced-float/ordinary-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 410122,
+      "sha256": "05d5d4566a3ad5ced156960519fe29fab03d0b925a413d07c0ef3e6517a3a528"
+    },
+    {
+      "path": "conditions/43-enforced-float/43-enforced-float/ordinary-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/43-enforced-float/ordinary-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "08e8540b5741ad856249dd00c0b83208b451633946fbbe014eae2a08d95dc714"
+    },
+    {
+      "path": "conditions/43-enforced-float/43-enforced-float/replace-retract-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/43-enforced-float/replace-retract-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 411030,
+      "sha256": "9a7961d214342ca0050c0ce851091553cb07953535471a022cd8fa5e4602026b"
+    },
+    {
+      "path": "conditions/43-enforced-float/43-enforced-float/replace-retract-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/43-enforced-float/replace-retract-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "b1d4536b9d97131322c268b0c82b2fbb184fab63eb66332fa6aba94b69cbefd1"
+    },
+    {
+      "path": "conditions/43-enforced-float/43-enforced-float/replay.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/43-enforced-float/replay.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 752,
+      "sha256": "df0a21573917cf75d3d8e557c953f8a623516fb42921a7e6865112487658aeb8"
+    },
+    {
+      "path": "conditions/43-enforced-float/43-enforced-float/replay.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/43-enforced-float/replay.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "97e7402b9677c94180b12dc6fe713cfdc9317408b73f29f932b1be5be84fb584"
+    },
+    {
+      "path": "conditions/43-enforced-float/43-enforced-float/run.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/43-enforced-float/run.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 81962,
+      "sha256": "0831cff32ff11c36caad6345d653c60674f05c04b3e6477ff140e1cdb8f9318c"
+    },
+    {
+      "path": "conditions/43-enforced-float/43-enforced-float/run.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/43-enforced-float/run.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "288b57c6ec98cafeade1ba25ac59563fa7b1e4fef3d79f6e27e3e4333bdca726"
+    },
+    {
+      "path": "conditions/43-enforced-float/43-enforced-float/unseen-composition-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/43-enforced-float/unseen-composition-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 410908,
+      "sha256": "b9835ddaea54eebe4f316e73e3baab699bf72defb3c0c8cdca434de7244c2af5"
+    },
+    {
+      "path": "conditions/43-enforced-float/43-enforced-float/unseen-composition-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/43-enforced-float/unseen-composition-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "2fcd2d3fc9c449333722a957f786f30d1ee162780fc5b9c9e7f922912807bfc5"
+    },
+    {
+      "path": "conditions/43-enforced-float/config.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/config.json",
+      "role": "condition input/audit provenance",
+      "bytes": 2402,
+      "sha256": "cdf7bd0e58c27e998c2528dc01ccf6f85def4438457f9d97438eea2bb1efb75b"
+    },
+    {
+      "path": "conditions/43-enforced-float/config.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/config.sha256",
+      "role": "condition input/audit provenance",
+      "bytes": 65,
+      "sha256": "07a9af8b4f81a71105a49ae72877c97fa57f801c09ea802c9fdc3f1122a2786d"
+    },
+    {
+      "path": "conditions/43-enforced-float/data/audit.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/data/audit.json",
+      "role": "condition input/audit provenance",
+      "bytes": 58889,
+      "sha256": "c3442572f98f152382de40d9c483c1e38a087205e4010557adb7b75242e195ee"
+    },
+    {
+      "path": "conditions/43-enforced-float/process.log",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float.log",
+      "role": "formal condition stdout/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "conditions/43-enforced-float/receipt-after-1.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/receipt-after-1.json",
+      "role": "immutable intermediate outer receipt",
+      "bytes": 83729,
+      "sha256": "6d919ba07a0404afdff63d4d91e6d18df17352302f91153d4138326e4bf8563e"
+    },
+    {
+      "path": "conditions/43-enforced-float/receipt-after-1.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/receipt-after-1.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "203fd3b6904edfa923de07a65cbbf652d4917361a3abf40c509218ba156c402f"
+    },
+    {
+      "path": "conditions/43-enforced-float/receipt.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/receipt.json",
+      "role": "full formal receipt: all metrics/curves/telemetry/replay",
+      "bytes": 83729,
+      "sha256": "6d919ba07a0404afdff63d4d91e6d18df17352302f91153d4138326e4bf8563e"
+    },
+    {
+      "path": "conditions/43-enforced-float/receipt.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-float/receipt.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "203fd3b6904edfa923de07a65cbbf652d4917361a3abf40c509218ba156c402f"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/43-enforced-ternary/conflicts-hypotheses-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/43-enforced-ternary/conflicts-hypotheses-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 397392,
+      "sha256": "00bdcfc094a549edf38c200acd03d45e8259aa88bad538bf98a7dcc26e1f1a75"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/43-enforced-ternary/conflicts-hypotheses-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/43-enforced-ternary/conflicts-hypotheses-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "0af2fad5cc5e07d04cd26b0ca87f5a15777068433de49974c07bf4fcbfb8bdf4"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/43-enforced-ternary/distractors-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/43-enforced-ternary/distractors-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 394741,
+      "sha256": "d213213fae1997360ba3175024b570932a40e5c650523bb8774c5c98091c7de3"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/43-enforced-ternary/distractors-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/43-enforced-ternary/distractors-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "e2bc88fee17885a59fc2530d650ef5191b56552963354674040eeb78e4b661e9"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/43-enforced-ternary/ordinary-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/43-enforced-ternary/ordinary-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 396122,
+      "sha256": "0ca77ff9e4fea409065624b1b0e9f2a89f40cad236f248b391c014dc9f084709"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/43-enforced-ternary/ordinary-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/43-enforced-ternary/ordinary-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "9d6cb9fc1f02bc9861466b514977d35b3f0a4eb705c889041751e93018e48d4a"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/43-enforced-ternary/replace-retract-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/43-enforced-ternary/replace-retract-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 397416,
+      "sha256": "6e15ec0ff7a812da2c8b737849107656a0bd7de0b32fd2fbb1cd2202587e5d58"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/43-enforced-ternary/replace-retract-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/43-enforced-ternary/replace-retract-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "adcfae544a170f5e8c495d93c4b4c66e56ef7c84e6713c05fbb6a70e7e7be7b5"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/43-enforced-ternary/replay.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/43-enforced-ternary/replay.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 738,
+      "sha256": "4d51a820ad3e921df7a93cf2119f1e68c12f85309b0e0bb3d604e1a378d81ab5"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/43-enforced-ternary/replay.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/43-enforced-ternary/replay.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "e34ebc4eef86094d2a26660fb459c795bf4d8eff8d4a33da948c63d32f30db99"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/43-enforced-ternary/run.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/43-enforced-ternary/run.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 82747,
+      "sha256": "13e0e8cbc15719a1aebf8e36b65867dd258512c7ee2d365377e3962960345eb6"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/43-enforced-ternary/run.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/43-enforced-ternary/run.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "220ccf6a03f47e264d6544ada640bfae9458db0837d4dde98414b8b2f6c381ad"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/43-enforced-ternary/unseen-composition-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/43-enforced-ternary/unseen-composition-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 391113,
+      "sha256": "cc122901543269fe7b47e8a2ade8bbbd4ec68d923b61d76ce192ba53bc91616a"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/43-enforced-ternary/unseen-composition-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/43-enforced-ternary/unseen-composition-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "9616156393c2c311297fd69dc1dfb6007a22df6e16d5aa51cb17378e7923ad73"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/config.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/config.json",
+      "role": "condition input/audit provenance",
+      "bytes": 2402,
+      "sha256": "cdf7bd0e58c27e998c2528dc01ccf6f85def4438457f9d97438eea2bb1efb75b"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/config.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/config.sha256",
+      "role": "condition input/audit provenance",
+      "bytes": 65,
+      "sha256": "07a9af8b4f81a71105a49ae72877c97fa57f801c09ea802c9fdc3f1122a2786d"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/data/audit.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/data/audit.json",
+      "role": "condition input/audit provenance",
+      "bytes": 58889,
+      "sha256": "8bb9a8c40cfe313d94643c854333c081460f7c6a88cc810843173467bd6ec0d3"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/process.log",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary.log",
+      "role": "formal condition stdout/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/receipt-after-1.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/receipt-after-1.json",
+      "role": "immutable intermediate outer receipt",
+      "bytes": 84518,
+      "sha256": "31b044be416b8f7169f2e867fef6d04ffff4644da23a9150f0f3a8ba1305ba1a"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/receipt-after-1.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/receipt-after-1.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "4c3150b9302c29f8c689322872801bafaa47889e57505087e5c3621244171141"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/receipt.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/receipt.json",
+      "role": "full formal receipt: all metrics/curves/telemetry/replay",
+      "bytes": 84518,
+      "sha256": "31b044be416b8f7169f2e867fef6d04ffff4644da23a9150f0f3a8ba1305ba1a"
+    },
+    {
+      "path": "conditions/43-enforced-ternary/receipt.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-enforced-ternary/receipt.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "4c3150b9302c29f8c689322872801bafaa47889e57505087e5c3621244171141"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/43-metadata-only-float/conflicts-hypotheses-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/43-metadata-only-float/conflicts-hypotheses-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 409286,
+      "sha256": "db30d416dbb787c92de89eef78a835ef0dbf19643e5c7d3d449284226c1dc003"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/43-metadata-only-float/conflicts-hypotheses-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/43-metadata-only-float/conflicts-hypotheses-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "94feb03662f51626213dfee6094064543ad6661efe9361e8c876820aaf5777a6"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/43-metadata-only-float/distractors-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/43-metadata-only-float/distractors-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 407589,
+      "sha256": "c4d9a181012e5cdc21a38298fd4aad4f008802545bfb60a0b1bb6b9590ca5436"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/43-metadata-only-float/distractors-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/43-metadata-only-float/distractors-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "6512ca189aafbefc1bc580660b836fe65e18e53251e35e6c2e07586b62b3e002"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/43-metadata-only-float/ordinary-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/43-metadata-only-float/ordinary-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 408196,
+      "sha256": "3c15a067bbb289d6e4904de52655717ebca18f381256d26d510a53fcf8887a31"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/43-metadata-only-float/ordinary-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/43-metadata-only-float/ordinary-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "4ddf5dd65f8549c2890db7de3e31c3dbab9b07067237ba4ab577dfb5294c52f6"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/43-metadata-only-float/replace-retract-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/43-metadata-only-float/replace-retract-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 408689,
+      "sha256": "ec0624b7b869bc7228969c07de8329c75f7768f4825905956c931a2861d09a29"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/43-metadata-only-float/replace-retract-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/43-metadata-only-float/replace-retract-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "1e5bc59ff3b6d19a143438c6736af7a46466a5b0736ced1db873b3a6e38c68c6"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/43-metadata-only-float/replay.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/43-metadata-only-float/replay.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 754,
+      "sha256": "e64db47ba1f5d78038cb0efd06650f298261ca68e34b3abe451a748f4f7e8686"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/43-metadata-only-float/replay.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/43-metadata-only-float/replay.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "2e9659288af638472d72c3e53e56e8b6da4507a1918fcdb762d27d2ad05897d3"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/43-metadata-only-float/run.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/43-metadata-only-float/run.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 82589,
+      "sha256": "ad70b5ff0db63f37bd2a6d744e8b6a13e9feec32e41e8cad199b5b6da2fdc67a"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/43-metadata-only-float/run.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/43-metadata-only-float/run.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "f4f5f0860d9600c09e62c63d03d2aa3e576e7791c0490ae4cbbd8ea6fac027b4"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/43-metadata-only-float/unseen-composition-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/43-metadata-only-float/unseen-composition-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 408262,
+      "sha256": "8ba7b7f010b0be297df06632980a3c2314414a4f70fcbddbe5b19cd8d5e17cf0"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/43-metadata-only-float/unseen-composition-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/43-metadata-only-float/unseen-composition-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "56a4c0a6c30df0a950fa1ebea92276b19952d210cb04cc6410417f08dd0d325f"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/config.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/config.json",
+      "role": "condition input/audit provenance",
+      "bytes": 2402,
+      "sha256": "cdf7bd0e58c27e998c2528dc01ccf6f85def4438457f9d97438eea2bb1efb75b"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/config.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/config.sha256",
+      "role": "condition input/audit provenance",
+      "bytes": 65,
+      "sha256": "07a9af8b4f81a71105a49ae72877c97fa57f801c09ea802c9fdc3f1122a2786d"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/data/audit.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/data/audit.json",
+      "role": "condition input/audit provenance",
+      "bytes": 58886,
+      "sha256": "62fc7f71d523bd82402d29a9de8e03248458a92bbbe8287845885e1e41e6e285"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/process.log",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float.log",
+      "role": "formal condition stdout/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/receipt-after-1.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/receipt-after-1.json",
+      "role": "immutable intermediate outer receipt",
+      "bytes": 84366,
+      "sha256": "21cf0b1d3840374536ac61ea6ed7e3111a835caf172a4db17b4c2ed27181a9de"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/receipt-after-1.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/receipt-after-1.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "bb61971fe0c6b10a5f48f9cca8c4267dea5c94a58127a82d244d94863fecce90"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/receipt.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/receipt.json",
+      "role": "full formal receipt: all metrics/curves/telemetry/replay",
+      "bytes": 84366,
+      "sha256": "21cf0b1d3840374536ac61ea6ed7e3111a835caf172a4db17b4c2ed27181a9de"
+    },
+    {
+      "path": "conditions/43-metadata-only-float/receipt.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-float/receipt.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "bb61971fe0c6b10a5f48f9cca8c4267dea5c94a58127a82d244d94863fecce90"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/43-metadata-only-ternary/conflicts-hypotheses-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/43-metadata-only-ternary/conflicts-hypotheses-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 394422,
+      "sha256": "c5d0db9e863b0d1d35c551a670f3f10e1fa36c78a00de308148910989d2b8ca4"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/43-metadata-only-ternary/conflicts-hypotheses-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/43-metadata-only-ternary/conflicts-hypotheses-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "bd0ca0333487a68fe8f096efa6c1ab3ca536066a191fa1233c22e22a8947a807"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/43-metadata-only-ternary/distractors-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/43-metadata-only-ternary/distractors-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 391908,
+      "sha256": "ce966c7faf05ca9ac5cb3a0129271377c8019ec8085bc70004a99ad809af9c48"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/43-metadata-only-ternary/distractors-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/43-metadata-only-ternary/distractors-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "fd823c3df9baabc42a7bb06925e4900398a31e9cbb44b3541100722a1534aebf"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/43-metadata-only-ternary/ordinary-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/43-metadata-only-ternary/ordinary-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 393448,
+      "sha256": "ac49eb78c23656a3f3328f9e9f97cddf4798afbd555a6521eb28339e614e4083"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/43-metadata-only-ternary/ordinary-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/43-metadata-only-ternary/ordinary-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "18eb6ffd6ce1686669187b43c08427ac0061f0fe432fac911d06f006461b224c"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/43-metadata-only-ternary/replace-retract-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/43-metadata-only-ternary/replace-retract-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 394640,
+      "sha256": "7a4d0950eef790291ba8bd9ab8cfebcf16d38c54a603c346a75f7bbc8b969a23"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/43-metadata-only-ternary/replace-retract-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/43-metadata-only-ternary/replace-retract-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "0d18e02f7c0cb4f92707598e0e2ac4ceb578f1c1c6470aaeb41aac8bf2682896"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/43-metadata-only-ternary/replay.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/43-metadata-only-ternary/replay.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 752,
+      "sha256": "1c0b10849a86e625ea31789132b8d7d42472b30fb1179e4f0e8ef332752f50fc"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/43-metadata-only-ternary/replay.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/43-metadata-only-ternary/replay.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "30b6a5c6f4c821a5906c0c00b38a4aa0aad183f50ed91f39e4de3877f9a96145"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/43-metadata-only-ternary/run.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/43-metadata-only-ternary/run.json",
+      "role": "per-condition results or actual full-batch replay proof",
+      "bytes": 82660,
+      "sha256": "e667cc914e2108c5f1156115ac8b4a4f9e942638764a635393a0ae79d3d791c1"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/43-metadata-only-ternary/run.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/43-metadata-only-ternary/run.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "e8a0f57b34a49d4e44450dbddd77a22cc423349340e0895ce2759c364e71f141"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/43-metadata-only-ternary/unseen-composition-predictions.json.gz",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/43-metadata-only-ternary/unseen-composition-predictions.json",
+      "role": "lossless original per-world predictions; gzip mtime0",
+      "bytes": 389943,
+      "sha256": "4c74288ad20ab96d73004bd72696f46a06d5e61e65155609c15a5f9e0fc8e4ca"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/43-metadata-only-ternary/unseen-composition-predictions.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/43-metadata-only-ternary/unseen-composition-predictions.sha256",
+      "role": "original uncompressed prediction checksum",
+      "bytes": 65,
+      "sha256": "6d39e1f37b495ddaa599969f9269eeb602d15f22d00a09e5c51abc658f498c98"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/config.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/config.json",
+      "role": "condition input/audit provenance",
+      "bytes": 2402,
+      "sha256": "cdf7bd0e58c27e998c2528dc01ccf6f85def4438457f9d97438eea2bb1efb75b"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/config.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/config.sha256",
+      "role": "condition input/audit provenance",
+      "bytes": 65,
+      "sha256": "07a9af8b4f81a71105a49ae72877c97fa57f801c09ea802c9fdc3f1122a2786d"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/data/audit.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/data/audit.json",
+      "role": "condition input/audit provenance",
+      "bytes": 58886,
+      "sha256": "378e14f875bf9747a782f31dad5f9c4ea0d3124b13702ecf1e940b031b3dd13f"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/process.log",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary.log",
+      "role": "formal condition stdout/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/receipt-after-1.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/receipt-after-1.json",
+      "role": "immutable intermediate outer receipt",
+      "bytes": 84441,
+      "sha256": "e9350bd71c5a3eea85d9b960aa0ea82ec4b592f88fef09cb50ea62cad6fbde6e"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/receipt-after-1.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/receipt-after-1.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "f6b91460e16c2187ab694cbd560a64d325a49eaa92c40ac4d7544fee14c321b6"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/receipt.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/receipt.json",
+      "role": "full formal receipt: all metrics/curves/telemetry/replay",
+      "bytes": 84441,
+      "sha256": "e9350bd71c5a3eea85d9b960aa0ea82ec4b592f88fef09cb50ea62cad6fbde6e"
+    },
+    {
+      "path": "conditions/43-metadata-only-ternary/receipt.sha256",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/43-metadata-only-ternary/receipt.sha256",
+      "role": "original checksum sidecar",
+      "bytes": 65,
+      "sha256": "f6b91460e16c2187ab694cbd560a64d325a49eaa92c40ac4d7544fee14c321b6"
+    },
+    {
+      "path": "config.json",
+      "origin": "git:4144184b1a83986f44feee36bcef3bfc0a086c84:experiments/typed-state-v1.json",
+      "role": "verbatim frozen recipe",
+      "bytes": 2402,
+      "sha256": "cdf7bd0e58c27e998c2528dc01ccf6f85def4438457f9d97438eea2bb1efb75b"
+    },
+    {
+      "path": "corpus/audit.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-audit-v3-final/audit.json",
+      "role": "clean final generator/oracle/metadata/degree audit",
+      "bytes": 58887,
+      "sha256": "c3302a86537ab75c1d6b4da840577bfb60d975974998c0aeb938d951de123d24"
+    },
+    {
+      "path": "corpus/dataset-inventory.json",
+      "bytes": 2805,
+      "sha256": "db3c1f90a00e771227d16b5bfbf43b1de7c7f0cb77541df538dd10f2ad772f66"
+    },
+    {
+      "path": "corpus/independent-python-audit.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-audit-v3-final/independent-python-audit.json",
+      "role": "independent event replay and split/degree audit",
+      "bytes": 2496,
+      "sha256": "f954062a7d15bf099b71a53ad1df5d7a55c42e10e7617c6257f19c3eb2ce7695"
+    },
+    {
+      "path": "execution.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/execution.json",
+      "role": "frozen fresh-process runner provenance",
+      "bytes": 568,
+      "sha256": "4ae3440bd4db4561af2eab2edbec88b626fda2c9533588feaaa14bac02dc986a"
+    },
+    {
+      "path": "final-metrics.csv",
+      "bytes": 7534,
+      "sha256": "5c7efe7f6063d7dd59b8f6bbbf06e912672535fdc85c6e929d70be57124d3870"
+    },
+    {
+      "path": "independent-results-audit.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/independent-results-audit.json",
+      "role": "independent checkpoint/prediction/bootstrap verification",
+      "bytes": 10943,
+      "sha256": "fae287ca48fb042a6d8173c3467a92e35faa96d83259affb3b860af958526083"
+    },
+    {
+      "path": "learning-curves.csv",
+      "role": "all20epochs per complete condition; no checkpoint selection",
+      "bytes": 22856,
+      "sha256": "5309c43b5aadf557f8836ac93ff494c8d49d89e20741bf1d10cc20670cc63bae"
+    },
+    {
+      "path": "prediction-inventory.json",
+      "bytes": 28302,
+      "sha256": "3413084d8725265d75ef0673729caed269dae866901f8e2b1261698c806aaf1e"
+    },
+    {
+      "path": "progress.jsonl",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-v1-formal/progress.jsonl",
+      "role": "every attempt/start/end/exit retained",
+      "bytes": 5242,
+      "sha256": "3e4991b4b017233001c7472cb6104b1f5829b6748bf6f70e3ee85b7a9978976d"
+    },
+    {
+      "path": "provenance.json",
+      "bytes": 4378,
+      "sha256": "3fb503368e38bbf1e1b16b32951377487a326e4cbb38d69a9db3b2503ae5d949"
+    },
+    {
+      "path": "scripts/bundle-evidence.py",
+      "origin": "/tmp/tergon-bundle-state-evidence.py",
+      "role": "deterministic artifact collection; no training",
+      "bytes": 19861,
+      "sha256": "a240576d29ac6186993e0e5f2aff982d5c33b549f2d9b762335c0a32733b6e16"
+    },
+    {
+      "path": "scripts/rehydrate-evidence.py",
+      "origin": "/tmp/tergon-rehydrate-state-evidence.py",
+      "role": "restore exact prediction bytes/receipt layout; optional local checkpoints",
+      "bytes": 3920,
+      "sha256": "052f7d252c080928db08cb0fed2b2bd61c7e1592556c1bd403a448e77a4f19ef"
+    },
+    {
+      "path": "scripts/tergon-independent-data-audit.py",
+      "origin": "/tmp/tergon-independent-data-audit.py",
+      "role": "unaltered independent/runner script",
+      "bytes": 5653,
+      "sha256": "e4b457bcb7e8f0dfadc330e4f1a5a2bb80488c240388b70a49d345cfb705a134"
+    },
+    {
+      "path": "scripts/tergon-independent-state-results.py",
+      "origin": "/tmp/tergon-independent-state-results.py",
+      "role": "unaltered independent/runner script",
+      "bytes": 8117,
+      "sha256": "2b7d7a9cedb8d0d0dd0faedab9b906907187595e6def78068dc710e1e1035e38"
+    },
+    {
+      "path": "scripts/tergon-run-frozen-state.py",
+      "origin": "/tmp/tergon-run-frozen-state.py",
+      "role": "unaltered independent/runner script",
+      "bytes": 3187,
+      "sha256": "af9589c046224435c8a7fa5ee8db72a964071736384efa8e57cff9d2db8f2154"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 329787,
+      "sha256": "0cf67fb5dbf1520445d3d09e4003a66a9eb60eb008fa119874a8d2fe03f8da60"
+    },
+    {
+      "path": "validation/development/cuda-first-failure.txt",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/cuda-first-failure.txt",
+      "role": "development-only; never a formal learning result",
+      "bytes": 610,
+      "sha256": "b01745f5f6e3b41800af966b3e070e0316494ed43f9db2b5b79afed9b15f6cb5"
+    },
+    {
+      "path": "validation/development/cuda-stage-probe.txt",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/cuda-stage-probe.txt",
+      "role": "development-only; never a formal learning result",
+      "bytes": 5647,
+      "sha256": "404a4ac4ea885b070bbb187f8932f8138f61a6e690049d0c3e02d9f0fe2c4cd5"
+    },
+    {
+      "path": "validation/development/cuda-stage-tf32-probe.txt",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/cuda-stage-tf32-probe.txt",
+      "role": "development-only; never a formal learning result",
+      "bytes": 5943,
+      "sha256": "996603118709ac1557657e8063e747805c3083a89feb2fa21261a16e1507b7b8"
+    },
+    {
+      "path": "validation/development/cuda-tf32-fixtures-v2.txt",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/cuda-tf32-fixtures-v2.txt",
+      "role": "development-only; never a formal learning result",
+      "bytes": 1208,
+      "sha256": "116e12a6bcd9f8ed7b797c9c055d3acbe583d1f5aa3f6984fb4eb4da80dafad5"
+    },
+    {
+      "path": "validation/development/cuda-tf32-fixtures.txt",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/cuda-tf32-fixtures.txt",
+      "role": "development-only; never a formal learning result",
+      "bytes": 1699,
+      "sha256": "4bc4984ce74a2e58039d6eb2ec3d1ca64f64e6f706b93f854f7b07ea94b07cca"
+    },
+    {
+      "path": "validation/development/final-cuda-clippy.txt",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/final-cuda-clippy.txt",
+      "role": "development-only; never a formal learning result",
+      "bytes": 410,
+      "sha256": "ea8a154dd182978bb7506c8d21357f96ee219f4e26b81e98e66af57f253bf58f"
+    },
+    {
+      "path": "validation/development/final-cuda-engine-tests.txt",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/final-cuda-engine-tests.txt",
+      "role": "development-only; never a formal learning result",
+      "bytes": 3084,
+      "sha256": "899aef3636fea92252a06a6eb7592458d3d5668fb2dd90a7f17ddbf9b7c706ea"
+    },
+    {
+      "path": "validation/development/final-cuda-explicit-fixtures.txt",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/final-cuda-explicit-fixtures.txt",
+      "role": "development-only; never a formal learning result",
+      "bytes": 5779,
+      "sha256": "da7cdb02cd96ac033577dad187ed8fa51d8986a3a0846da93df305ee286bad7e"
+    },
+    {
+      "path": "validation/development/final-cuda-serialized-replay.txt",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/final-cuda-serialized-replay.txt",
+      "role": "development-only; never a formal learning result",
+      "bytes": 685,
+      "sha256": "9cc860fe0fe2fa50d63eff633bd5bc6257b07e0fb0be08554af7f071ffc843dd"
+    },
+    {
+      "path": "validation/development/final-workspace-tests.txt",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/final-workspace-tests.txt",
+      "role": "development-only; never a formal learning result",
+      "bytes": 5238,
+      "sha256": "b020837fb716bc2c01aff6667390348e690e676d78cffeb839bc6755fe2a034f"
+    },
+    {
+      "path": "validation/development/freeze-cuda-clippy.txt",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/freeze-cuda-clippy.txt",
+      "role": "development-only; never a formal learning result",
+      "bytes": 161,
+      "sha256": "e130ff3973812032e1a7a1164d93f0e93f8a9adbd6d1814ddb92126092ce2e3d"
+    },
+    {
+      "path": "validation/development/freeze-cuda-engine-tests.txt",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/freeze-cuda-engine-tests.txt",
+      "role": "development-only; never a formal learning result",
+      "bytes": 3201,
+      "sha256": "47744e28d80bd340eb381ff37bfdb44b70108a7048a300d02a3bdb4ae6bdcbf7"
+    },
+    {
+      "path": "validation/development/freeze-cuda-explicit-fixtures.txt",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/freeze-cuda-explicit-fixtures.txt",
+      "role": "development-only; never a formal learning result",
+      "bytes": 5790,
+      "sha256": "b7284a37acb8936b14ca5f416004ecb0485e7a6c73ec70b44efd459981d5c5d2"
+    },
+    {
+      "path": "validation/development/freeze-cuda-training-tests.txt",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/freeze-cuda-training-tests.txt",
+      "role": "development-only; never a formal learning result",
+      "bytes": 1091,
+      "sha256": "c0608a010d8e4e4cc80d697281331a0e1cacec0ebe0b5c903a5b56ff515e9b99"
+    },
+    {
+      "path": "validation/development/freeze-workspace-tests.txt",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/freeze-workspace-tests.txt",
+      "role": "development-only; never a formal learning result",
+      "bytes": 5199,
+      "sha256": "c087957142bbddcce3b5c26c6ff97151856c12f01e58ab8714fd76a450fc71d0"
+    },
+    {
+      "path": "validation/development/full-batch-replay-cpu.txt",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/full-batch-replay-cpu.txt",
+      "role": "development-only; never a formal learning result",
+      "bytes": 675,
+      "sha256": "a9cba553a16a3605900d87ff7f37aec181b7a2011a44f4c49ba2545467996eb3"
+    },
+    {
+      "path": "validation/development/full-batch-replay-cuda.txt",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/full-batch-replay-cuda.txt",
+      "role": "development-only; never a formal learning result",
+      "bytes": 680,
+      "sha256": "4a3163628875e525cd8d9a0a3b0b4b89175471c3e02594c080ada3babddb3650"
+    },
+    {
+      "path": "validation/development/preflight-v1-status.json",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/preflight-v1-status.json",
+      "role": "development-only; never a formal learning result",
+      "bytes": 336,
+      "sha256": "7f785c5076edd58fb9a12352f004126f2bc8c10fc04a3b32ac6b6904e8bdbb67"
+    },
+    {
+      "path": "validation/development/release-batch128-timing.txt",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/release-batch128-timing.txt",
+      "role": "development-only; never a formal learning result",
+      "bytes": 1411,
+      "sha256": "6b346b3a249212f60eaa2daead41774f6ef528b85f63dbab3ac7dd03bbdf1cab"
+    },
+    {
+      "path": "validation/development/workspace-tests.txt",
+      "origin": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-preflight/workspace-tests.txt",
+      "role": "development-only; never a formal learning result",
+      "bytes": 5063,
+      "sha256": "c5d3fe5150a39940867f02f9aaea94726c8264bdbbedd95463023ad8488892a4"
+    },
+    {
+      "path": "validation/rehydration-verification.json",
+      "bytes": 813,
+      "sha256": "2887534f07ceaa8deb4be2ee5b61b06d213734df23cc6458440826eb8fd624a3"
+    },
+    {
+      "path": "validation/required/clippy.log",
+      "bytes": 60,
+      "sha256": "661da8b8caaccac419f4800ccb28357681229cf3c42cda4aa5176b9e56497a3f"
+    },
+    {
+      "path": "validation/required/fmt.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "validation/required/rustdoc.log",
+      "bytes": 161,
+      "sha256": "c169bcca5f67dc9d4a5f1e8436ff08f88c4ac82b519537ec1beaffc50695eb1a"
+    },
+    {
+      "path": "validation/required/tests.log",
+      "bytes": 5416,
+      "sha256": "c09e8c9897ce27289f89429d77b875bb982ff7f35ec74bda5791e33f23cad343"
+    },
+    {
+      "path": "validation/required/verification.json",
+      "bytes": 2624,
+      "sha256": "039f459235f6940a874d9f6220cf6a6c84d614264b5fa0ac687f687b6a9353bc"
+    },
+    {
+      "path": "validation/required/xtask.log",
+      "bytes": 148,
+      "sha256": "6ce1faaf382e8e8d1691bbaf2fad9961342383ef1446e9c28d68157201d2dda2"
+    }
+  ],
+  "inventory_self_excluded": true
+}

@@ -8,6 +8,7 @@ quality, memory use, or execution cost on accessible hardware.
 - [Component development](https://github.com/kmosoti/tergon-lab/wiki/Component-development)
 - [Reproduce experiments](https://github.com/kmosoti/tergon-lab/wiki/Reproduce-experiments)
 - [Typed state experiment](https://github.com/kmosoti/tergon-lab/wiki/Typed-state-experiment)
+- [Typed state results](https://github.com/kmosoti/tergon-lab/wiki/Typed-state-results)
 - [Findings](https://github.com/kmosoti/tergon-lab/wiki/Findings)
 - [Hardware profiling](https://github.com/kmosoti/tergon-lab/wiki/Hardware-profiling)
 - [GitHub App setup](https://github.com/kmosoti/tergon-lab/wiki/GitHub-App-setup)

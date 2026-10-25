@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "source_revision": "4144184b1a83986f44feee36bcef3bfc0a086c84",
+  "files": [
+    {
+      "group": "train",
+      "worlds": 8192,
+      "queries": 32768,
+      "bytes": 51967952,
+      "sha256": "2c02e9aee3d14ff8d69ce3a8b8574840806f8685892e39574d4809d9a666a5d1",
+      "local_path": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-audit-v3-final/train.json",
+      "retention": "local JSON; bit-exact regeneration from frozen source/recipe"
+    },
+    {
+      "group": "validation",
+      "worlds": 1024,
+      "queries": 4096,
+      "bytes": 6524270,
+      "sha256": "fa9773cffab444f14248d8957928e7c67117033267c5f5d9a3681b60313ab703",
+      "local_path": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-audit-v3-final/validation.json",
+      "retention": "local JSON; bit-exact regeneration from frozen source/recipe"
+    },
+    {
+      "group": "ordinary",
+      "worlds": 512,
+      "queries": 2048,
+      "bytes": 3305714,
+      "sha256": "0521144392e97633d2e6b015797a4e0fc55bbd878c69bea35c50b71e71600041",
+      "local_path": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-audit-v3-final/ordinary.json",
+      "retention": "local JSON; bit-exact regeneration from frozen source/recipe"
+    },
+    {
+      "group": "unseen-composition",
+      "worlds": 512,
+      "queries": 2048,
+      "bytes": 3282971,
+      "sha256": "d43dd5841232977a66336c79d146de8abb9d3fc1def5f816be6e0594805a3b9c",
+      "local_path": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-audit-v3-final/unseen-composition.json",
+      "retention": "local JSON; bit-exact regeneration from frozen source/recipe"
+    },
+    {
+      "group": "replace-retract",
+      "worlds": 512,
+      "queries": 2048,
+      "bytes": 3373827,
+      "sha256": "2cd0667bd9f26a4972167b7226b29c6c22d4b5213ae4c7e71aeb62d8ec522cd5",
+      "local_path": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-audit-v3-final/replace-retract.json",
+      "retention": "local JSON; bit-exact regeneration from frozen source/recipe"
+    },
+    {
+      "group": "conflicts-hypotheses",
+      "worlds": 512,
+      "queries": 2048,
+      "bytes": 3354857,
+      "sha256": "964b3812dadce1e791d1dd4516de4c41f7c5ca15e80a18c97657c34fd203e692",
+      "local_path": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-audit-v3-final/conflicts-hypotheses.json",
+      "retention": "local JSON; bit-exact regeneration from frozen source/recipe"
+    },
+    {
+      "group": "distractors",
+      "worlds": 512,
+      "queries": 2048,
+      "bytes": 7177434,
+      "sha256": "0a18c63e30133031d3dd4f8008788a59d9236b92b6c9f5c9a410816084d325de",
+      "local_path": "/home/kmosoti/Projects/tergon-lab/runs/typed-state-audit-v3-final/distractors.json",
+      "retention": "local JSON; bit-exact regeneration from frozen source/recipe"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "source_revision": "4144184b1a83986f44feee36bcef3bfc0a086c84",
+  "prediction_files": 60,
+  "prediction_rows": 122880,
+  "original_bytes_restored": true,
+  "checkpoint_payloads_verified_locally": 24,
+  "rust_analysis_byte_identical": true,
+  "rust_analysis_sha256": "c6c10df4df45b48126131135a8bde6b056bc382104ec908a6a9c9d6508597418",
+  "independent_results_json_identical": true,
+  "independent_results_sha256": "fae287ca48fb042a6d8173c3467a92e35faa96d83259affb3b860af958526083",
+  "all60_condition_stratum_order_consistencies": 1.0,
+  "commands": [
+    "python3 scripts/rehydrate-evidence.py <bundle> <new-dir> --checkpoints <local-study>",
+    "frozen-release-binary state-analyze <new-dir> <new-report>",
+    "python3 scripts/tergon-independent-state-results.py <new-dir> <new-report>"
+  ]
+}

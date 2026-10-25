@@ -101,3 +101,25 @@ that error without bypassing finite checks; the development failure/probe and
 clean GPU smoke are preserved. A separate startup attempt failed before learning
 because the ignored output parent did not exist; creating it resolved startup.
 No recipe or tolerance changed in response. Historical findings remain unchanged.
+
+## Typed state memory reader (2026-10-25)
+
+All twelve frozen runs completed 20 epochs and 5,120 updates. Every metadata-only
+float control passed 90% ordinary accuracy. Contract enforcement improved mean
+ternary stress accuracy by 3.75 percentage points (paired 95% world-bootstrap
+interval3.25–4.25), below the required5 points. Enforced ternary ordinary accuracy
+was 57.76–61.04% and stress accuracy 50.60–54.52%, below 90% and 85%. The storage-pilot
+gate is closed; this is a completed negative result for the fixed reader/recipe.
+
+Ordinary ternary Known/Unknown accuracy improved, but Conflict accuracy fell
+from 13.67% to 11.46%. Record-order consistency was 100%; ternary renaming consistency
+improved from 66.03% to 73.47%. The results support a bounded average contract
+effect while showing a measured reader limitation; they do not establish a
+general failure of typed state or ternary architectures.
+
+Every run's on-disk step 200 checkpoint replayed the next 50 full 128 batches with
+zero measured loss/state/logit error. Independent event, prediction, checkpoint
+and bootstrap audits passed. The [full results](Typed-state-results.md) retain
+all seed/group/outcome metrics, calibration, memory/timing limits, preserved GPU
+arithmetic failures and exact evidence reproduction. No pilot or default change
+follows.

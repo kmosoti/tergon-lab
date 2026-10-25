@@ -1,0 +1,95 @@
+{
+  "method": "independent Python event replay and nuisance/split audit",
+  "source_revision": "4144184b1a83986f44feee36bcef3bfc0a086c84",
+  "source_dirty": false,
+  "config_sha256": "cdf7bd0e58c27e998c2528dc01ccf6f85def4438457f9d97438eea2bb1efb75b",
+  "audit_sha256": "c3302a86537ab75c1d6b4da840577bfb60d975974998c0aeb938d951de123d24",
+  "unique_worlds": 11776,
+  "groups": [
+    {
+      "group": "train",
+      "worlds": 8192,
+      "queries": 32768,
+      "primitive_occurrences": {
+        "agreeing_duplicate": 16384,
+        "competing_hypothesis": 22820,
+        "hypothesis_only_gap": 8192,
+        "update_context": 16420
+      },
+      "distinct_paths": 23
+    },
+    {
+      "group": "validation",
+      "worlds": 1024,
+      "queries": 4096,
+      "primitive_occurrences": {
+        "agreeing_duplicate": 2048,
+        "competing_hypothesis": 2868,
+        "hypothesis_only_gap": 1024,
+        "update_context": 1992
+      },
+      "distinct_paths": 23
+    },
+    {
+      "group": "ordinary",
+      "worlds": 512,
+      "queries": 2048,
+      "primitive_occurrences": {
+        "agreeing_duplicate": 1024,
+        "competing_hypothesis": 1427,
+        "hypothesis_only_gap": 512,
+        "update_context": 1000
+      },
+      "distinct_paths": 23
+    },
+    {
+      "group": "unseen-composition",
+      "worlds": 512,
+      "queries": 2048,
+      "primitive_occurrences": {
+        "agreeing_duplicate": 1024,
+        "competing_hypothesis": 1471,
+        "hypothesis_only_gap": 512,
+        "update_context": 1008
+      },
+      "distinct_paths": 2
+    },
+    {
+      "group": "replace-retract",
+      "worlds": 512,
+      "queries": 2048,
+      "primitive_occurrences": {
+        "agreeing_duplicate": 1024,
+        "competing_hypothesis": 1449,
+        "hypothesis_only_gap": 512,
+        "update_context": 2048
+      },
+      "distinct_paths": 23
+    },
+    {
+      "group": "conflicts-hypotheses",
+      "worlds": 512,
+      "queries": 2048,
+      "primitive_occurrences": {
+        "agreeing_duplicate": 1024,
+        "competing_hypothesis": 1881,
+        "hypothesis_only_gap": 512,
+        "update_context": 1024
+      },
+      "distinct_paths": 23
+    },
+    {
+      "group": "distractors",
+      "worlds": 512,
+      "queries": 2048,
+      "primitive_occurrences": {
+        "agreeing_duplicate": 1024,
+        "competing_hypothesis": 1429,
+        "hypothesis_only_gap": 512,
+        "update_context": 1040
+      },
+      "distinct_paths": 23
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,6 @@
+    Checking burn-optim v0.22.1
+    Checking xtask v0.1.0 (/home/kmosoti/Projects/tergon-lab/scratch/issue14/xtask)
+    Checking burn v0.22.1
+    Checking tergon-engine v0.1.0 (/home/kmosoti/Projects/tergon-lab/scratch/issue14/crates/tergon-engine)
+    Checking tergon-lab v0.1.0 (/home/kmosoti/Projects/tergon-lab/scratch/issue14/crates/tergon-lab)
+    Finished `dev` profile [unoptimized] target(s) in 2.25s
