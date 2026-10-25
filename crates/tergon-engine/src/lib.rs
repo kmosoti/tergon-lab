@@ -1,11 +1,16 @@
 //! Explicit execution boundaries for Tergon Lab.
 //!
 //! The first bridge expands packed values into f32 tensors. It is intentionally
-//! a reference path; it does not implement packed GEMM or training.
+//! a reference path; it does not implement packed GEMM.
+
+mod ternary;
+mod training;
+pub use ternary::TernaryLinear;
+pub use training::{ClassifierSnapshot, ParameterSnapshot, TinyClassifier};
 
 use burn::tensor::{Device, Tensor, TensorData};
 use std::{error::Error, fmt};
-use tergon_math::PackedTernary;
+use tergon_math::{PackedTernary, QuantError};
 
 /// A requested execution device. There is no automatic fallback.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -33,6 +38,14 @@ pub enum EngineError {
     Shape,
     /// Rebuild explicitly with CUDA; CPU is not silently substituted.
     CudaNotCompiled,
+    /// Canonical host quantization rejected the latent values.
+    Quantization(QuantError),
+    /// Bias or input contains a nonfinite value.
+    NonFinite,
+    /// Tensors must share one explicitly chosen device.
+    Device,
+    /// Backend data could not be decoded as f32.
+    Data,
 }
 
 impl fmt::Display for EngineError {
@@ -79,4 +92,10 @@ pub fn materialize(
         TensorData::new(packed.dequantize().collect::<Vec<_>>(), [rows, columns]),
         &device,
     ))
+}
+
+impl From<QuantError> for EngineError {
+    fn from(value: QuantError) -> Self {
+        Self::Quantization(value)
+    }
 }

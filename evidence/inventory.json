@@ -50,6 +50,101 @@
       "path": "evidence/publication.json",
       "bytes": 504,
       "sha256": "b5e97be70b8570091625117d7ba59d60f369c9d58521c46aa57ebfb8f8ee296c"
+    },
+    {
+      "path": "evidence/ternary-layer-v1.json",
+      "bytes": 2515,
+      "sha256": "70d969313239497b10b372d7f1e969a2b0f9f7bd3417087cd16580a72d783630"
+    },
+    {
+      "path": "experiments/mnist-adamw-v1.json",
+      "bytes": 2913,
+      "sha256": "90893a22ab06cb6bac4aa734658d47d61ffa19af8a9be0e142866de144430e02"
+    },
+    {
+      "path": "evidence/mnist-adamw-v1/checkpoint-inventory.json",
+      "bytes": 10799,
+      "sha256": "15f4fc43d5c48f1f4537a7b595bc6950bad98872b139c4555c34a28f2e8434c7"
+    },
+    {
+      "path": "evidence/mnist-adamw-v1/cli-resume.log",
+      "bytes": 1030,
+      "sha256": "005d4b3c17f572669538fbd85cf442224c7375153d04f635fa84066c8ab103c3"
+    },
+    {
+      "path": "evidence/mnist-adamw-v1/cli-terminal-resume.json",
+      "bytes": 3252,
+      "sha256": "73febe30a6a9b15d201cef829d6c5c3585658fba4e3c156632bc835bd078016d"
+    },
+    {
+      "path": "evidence/mnist-adamw-v1/development-bool-storage-probe.log",
+      "bytes": 581,
+      "sha256": "716ee41fc20622a89f0819fe1af54ab00949b3c4b907c0ff4e5d861df8c17ac1"
+    },
+    {
+      "path": "evidence/mnist-adamw-v1/development-gpu-read-failure.log",
+      "bytes": 883,
+      "sha256": "a19ece60fc463f03249fe43f370f04609e74decc42491017b42ce35aa686981e"
+    },
+    {
+      "path": "evidence/mnist-adamw-v1/float-17.json",
+      "bytes": 3290,
+      "sha256": "16881a561352c8e2df623f902a6dd4f7a78c8774aea97af89c47c2484236372b"
+    },
+    {
+      "path": "evidence/mnist-adamw-v1/float-29.json",
+      "bytes": 3288,
+      "sha256": "76cee9e3b74ced79d462c0da70aecc8334de8bb6a71f63d233617481cc266b8f"
+    },
+    {
+      "path": "evidence/mnist-adamw-v1/float-43.json",
+      "bytes": 3286,
+      "sha256": "d556c4fa77add20136c13a556b5cd0df08f0aed984fad697ffd8d0f4bd9b31b0"
+    },
+    {
+      "path": "evidence/mnist-adamw-v1/gpu-clean-smoke.log",
+      "bytes": 341,
+      "sha256": "b716e633eb5f11c75732c540e7ba341eeeaa2b0f1b65a461fa88555b383a0675"
+    },
+    {
+      "path": "evidence/mnist-adamw-v1/learning-curves.csv",
+      "bytes": 3925,
+      "sha256": "85e8cdcd66ee664014f4a713275367174f2b5b5a1222456375f5ec98dd9b06e6"
+    },
+    {
+      "path": "evidence/mnist-adamw-v1/manifest.json",
+      "bytes": 2089,
+      "sha256": "5842e42f547b5fb476b34b921e53cf58ef633ae53ad0a5aae099767efaba9eb3"
+    },
+    {
+      "path": "evidence/mnist-adamw-v1/primary.log",
+      "bytes": 3754,
+      "sha256": "44045dfaf653a5864527abf99af0ada104cd383193ffafd14f672b3e407a24fd"
+    },
+    {
+      "path": "evidence/mnist-adamw-v1/startup-parent-directory-failure.log",
+      "bytes": 1050,
+      "sha256": "990d8abb08713bd6abe51da4878dfec6a8afc40eec13c61c46546bb1d112166e"
+    },
+    {
+      "path": "evidence/mnist-adamw-v1/summary.json",
+      "bytes": 3625,
+      "sha256": "2ca4902342f0b170df50e71cdad2e07cc519dfa0e82c67018113cb36600d913c"
+    },
+    {
+      "path": "evidence/mnist-adamw-v1/ternary-17.json",
+      "bytes": 3320,
+      "sha256": "c171a00e0e679e703497810e77f8cae9ca21f8f03057d2a9094ec8d24c61d5e1"
+    },
+    {
+      "path": "evidence/mnist-adamw-v1/ternary-29.json",
+      "bytes": 3315,
+      "sha256": "8d9030af4467cc7a538d08b2f74d238e7cec4f2cdf54e5dbf75638eecac24438"
+    },
+    {
+      "path": "evidence/mnist-adamw-v1/ternary-43.json",
+      "bytes": 3314,
+      "sha256": "c60ff901eff9ba55429c898ac1ce3d9a08ef303dc9bfa31bee26a78d70de5261"
     }
   ]
 }

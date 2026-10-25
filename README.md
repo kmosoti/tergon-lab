@@ -4,11 +4,19 @@ Rust experiments in trainable ternary models, measured learning quality, and
 efficient execution on consumer hardware. Biological efficiency is a research
 motivation; it is not a demonstrated result of this project.
 
-The first component defines and tests a native two-bit ternary representation,
-an explicit Burn CPU tensor bridge, and reproducible component receipts. The
-repository also contains contribution controls and preserved observations from
-earlier symbolic-learning experiments. Neural training, Muon, packed kernels,
-offload, and distributed execution are later milestones.
+The runtime includes a native two-bit ternary representation, explicit CPU/CUDA
+placement, a trainable ternary linear layer with an identity surrogate, and a
+fixed MNIST classifier trained with AdamW. The repository also preserves earlier
+symbolic-learning observations. Muon, packed kernels, offload and distributed
+execution remain later milestones.
+
+Three fixed ternary MNIST runs reached 96.44–96.86% test accuracy, with paired f32
+controls at 97.67–97.91%, on an NVIDIA RTX 3060 Laptop GPU. All predeclared quality
+targets and checkpoint replay checks passed. This is a small-task learning result,
+with host quantization and decoded buffers; it makes no throughput, energy,
+accuracy-parity or total-memory-saving claim. See the
+[measured summary](evidence/mnist-adamw-v1/summary.json) and
+[learning curves](evidence/mnist-adamw-v1/learning-curves.csv).
 
 ```bash
 cargo test --locked --workspace
@@ -29,9 +37,9 @@ never overwritten. This smoke run tests correctness, not model quality or speed.
 - [Historical evidence and source](research/history/README.md)
 
 Rust 1.99.1 and Burn 0.22.1 are pinned. CPU uses Burn Flex; CUDA is an explicit
-optional feature and has not been executed in this cloud environment. New code
+optional feature; named-device evidence is recorded in the linked findings. New code
 is Apache-2.0; attribution and historical exceptions are in [NOTICE](NOTICE).
 
-The implementation is published in [foundation PR #9](https://github.com/kmosoti/tergon-lab/pull/9).
+The foundation was published in [PR #9](https://github.com/kmosoti/tergon-lab/pull/9).
 Repository protection settings still require owner administration access; see
 [publication status](docs/PUBLISHING.md).
