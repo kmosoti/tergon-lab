@@ -1,4 +1,5 @@
 //! Reproducible component experiments.
+mod state_data;
 mod training;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
@@ -171,9 +172,10 @@ fn smoke(config: &Path, out: &Path) -> Result<(), Box<dyn Error>> {
 fn main() -> Result<(), Box<dyn Error>> {
     let args: Vec<_> = std::env::args().skip(1).collect();
     match args.as_slice() {
+        [cmd, out] if cmd=="state-audit" => state_data::audit(Path::new(out)),
         [cmd, config, out] if cmd == "smoke" => smoke(Path::new(config), Path::new(out)),
         [cmd, config, dataset, out] if cmd == "train" => training::train(Path::new(config), Path::new(dataset), Path::new(out), None),
         [cmd, config, dataset, out, flag, checkpoint] if cmd == "train" && flag == "--resume" => training::train(Path::new(config), Path::new(dataset), Path::new(out), Some(Path::new(checkpoint))),
-        _ => Err("usage: tergon-lab smoke <experiment.json> <new-receipt.json> | train <config> <datasetdir> <newrundir> [--resume <checkpoint>]".into()),
+        _ => Err("usage: tergon-lab state-audit <new-dataset-dir> | smoke <experiment.json> <new-receipt.json> | train <config> <datasetdir> <newrundir> [--resume <checkpoint>]".into()),
     }
 }
