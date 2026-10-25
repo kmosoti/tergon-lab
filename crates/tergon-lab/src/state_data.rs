@@ -282,7 +282,7 @@ pub(crate) fn world(group: usize, index: usize) -> Vec<Example> {
     } else {
         8 + rng.bounded(9)
     };
-    let history = group == 4;
+    let history = group == 4 || rng.bounded(2) == 0;
     let nuisance = relations.len();
     let mut update_targets = vec![critical, relations.len() - 1, nuisance];
     update_targets.sort_unstable();
@@ -310,6 +310,34 @@ pub(crate) fn world(group: usize, index: usize) -> Vec<Example> {
         true,
         (nuisance + 1) as u32,
     ));
+    // Incorrect hypotheses challenge the queried operation in every split, including
+    // hypothesis-only support at the Unknown branch's missing key.
+    base.push(assertion(
+        &mut rng,
+        (base.len() + 1) as u32,
+        subject,
+        relation,
+        other_object,
+        false,
+        (base.len() + 1) as u32,
+    ));
+    if group == 5 {
+        for (i, r) in relations.iter().enumerate() {
+            if base.len() == base_count {
+                break;
+            }
+            let destination = different(&mut rng, &types, nodes[i + 1]);
+            base.push(assertion(
+                &mut rng,
+                (base.len() + 1) as u32,
+                nodes[i],
+                *r,
+                destination,
+                false,
+                (base.len() + 1) as u32,
+            ));
+        }
+    }
     let mut attempts = 0;
     while base.len() < base_count {
         attempts += 1;
@@ -541,6 +569,26 @@ pub(crate) fn audit(directory: &std::path::Path) -> Result<(), Box<dyn std::erro
             }
         }
         let symbolic_seconds = started.elapsed().as_secs_f64();
+        let contexts: Vec<_> = data.iter().map(Example::materialize).collect();
+        let state_record_allocation_bytes = contexts
+            .iter()
+            .map(|(state, _)| {
+                state.records.capacity() * std::mem::size_of::<tergon_engine::state::Record>()
+            })
+            .sum::<usize>();
+        let query_relation_allocation_bytes = contexts
+            .iter()
+            .map(|(_, query)| query.relations.capacity() * std::mem::size_of::<Relation>())
+            .sum::<usize>();
+        let inline_context_bytes = contexts.capacity() * std::mem::size_of::<(State, Query)>();
+        let symbolic_started = Instant::now();
+        let mut checksum = 0usize;
+        for (state, query) in &contexts {
+            checksum = checksum.wrapping_add(std::hint::black_box(state.answer(query)?.class()));
+        }
+        let isolated_symbolic_seconds = symbolic_started.elapsed().as_secs_f64();
+        assert_eq!(checksum, data.iter().map(|e| e.label).sum::<usize>());
+
         let bytes = serde_json::to_vec(&data)?;
         let filename = format!("{name}.json");
         let mut file = fs::OpenOptions::new()
@@ -549,10 +597,10 @@ pub(crate) fn audit(directory: &std::path::Path) -> Result<(), Box<dyn std::erro
             .open(directory.join(&filename))?;
         file.write_all(&bytes)?;
         file.sync_all()?;
-        receipt.push(serde_json::json!({"group":name,"worlds":worlds,"queries":data.len(),"sha256":super::hash(&bytes),"bytes":bytes.len(),"outcome_by_hop":counts,"symbolic_accuracy":1.0,"exact_nuisance_equality_worlds":worlds,"generation_seconds":generation_seconds,"symbolic_and_metamorphic_audit_seconds":symbolic_seconds,"active_observed_histogram":metadata}));
+        receipt.push(serde_json::json!({"group":name,"worlds":worlds,"queries":data.len(),"sha256":super::hash(&bytes),"bytes":bytes.len(),"outcome_by_hop":counts,"symbolic_accuracy":1.0,"exact_nuisance_equality_worlds":worlds,"generation_seconds":generation_seconds,"symbolic_and_metamorphic_audit_seconds":symbolic_seconds,"isolated_symbolic_query_seconds":isolated_symbolic_seconds,"isolated_query_boundary":"validated-context answer API includes its validation; excludes event reduction, generation, serialization and metamorphic checks","symbolic_live_storage":{"inline_state_query_bytes":inline_context_bytes,"record_capacity_bytes":state_record_allocation_bytes,"query_relation_capacity_bytes":query_relation_allocation_bytes,"excludes":"allocator bookkeeping, event logs, and report/dataset storage"},"active_observed_histogram":metadata}));
     }
     let bytes = serde_json::to_vec_pretty(
-        &serde_json::json!({"schema":1,"source_revision":super::command("git",&["rev-parse","HEAD"])?,"groups":receipt,"limitations":["symbolic timing includes validation, materialization, renaming and reversal checks; not isolated execution latency","serialized JSON bytes are data storage, not tensor or allocator memory"]}),
+        &serde_json::json!({"schema":1,"source_revision":super::command("git",&["rev-parse","HEAD"])?,"source_dirty":!super::command("git",&["status","--porcelain"])?.is_empty(),"config_sha256":super::hash(include_bytes!("../../../experiments/typed-state-v1.json")),"generator_sha256":super::hash(include_bytes!("state_data.rs")),"groups":receipt,"limitations":["combined audit timing includes validation/materialization/renaming/reversal; isolated query timing reported separately","serialized JSON bytes are data storage, not tensor or allocator memory"]}),
     )?;
     fs::write(directory.join("audit.json"), bytes)?;
     Ok(())

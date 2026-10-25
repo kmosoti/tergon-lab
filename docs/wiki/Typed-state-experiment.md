@@ -51,15 +51,23 @@ Normal contexts have 8–16 assertions, distractor contexts 24–32. Every tenso
 uses 32 padded slots plus NULL. Hypothesis probability is 1/4 for background
 assertions and 1/2 in the conflicts/hypotheses stratum. Background records avoid
 backbone subject/relation keys, so they cannot accidentally change oracle labels.
+Half of train/validation/ordinary/other worlds and every replacement/retraction
+stress world retain inactive assertions through explicit updates, teaching the
+activity primitive before testing stress. Every context has an incorrect active
+query-related hypothesis, including hypothesis-only support at an Unknown missing
+key; the hypothesis stress adds further such claims where capacity permits.
 History branches apply identical update targets and timestamps in every branch,
 preserving stale query-related claims with explicit updates;
 missing branches use a retraction followed by a new irrelevant assertion.
 
 `state-audit <new-dataset-dir>` persists the corpus with per-group hashes, an
 independent symbolic baseline, label/hop balance, metadata histograms, record-order
-and renaming checks. The symbolic timing currently includes validation and
-metamorphic checks and is labeled accordingly. Corpus storage is measured as
-serialized bytes, separately from tensor/model/allocator memory.
+and renaming checks. The receipt separates combined audit timing from isolated symbolic query timing
+over materialized contexts. The latter includes public-API validation and excludes
+generation, reduction and serialization. Live symbolic storage counts inline
+state/query values and record/relation vector capacity, excluding allocator
+bookkeeping; serialized corpus bytes are reported separately. Receipts identify
+source revision/dirty state and config/generator hashes.
 
 ## Reader and numerical contract
 
