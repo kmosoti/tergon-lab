@@ -2,7 +2,7 @@
   "name": "main: reviewed and verified",
   "target": "branch",
   "enforcement": "active",
-  "bypass_actors": [],
+  "bypass_actors": [{"actor_id": 47609243, "actor_type": "User", "bypass_mode": "always"}],
   "conditions": {"ref_name": {"include": ["~DEFAULT_BRANCH"], "exclude": []}},
   "rules": [
     {"type": "deletion"},
