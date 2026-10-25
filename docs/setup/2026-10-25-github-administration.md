@@ -176,3 +176,24 @@ replacement PR preserving the commits/links, or another valid code-owner review
 arrangement, before merging. Do not weaken the review rule to resolve this.
 The owner must separately approve the environment for the current head/base.
 Neither PR will be merged by this setup session.
+
+## Subsequent owner-directed exception
+
+After the initial setup, the owner requested that protections stop blocking
+`kmosoti` and explicitly authorized merging PRs #10 and #11. Ruleset `25801689`
+remains active, with one named bypass actor: User `47609243` (`kmosoti`),
+`bypass_mode: always`. The returned configuration was verified, and
+policy/github-ruleset.json now records that exception. All other main rules and
+the owner-review environment configuration remain in place. This supersedes the
+initial no-bypass/no-merge state above without rewriting its historical receipt.
+
+The exception applies to any client authenticated as kmosoti, including the
+owner-authorized gh session; it cannot distinguish the human from an agent using
+the same owner credential. Contributor/App identities receive no bypass. It does
+not enable scoped agent merging. An owner merge can bypass required reviews and
+checks; it is not evidence that the waiting owner-gate check passed.
+
+The owner-authorized sequence is to squash-merge #10 and #11, then publish the
+resulting current main Wiki revision and verify navigation again. Earlier
+permission tests describe the original no-bypass fixture, not the new owner
+exception. App registration and restricted-token tests remain pending.
