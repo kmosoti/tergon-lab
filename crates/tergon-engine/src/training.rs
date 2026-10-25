@@ -41,7 +41,8 @@ fn finite<const D: usize>(value: Tensor<D>, host_read_wait: &mut f64) -> Result<
         .is_finite()
         .all()
         .into_data()
-        .try_to_vec::<bool>()
+        // CUDA stores booleans as U8, Flex as native bool; convert storage explicitly.
+        .try_to_vec_as::<bool>()
         .map(|v| v[0])
         .map_err(|_| EngineError::Data);
     *host_read_wait += started.elapsed().as_secs_f64();
