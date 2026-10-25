@@ -10,7 +10,7 @@ type Result<T> = std::result::Result<T, Box<dyn Error>>;
 const RECIPE: &str = include_str!("../../../experiments/mnist-adamw-v1.json");
 
 /// SplitMix64 by Sebastiano Vigna (public domain), adapted to explicit saved state.
-/// https://prng.di.unimi.it/splitmix.c
+/// <https://prng.di.unimi.it/splitmix.c>
 struct Rng(u64);
 impl Rng {
     fn next(&mut self) -> u64 {
