@@ -12,8 +12,8 @@ use crate::{EngineError, PlacementPlan};
 /// packed kernel. See the mathematical contract for its identity STE.
 #[derive(Clone, Debug)]
 pub struct TernaryLinear {
-    weights: Tensor<2>,
-    bias: Tensor<1>,
+    pub(crate) weights: Tensor<2>,
+    pub(crate) bias: Tensor<1>,
 }
 
 impl TernaryLinear {

@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "task": "MNIST classifier learning feasibility; no throughput, energy or total memory savings claim",
+  "device": "cuda:0",
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "modes": [
+    "ternary",
+    "float"
+  ],
+  "epochs": 10,
+  "batch_size": 128,
+  "max_run_seconds": 1800,
+  "architecture": [
+    784,
+    128,
+    10
+  ],
+  "activation": "ReLU",
+  "pixels": "f32(byte)/255",
+  "train_range": [
+    0,
+    55000
+  ],
+  "validation_range": [
+    55000,
+    60000
+  ],
+  "test_range": [
+    0,
+    10000
+  ],
+  "initializer": "host He uniform [-sqrt(6/fan_in),sqrt(6/fan_in)], zero bias",
+  "rng": "SplitMix64; Fisher-Yates with unbiased bounded rejection; state serialized",
+  "optimizer": {
+    "name": "Burn 0.22.1 AdamW",
+    "learning_rate": 0.001,
+    "beta1": 0.9,
+    "beta2": 0.999,
+    "epsilon": 1e-08,
+    "matrix_weight_decay": 0.01,
+    "bias_weight_decay": 0.0,
+    "amsgrad": false,
+    "cautious_weight_decay": false,
+    "clipping": false,
+    "scheduler": false
+  },
+  "loss": "mean softmax cross entropy",
+  "augmentation": false,
+  "dropout": false,
+  "normalization": false,
+  "activation_quantization": false,
+  "acceptance": {
+    "ternary_test_accuracy": 0.9,
+    "float_test_accuracy": 0.95
+  },
+  "resume_check": {
+    "at_step": 200,
+    "updates": 50,
+    "cpu": "bitwise",
+    "gpu_atol": 1e-05,
+    "gpu_rtol": 0.0001
+  },
+  "dataset": {
+    "train-images-idx3-ubyte": {
+      "source": "https://ossci-datasets.s3.amazonaws.com/mnist/train-images-idx3-ubyte.gz",
+      "gzip_md5": "f68b3c2dcbeaaa9fbdd348bbdeb94873",
+      "gzip_sha256": "440fcabf73cc546fa21475e81ea370265605f56be210a4024d2ca8f203523609",
+      "sha256": "ba891046e6505d7aadcbbe25680a0738ad16aec93bde7f9b65e87a2fc25776db",
+      "bytes": 47040016
+    },
+    "train-labels-idx1-ubyte": {
+      "source": "https://ossci-datasets.s3.amazonaws.com/mnist/train-labels-idx1-ubyte.gz",
+      "gzip_md5": "d53e105ee54ea40749a09fcbcd1e9432",
+      "gzip_sha256": "3552534a0a558bbed6aed32b30c495cca23d567ec52cac8be1a0730e8010255c",
+      "sha256": "65a50cbbf4e906d70832878ad85ccda5333a97f0f4c3dd2ef09a8a9eef7101c5",
+      "bytes": 60008
+    },
+    "t10k-images-idx3-ubyte": {
+      "source": "https://ossci-datasets.s3.amazonaws.com/mnist/t10k-images-idx3-ubyte.gz",
+      "gzip_md5": "9fb629c4189551a2d022fa330f9573f3",
+      "gzip_sha256": "8d422c7b0a1c1c79245a5bcf07fe86e33eeafee792b84584aec276f5a2dbc4e6",
+      "sha256": "0fa7898d509279e482958e8ce81c8e77db3f2f8254e26661ceb7762c4d494ce7",
+      "bytes": 7840016
+    },
+    "t10k-labels-idx1-ubyte": {
+      "source": "https://ossci-datasets.s3.amazonaws.com/mnist/t10k-labels-idx1-ubyte.gz",
+      "gzip_md5": "ec29112dd5afa0611ce80d1b7f02629c",
+      "gzip_sha256": "f7ae60f92e00ec6debd23a6088c31dbd2371eca3ffa0defaefb259924204aec6",
+      "sha256": "ff7bcfd416de33731a308c3f266cc351222c34898ecbeaf847f06e48f7ec33f2",
+      "bytes": 10008
+    }
+  }
+}
