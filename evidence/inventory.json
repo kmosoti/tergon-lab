@@ -50,6 +50,11 @@
       "path": "evidence/publication.json",
       "bytes": 504,
       "sha256": "b5e97be70b8570091625117d7ba59d60f369c9d58521c46aa57ebfb8f8ee296c"
+    },
+    {
+      "path": "evidence/ternary-layer-v1.json",
+      "bytes": 2302,
+      "sha256": "efeb576b36635e03936a8c4d9435b9cbbd2564a1447d44049adb7860e8ffd8d1"
     }
   ]
 }

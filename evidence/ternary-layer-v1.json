@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "kind": "trainable-ternary-layer-correctness",
+  "source_revision": "0dfe0d6",
+  "source_dirty": false,
+  "date": "2026-10-25",
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "gpu_uuid": "GPU-9cfade90-dabc-1aeb-423c-1a96ba059764",
+    "gpu_memory_mib": 6144,
+    "driver": "615.78.08",
+    "rustc": "1.99.1 (58cf8f9c3 2026-10-13)"
+  },
+  "provisioning": {
+    "initial_failure": "CUDA build required a C++ compiler; system g++/headers absent",
+    "resolution": "Ignored local Fedora gcc-c++/libstdc++ headers and compiler matching GCC16.2.1; official NVIDIA PyPI NVRTC/NVCC13.4.92 in ignored scratch/cuda; no driver or system change",
+    "environment": "source scratch/cuda-env.sh; CUDARC_CUDA_VERSION=13040"
+  },
+  "contract": {
+    "shape_weights": [
+      2,
+      5
+    ],
+    "shape_input": [
+      2,
+      5
+    ],
+    "forward": "X Q(W)^T+b",
+    "backward": "dW=G^T X; dX=G Q(W); db=sum_batch G",
+    "oracle": "independent host f64 division/rounding quantizer, scalar forward and analytic surrogate",
+    "cpu_tolerance": "1e-6+1e-6*abs(expected)",
+    "gpu_tolerance": "1e-5+1e-5*abs(expected)"
+  },
+  "checks": [
+    {
+      "command": "cargo fmt --all -- --check",
+      "passed": true
+    },
+    {
+      "command": "cargo clippy --locked --workspace --all-targets -- -D warnings",
+      "passed": true
+    },
+    {
+      "command": "cargo test --locked --workspace",
+      "passed": true
+    },
+    {
+      "command": "RUSTDOCFLAGS=\"-D warnings\" cargo doc --locked --workspace --no-deps",
+      "passed": true
+    },
+    {
+      "command": "cargo xtask check",
+      "passed": true
+    },
+    {
+      "command": "cargo test --locked -p tergon-engine --features cuda --test ternary_layer -- --ignored --nocapture",
+      "passed": true
+    }
+  ],
+  "gpu_fixture": {
+    "passed": 1,
+    "failed": 0,
+    "runtime_seconds": 3.01,
+    "compile_seconds": 137
+  },
+  "limitations": [
+    "Bounded correctness fixture only; no learning, throughput, energy or memory saving conclusion",
+    "Every ternary forward reads latent weights and inputs on host; uploads decoded f32 weights",
+    "GPU tolerance applies only to new layer fixture; existing bridge tolerance unchanged",
+    "Prior CUDA failure evidence remains historical and unchanged"
+  ]
+}

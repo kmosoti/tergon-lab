@@ -33,3 +33,21 @@ transfer, and total acquisition cost. A new mechanism can help one metric while
 hurting another. Preserve the baseline and negative findings before adding more
 components. Historical sources and exact files are linked in the repository's
 [archive record](https://github.com/kmosoti/tergon-lab/tree/main/research/history).
+
+## Trainable layer correctness (2026-10-25)
+
+The bounded `[2,5]` layer fixture matches independent f64 scalar forward and
+analytic identity-STE backward equations on Flex CPU and NVIDIA GeForce RTX 3060
+Laptop GPU (driver 615.78.08). Zero rows, threshold ties, a packed-byte tail,
+nonfinite values, invalid shapes, and overflow are covered. The new GPU fixture
+uses its predeclared `1e-5 + 1e-5*abs(expected)` tolerance; existing tolerances
+remain unchanged. All five required local checks passed.
+
+The first CUDA readiness attempt lacked a system C++ compiler. Local user-space
+compiler/headers and official NVIDIA NVRTC/NVCC 13.4.92 resolved provisioning,
+without changing the driver. Earlier failure evidence remains unchanged.
+[Receipt](../../evidence/ternary-layer-v1.json).
+
+These are component correctness results. Training feasibility remains unmeasured
+here. Host weight/input reads and decoded device buffers preclude a packed-kernel
+or total-memory-savings conclusion.
