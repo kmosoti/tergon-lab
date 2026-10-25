@@ -382,7 +382,7 @@ pub(super) fn train(
         "dataset":config["dataset"],"hardware":super::command("nvidia-smi",&["--query-gpu=name,uuid,driver_version,memory.total","--format=csv,noheader"] )?,
         "rustc":super::command("rustc",&["--version"] )?,"resume":resume.map(|p|p.display().to_string()),
         "runtime_boundary":"Per-run wallclock includes initialization, training, evaluation, checkpoints, resume comparison and process-memory sampling; excludes compilation and initial IDX loading",
-        "memory_boundary":"VmHWM process-wide peak includes IDX, allocator, checkpoints, host tensors and runtime; GPU process memory sampled every20steps and evaluation, may miss transient peaks; no total-memory savings assertion"});
+        "memory_boundary":"VmHWM process-wide peak includes IDX, allocator, checkpoints, host tensors and runtime; GPU process memory sampled every 20 training steps, may miss transient peaks; no total-memory savings assertion"});
     write_json(&out.join("manifest.json"), &manifest)?;
     let first = checkpoint.as_ref().map_or(0, |c| c.run);
     let mut any_failed = false;
