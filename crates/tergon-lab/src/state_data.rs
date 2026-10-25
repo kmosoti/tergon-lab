@@ -277,17 +277,19 @@ pub(crate) fn world(group: usize, index: usize) -> Vec<Example> {
     let other_subject = other_subjects[rng.bounded(other_subjects.len())];
     let other_object = different(&mut rng, &types, object);
     // All branches have identical record budgets and counts of observed/hypothetical/inactive records.
-    let count = if group == 6 {
+    let mut count = if group == 6 {
         24 + rng.bounded(9)
     } else {
         8 + rng.bounded(9)
     };
     let history = group == 4 || rng.bounded(2) == 0;
     let nuisance = relations.len();
-    let mut update_targets = vec![critical, relations.len() - 1, nuisance];
+    let duplicate = nuisance + 1;
+    let mut update_targets = vec![critical, relations.len() - 1, nuisance, duplicate];
     update_targets.sort_unstable();
     update_targets.dedup();
     rng.shuffle(&mut update_targets);
+    count = count.max(relations.len() + 3 + if history { update_targets.len() } else { 0 });
     let base_count = count - if history { update_targets.len() } else { 0 };
     let mut base = Vec::new();
     for (i, r) in relations.iter().enumerate() {
@@ -309,6 +311,16 @@ pub(crate) fn world(group: usize, index: usize) -> Vec<Example> {
         other_object,
         true,
         (nuisance + 1) as u32,
+    ));
+    // Agreeing duplicate support is preserved as a distinct observed assertion.
+    base.push(assertion(
+        &mut rng,
+        (base.len() + 1) as u32,
+        subject,
+        relation,
+        object,
+        true,
+        (base.len() + 1) as u32,
     ));
     // Incorrect hypotheses challenge the queried operation in every split, including
     // hypothesis-only support at the Unknown branch's missing key.
@@ -388,6 +400,12 @@ pub(crate) fn world(group: usize, index: usize) -> Vec<Example> {
             3 => assertions[nuisance].subject = subject,
             _ => unreachable!(),
         }
+        if branch == 1 && critical == relations.len() - 1 {
+            assertions[duplicate].object = alternate_final;
+        }
+        if branch == 2 {
+            assertions[duplicate].subject = other_subject;
+        }
         let initial = if history { &base } else { &assertions };
         let mut events: Vec<_> = chronology
             .iter()
@@ -403,7 +421,7 @@ pub(crate) fn world(group: usize, index: usize) -> Vec<Example> {
                 let mut changed = assertions[*target].clone();
                 changed.id = (base_count + j + 1) as u32;
                 changed.time = (base_count + 2 * (j + 1)) as u32;
-                if branch == 2 && *target == critical {
+                if branch == 2 && (*target == critical || *target == duplicate) {
                     events.push(SavedEvent::Retract {
                         target: (target + 1) as u32,
                         time: changed.time - 1,

@@ -33,6 +33,9 @@ it does not call the engine reducer, baseline, masks or type signatures.
 
 Worlds have one random valid backbone, with four related counterfactual branches:
 two different uniquely supported answers, one missing step, and one conflict.
+Every context includes distinct agreeing observed support at a queried key;
+the missing branch redirects both copies into an irrelevant decoy key. This
+prevents learning Conflict from claim count alone.
 All four branches share the query and common distractors; they have identical
 record counts and exactly identical per-slot relation/type/status/source/time/ID
 metadata, apart from the subject/object ID changes being tested. One branch redirects a
