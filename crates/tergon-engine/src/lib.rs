@@ -3,6 +3,7 @@
 //! The first bridge expands packed values into f32 tensors. It is intentionally
 //! a reference path; it does not implement packed GEMM.
 
+pub mod state;
 mod ternary;
 mod training;
 pub use ternary::TernaryLinear;
