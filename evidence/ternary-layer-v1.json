@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "kind": "trainable-ternary-layer-correctness",
-  "source_revision": "0dfe0d6",
+  "source_revision": "74951c53578e1c0ed0692b6535830886a7abacf0",
   "source_dirty": false,
   "date": "2026-10-25",
   "hardware": {
@@ -60,13 +60,14 @@
   "gpu_fixture": {
     "passed": 1,
     "failed": 0,
-    "runtime_seconds": 3.01,
-    "compile_seconds": 137
+    "runtime_seconds": 2.62,
+    "compile_seconds": 0.21
   },
   "limitations": [
     "Bounded correctness fixture only; no learning, throughput, energy or memory saving conclusion",
     "Every ternary forward reads latent weights and inputs on host; uploads decoded f32 weights",
     "GPU tolerance applies only to new layer fixture; existing bridge tolerance unchanged",
     "Prior CUDA failure evidence remains historical and unchanged"
-  ]
+  ],
+  "execution_provenance": "GPU fixture repeated on clean source revision after initial dirty development run; original development runtime3.01s was not a clean-tree measurement"
 }
