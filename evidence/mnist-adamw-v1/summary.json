@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "source_revision": "c9ad055f876f85dd28a6363e55ef54acc6deb49e",
+  "source_dirty": false,
+  "config_sha256": "90893a22ab06cb6bac4aa734658d47d61ffa19af8a9be0e142866de144430e02",
+  "recorded_utc": "2026-10-25T18:36:27.135259+00:00",
+  "platform": "Linux-7.2.9-201.fc44.x86_64-x86_64-with-glibc2.43",
+  "cpu_model": "Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz",
+  "release_binary": {
+    "bytes": 162078416,
+    "sha256": "96f0b82c705d3605eb5b9f6232bbd7d898428b6b759d845b3d7a715613f312cd",
+    "command": "cargo build --locked --release -p tergon-lab --features cuda"
+  },
+  "run_order": [
+    "ternary-17",
+    "float-17",
+    "ternary-29",
+    "float-29",
+    "ternary-43",
+    "float-43"
+  ],
+  "primary_runs": 6,
+  "primary_execution_failures": 0,
+  "quality_targets_met": 6,
+  "gpu_resume": {
+    "runs": 6,
+    "at_step": 200,
+    "next_updates": 50,
+    "state_max_abs_error": 0.0,
+    "logits": "all comparisons passed atol1e-5+rtol1e-4",
+    "data": "independently reconstructed from serialized order/cursor; batches/counters checked"
+  },
+  "cpu_resume": {
+    "fixture": "serialized CPU checkpoint after200 synthetic-batch updates, next50 updates for both modes",
+    "result": "bitwise parameter/moment and logit equality"
+  },
+  "cli_terminal_resume": {
+    "checkpoint": "float-43/step-4300.json",
+    "result": "exit0, same final test accuracy and loss, no new updates; new output directory"
+  },
+  "required_checks": {
+    "fmt": true,
+    "clippy": true,
+    "workspace_tests": true,
+    "rustdoc": true,
+    "xtask": true
+  },
+  "development_failures": [
+    {
+      "stage": "GPU finite-reduction read",
+      "observed": "Bool(U8) cannot be strictly decoded as Bool(Native)",
+      "correction": "Explicit supported try_to_vec_as<bool> conversion; finite checks retained; clean GPU smoke passed"
+    },
+    {
+      "stage": "CLI startup before any learning",
+      "observed": "Output parent runs/ did not exist",
+      "correction": "Created ignored parent directory; no source/config/data change"
+    }
+  ],
+  "timing_conditions": [
+    "Release binary; one process, sequential fixed order, initial IDX loading and Rust compilation excluded",
+    "Earlier component/GPU smoke warmed some runtime/compiler caches; newly encountered shapes may still compile kernels",
+    "Per-run wallclock includes initialization, updates, validation/test, checkpoints,50update replay and process-memory sampling",
+    "Host read wait overlaps step wallclock and includes pending device work, reduction kernels and transfer; not pure synchronization latency",
+    "Times establish recipe-budget feasibility in this environment, not a general throughput ranking"
+  ],
+  "limitations": [
+    "MNIST fixed tiny classifier and three seeds only; not general intelligence or broad task evidence",
+    "Float controls scored higher on these fixed held-out runs; no inference kernel or accuracy parity claim",
+    "Process VmHWM is cumulative across sequential runs and includes data, host snapshots and replay; sampledGPU memory can miss transient peaks",
+    "Analytic tensor payloads are not allocator telemetry or simultaneous total training memory",
+    "No energy, inference-throughput or total-memory saving conclusion",
+    "Checkpoints and raw data remain ignored local artifacts; committed inventory identifies all66 saved primary checkpoints"
+  ],
+  "receipts": [
+    "ternary-17.json",
+    "float-17.json",
+    "ternary-29.json",
+    "float-29.json",
+    "ternary-43.json",
+    "float-43.json"
+  ],
+  "learning_curves_csv": "learning-curves.csv",
+  "checkpoint_inventory": "checkpoint-inventory.json"
+}

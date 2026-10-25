@@ -46,6 +46,7 @@ source tree:
 
 ```bash
 cargo build --locked --release -p tergon-lab --features cuda
+mkdir -p runs
 ./target/release/tergon-lab train experiments/mnist-adamw-v1.json scratch/mnist runs/mnist-v1
 ```
 
