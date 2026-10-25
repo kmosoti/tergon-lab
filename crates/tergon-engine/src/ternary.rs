@@ -1,4 +1,5 @@
 use burn::tensor::{Tensor, TensorData};
+use std::time::Instant;
 use tergon_math::{PackedTernary, QuantSpec};
 
 use crate::{EngineError, PlacementPlan};
@@ -12,11 +13,15 @@ use crate::{EngineError, PlacementPlan};
 /// packed kernel. See the mathematical contract for its identity STE.
 #[derive(Clone, Debug)]
 pub struct TernaryLinear {
-    pub(crate) weights: Tensor<2>,
-    pub(crate) bias: Tensor<1>,
+    weights: Tensor<2>,
+    bias: Tensor<1>,
 }
 
 impl TernaryLinear {
+    pub(crate) fn from_parameters(weights: Tensor<2>, bias: Tensor<1>) -> Self {
+        Self { weights, bias }
+    }
+
     /// Validate finite host parameters, then allocate trainable device leaves.
     pub fn new(
         weights: &[f32],
@@ -56,12 +61,18 @@ impl TernaryLinear {
 
     /// Immutable inference export, independent of the latent tensor lifecycle.
     pub fn packed(&self) -> Result<PackedTernary, EngineError> {
+        self.packed_profiled(&mut 0.)
+    }
+
+    fn packed_profiled(&self, host_read_wait: &mut f64) -> Result<PackedTernary, EngineError> {
+        let started = Instant::now();
         let values = self
             .weights
             .clone()
             .into_data()
             .try_to_vec::<f32>()
             .map_err(|_| EngineError::Data)?;
+        *host_read_wait += started.elapsed().as_secs_f64();
         Ok(PackedTernary::quantize(
             &values,
             QuantSpec::new(self.weights.dims()[1])?,
@@ -74,6 +85,14 @@ impl TernaryLinear {
     /// `db=sum_batch G`. Scales and codes have no gradient. This is not the
     /// derivative of the discontinuous quantizer. Inputs must be finite.
     pub fn forward(&self, input: Tensor<2>) -> Result<Tensor<2>, EngineError> {
+        self.forward_profiled(input, &mut 0.)
+    }
+
+    pub(crate) fn forward_profiled(
+        &self,
+        input: Tensor<2>,
+        host_read_wait: &mut f64,
+    ) -> Result<Tensor<2>, EngineError> {
         let [batch, inputs] = input.dims();
         if batch == 0 || inputs != self.weights.dims()[1] {
             return Err(EngineError::Shape);
@@ -81,17 +100,17 @@ impl TernaryLinear {
         if input.device() != self.weights.device() {
             return Err(EngineError::Device);
         }
-        if input
+        let started = Instant::now();
+        let values = input
             .clone()
             .into_data()
             .try_to_vec::<f32>()
-            .map_err(|_| EngineError::Data)?
-            .iter()
-            .any(|v| !v.is_finite())
-        {
+            .map_err(|_| EngineError::Data)?;
+        *host_read_wait += started.elapsed().as_secs_f64();
+        if values.iter().any(|v| !v.is_finite()) {
             return Err(EngineError::NonFinite);
         }
-        let packed = self.packed()?;
+        let packed = self.packed_profiled(host_read_wait)?;
         let quantized = Tensor::<2>::from_data(
             TensorData::new(packed.dequantize().collect::<Vec<_>>(), self.weights.dims()),
             &self.weights.device(),

@@ -1,4 +1,5 @@
 //! Reproducible component experiments.
+mod training;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::{error::Error, fs, io::Write, path::Path, process::Command};
@@ -171,6 +172,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     let args: Vec<_> = std::env::args().skip(1).collect();
     match args.as_slice() {
         [cmd, config, out] if cmd == "smoke" => smoke(Path::new(config), Path::new(out)),
-        _ => Err("usage: tergon-lab smoke <experiment.json> <new-receipt.json>".into()),
+        [cmd, config, dataset, out] if cmd == "train" => training::train(Path::new(config), Path::new(dataset), Path::new(out), None),
+        [cmd, config, dataset, out, flag, checkpoint] if cmd == "train" && flag == "--resume" => training::train(Path::new(config), Path::new(dataset), Path::new(out), Some(Path::new(checkpoint))),
+        _ => Err("usage: tergon-lab smoke <experiment.json> <new-receipt.json> | train <config> <datasetdir> <newrundir> [--resume <checkpoint>]".into()),
     }
 }

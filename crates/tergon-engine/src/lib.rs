@@ -5,8 +5,8 @@
 
 mod ternary;
 mod training;
-pub use training::{ClassifierSnapshot, ParameterSnapshot, TinyClassifier};
 pub use ternary::TernaryLinear;
+pub use training::{ClassifierSnapshot, ParameterSnapshot, TinyClassifier};
 
 use burn::tensor::{Device, Tensor, TensorData};
 use std::{error::Error, fmt};
