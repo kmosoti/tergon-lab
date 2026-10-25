@@ -24,11 +24,11 @@ pub struct ClassifierSnapshot {
     pub parameters: [ParameterSnapshot; 4],
 }
 
-struct Parameter<const D: usize> {
-    value: Tensor<D>,
+pub(crate) struct Parameter<const D: usize> {
+    pub(crate) value: Tensor<D>,
     state: Option<AdamWState<D>>,
 }
-fn floats<const D: usize>(value: Tensor<D>) -> Result<Vec<f32>, EngineError> {
+pub(crate) fn floats<const D: usize>(value: Tensor<D>) -> Result<Vec<f32>, EngineError> {
     value
         .into_data()
         .try_to_vec()
@@ -49,7 +49,7 @@ fn finite<const D: usize>(value: Tensor<D>, host_read_wait: &mut f64) -> Result<
     result
 }
 impl<const D: usize> Parameter<D> {
-    fn restore(
+    pub(crate) fn restore(
         saved: &ParameterSnapshot,
         shape: [usize; D],
         plan: PlacementPlan,
@@ -93,7 +93,7 @@ impl<const D: usize> Parameter<D> {
         };
         Ok(Self { value, state })
     }
-    fn snapshot(&self) -> Result<ParameterSnapshot, EngineError> {
+    pub(crate) fn snapshot(&self) -> Result<ParameterSnapshot, EngineError> {
         Ok(ParameterSnapshot {
             values: floats(self.value.clone())?,
             moment_1: self
@@ -111,7 +111,7 @@ impl<const D: usize> Parameter<D> {
             time: self.state.as_ref().map_or(0, |s| s.momentum.time),
         })
     }
-    fn proposed(
+    pub(crate) fn proposed(
         &self,
         gradients: &mut burn::tensor::Gradients,
         decay: f32,

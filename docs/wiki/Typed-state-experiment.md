@@ -86,7 +86,9 @@ Six linear maps with floating biases project keys/values 85->64, query20->64,
 relation5->64, shared update64->64, decoder64->18. At each requested operation,
 `z = h + R(operation)`, `p = softmax(K z / sqrt(64))`,
 `read = sum_slot p_slot V_slot`, `h = ReLU(U z + read)`.
-There is one hop per relation. The same decoder produces 18 unrestricted logits.
+There is one semantic hop per relation. Fixed-shape execution computes three
+candidate hops for every batch and freezes state after each query’s actual
+length; timings include this padding work. The same decoder produces 18 unrestricted logits.
 No answer/type restriction is applied to output. Padding is always masked; NULL
 has its own input bit and is always eligible. Metadata-only attends every present
 record; enforced additionally excludes inactive, hypothetical and current-relation
@@ -99,6 +101,13 @@ f32. Existing numerical tolerances and MNIST behavior remain unchanged. Mean
 final-answer cross entropy is the only training objective. AdamW lr .001, betas
 .9/.999, epsilon1e-8, matrix decay .01, bias decay0, no clipping/schedule.
 Batch128,20 epochs, final checkpoints, no best-validation selection.
+
+`state-train <config> <new-run-dir> [--resume <checkpoint>]` executes the twelve
+frozen conditions. Optional `TERGON_STATE_RUN=17:metadata-only:float` selects one
+exact approved seed/policy/mode, is strictly validated and recorded verbatim and
+parsed, and changes no data/order/initialization/hyperparameter. Aggregate analysis
+requires all twelve distinct matching source/config/data conditions. Resume rejects
+conflicting selection and carries elapsed execution budget across processes.
 
 Each run has 600 seconds excluding compilation and dataset generation. Record
 incomplete runs and errors; do not extend budgets after observing outcomes.

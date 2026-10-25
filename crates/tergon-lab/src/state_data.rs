@@ -538,11 +538,45 @@ pub(crate) fn audit(directory: &std::path::Path) -> Result<(), Box<dyn std::erro
             assert_nuisance_equal(cluster);
         }
         let mut counts = [[0usize; 3]; 4];
+        let mut inactive_contexts = 0usize;
+        let mut agreeing_duplicate_contexts = 0usize;
+        let mut query_related_hypothesis_contexts = 0usize;
+        let mut retraction_contexts = 0usize;
         let mut metadata = serde_json::Map::new();
         let started = Instant::now();
         for example in &data {
             let (state, query) = example.materialize();
             assert_eq!(state.answer(&query)?.class(), example.oracle());
+            inactive_contexts += usize::from(state.records.iter().any(|r| !r.active));
+            retraction_contexts += usize::from(
+                example
+                    .events
+                    .iter()
+                    .any(|e| matches!(e, SavedEvent::Retract { .. })),
+            );
+            agreeing_duplicate_contexts +=
+                usize::from(state.records.iter().enumerate().any(|(i, r)| {
+                    r.active
+                        && r.assertion.evidence == Evidence::Observed
+                        && state.records[..i].iter().any(|s| {
+                            s.active
+                                && s.assertion.evidence == Evidence::Observed
+                                && (
+                                    r.assertion.subject,
+                                    r.assertion.relation,
+                                    r.assertion.object,
+                                ) == (
+                                    s.assertion.subject,
+                                    s.assertion.relation,
+                                    s.assertion.object,
+                                )
+                        })
+                }));
+            query_related_hypothesis_contexts += usize::from(state.records.iter().any(|r| {
+                r.active
+                    && r.assertion.evidence == Evidence::Hypothesis
+                    && query.relations.contains(&r.assertion.relation)
+            }));
             counts[query.relations.len()][if example.label < 16 {
                 0
             } else {
@@ -615,7 +649,7 @@ pub(crate) fn audit(directory: &std::path::Path) -> Result<(), Box<dyn std::erro
             .open(directory.join(&filename))?;
         file.write_all(&bytes)?;
         file.sync_all()?;
-        receipt.push(serde_json::json!({"group":name,"worlds":worlds,"queries":data.len(),"sha256":super::hash(&bytes),"bytes":bytes.len(),"outcome_by_hop":counts,"symbolic_accuracy":1.0,"exact_nuisance_equality_worlds":worlds,"generation_seconds":generation_seconds,"symbolic_and_metamorphic_audit_seconds":symbolic_seconds,"isolated_symbolic_query_seconds":isolated_symbolic_seconds,"isolated_query_boundary":"validated-context answer API includes its validation; excludes event reduction, generation, serialization and metamorphic checks","symbolic_live_storage":{"inline_state_query_bytes":inline_context_bytes,"record_capacity_bytes":state_record_allocation_bytes,"query_relation_capacity_bytes":query_relation_allocation_bytes,"excludes":"allocator bookkeeping, event logs, and report/dataset storage"},"active_observed_histogram":metadata}));
+        receipt.push(serde_json::json!({"group":name,"worlds":worlds,"queries":data.len(),"sha256":super::hash(&bytes),"bytes":bytes.len(),"outcome_by_hop":counts,"symbolic_accuracy":1.0,"exact_nuisance_equality_worlds":worlds,"primitive_coverage":{"inactive_contexts":inactive_contexts,"explicit_retraction_contexts":retraction_contexts,"agreeing_duplicate_contexts":agreeing_duplicate_contexts,"query_relation_hypothesis_contexts":query_related_hypothesis_contexts},"generation_seconds":generation_seconds,"symbolic_and_metamorphic_audit_seconds":symbolic_seconds,"isolated_symbolic_query_seconds":isolated_symbolic_seconds,"isolated_query_boundary":"validated-context answer API includes its validation; excludes event reduction, generation, serialization and metamorphic checks","symbolic_live_storage":{"inline_state_query_bytes":inline_context_bytes,"record_capacity_bytes":state_record_allocation_bytes,"query_relation_capacity_bytes":query_relation_allocation_bytes,"excludes":"allocator bookkeeping, event logs, and report/dataset storage"},"active_observed_histogram":metadata}));
     }
     let bytes = serde_json::to_vec_pretty(
         &serde_json::json!({"schema":1,"source_revision":super::command("git",&["rev-parse","HEAD"])?,"source_dirty":!super::command("git",&["status","--porcelain"])?.is_empty(),"config_sha256":super::hash(include_bytes!("../../../experiments/typed-state-v1.json")),"generator_sha256":super::hash(include_bytes!("state_data.rs")),"groups":receipt,"limitations":["combined audit timing includes validation/materialization/renaming/reversal; isolated query timing reported separately","serialized JSON bytes are data storage, not tensor or allocator memory"]}),
