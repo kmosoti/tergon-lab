@@ -397,7 +397,7 @@ pub(crate) fn world(group: usize, index: usize) -> Vec<Example> {
             0 => {}
             1 => assertions[relations.len() - 1].object = alternate_final,
             2 => assertions[critical].subject = other_subject,
-            3 => assertions[nuisance].subject = subject,
+            3 => assertions[duplicate].object = other_object,
             _ => unreachable!(),
         }
         if branch == 1 && critical == relations.len() - 1 {
@@ -508,6 +508,34 @@ fn assert_nuisance_equal(examples: &[Example]) {
             })
             .collect::<Vec<_>>()
     };
+    let known = examples
+        .iter()
+        .find(|e| e.branch == 0)
+        .unwrap()
+        .materialize()
+        .0;
+    let conflict = examples
+        .iter()
+        .find(|e| e.branch == 3)
+        .unwrap()
+        .materialize()
+        .0;
+    let degree = |state: &State| {
+        let mut counts = BTreeMap::new();
+        for r in &state.records {
+            if r.active && r.assertion.evidence == Evidence::Observed {
+                *counts
+                    .entry((r.assertion.subject, r.assertion.relation.index()))
+                    .or_insert(0) += 1;
+            }
+        }
+        counts
+    };
+    assert_eq!(
+        degree(&known),
+        degree(&conflict),
+        "known/conflict cardinality shortcut"
+    );
     let expected = signature(&examples[0]);
     for e in &examples[1..] {
         assert_eq!(
@@ -649,7 +677,7 @@ pub(crate) fn audit(directory: &std::path::Path) -> Result<(), Box<dyn std::erro
             .open(directory.join(&filename))?;
         file.write_all(&bytes)?;
         file.sync_all()?;
-        receipt.push(serde_json::json!({"group":name,"worlds":worlds,"queries":data.len(),"sha256":super::hash(&bytes),"bytes":bytes.len(),"outcome_by_hop":counts,"symbolic_accuracy":1.0,"exact_nuisance_equality_worlds":worlds,"primitive_coverage":{"inactive_contexts":inactive_contexts,"explicit_retraction_contexts":retraction_contexts,"agreeing_duplicate_contexts":agreeing_duplicate_contexts,"query_relation_hypothesis_contexts":query_related_hypothesis_contexts},"generation_seconds":generation_seconds,"symbolic_and_metamorphic_audit_seconds":symbolic_seconds,"isolated_symbolic_query_seconds":isolated_symbolic_seconds,"isolated_query_boundary":"validated-context answer API includes its validation; excludes event reduction, generation, serialization and metamorphic checks","symbolic_live_storage":{"inline_state_query_bytes":inline_context_bytes,"record_capacity_bytes":state_record_allocation_bytes,"query_relation_capacity_bytes":query_relation_allocation_bytes,"excludes":"allocator bookkeeping, event logs, and report/dataset storage"},"active_observed_histogram":metadata}));
+        receipt.push(serde_json::json!({"group":name,"worlds":worlds,"queries":data.len(),"sha256":super::hash(&bytes),"bytes":bytes.len(),"outcome_by_hop":counts,"symbolic_accuracy":1.0,"exact_nuisance_equality_worlds":worlds,"known_conflict_equal_degree_worlds":worlds,"primitive_coverage":{"inactive_contexts":inactive_contexts,"explicit_retraction_contexts":retraction_contexts,"agreeing_duplicate_contexts":agreeing_duplicate_contexts,"query_relation_hypothesis_contexts":query_related_hypothesis_contexts},"generation_seconds":generation_seconds,"symbolic_and_metamorphic_audit_seconds":symbolic_seconds,"isolated_symbolic_query_seconds":isolated_symbolic_seconds,"isolated_query_boundary":"validated-context answer API includes its validation; excludes event reduction, generation, serialization and metamorphic checks","symbolic_live_storage":{"inline_state_query_bytes":inline_context_bytes,"record_capacity_bytes":state_record_allocation_bytes,"query_relation_capacity_bytes":query_relation_allocation_bytes,"excludes":"allocator bookkeeping, event logs, and report/dataset storage"},"active_observed_histogram":metadata}));
     }
     let bytes = serde_json::to_vec_pretty(
         &serde_json::json!({"schema":1,"source_revision":super::command("git",&["rev-parse","HEAD"])?,"source_dirty":!super::command("git",&["status","--porcelain"])?.is_empty(),"config_sha256":super::hash(include_bytes!("../../../experiments/typed-state-v1.json")),"generator_sha256":super::hash(include_bytes!("state_data.rs")),"groups":receipt,"limitations":["combined audit timing includes validation/materialization/renaming/reversal; isolated query timing reported separately","serialized JSON bytes are data storage, not tensor or allocator memory"]}),

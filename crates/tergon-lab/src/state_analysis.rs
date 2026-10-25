@@ -3,7 +3,7 @@ use crate::state_data::{GROUPS, Rng};
 use crate::state_training::Prediction;
 use serde_json::{Value, json};
 use std::{
-    collections::BTreeMap,
+    collections::{BTreeMap, BTreeSet},
     error::Error,
     fs,
     path::{Path, PathBuf},
@@ -76,7 +76,11 @@ pub(crate) fn analyze(root: &Path, output: &Path) -> Result<()> {
                 return Err("duplicate condition receipts".into());
             }
             if run["completed"] == true
-                && (run["epochs"] != 20
+                && (run["serialized_replay"]["completed"] != true
+                    || run["serialized_replay"]["updates"] != 50
+                    || run["serialized_replay"]["batch_size"] != 128
+                    || run["serialized_replay"]["last_step"] != 250
+                    || run["epochs"] != 20
                     || run["updates"] != 5120
                     || run["elapsed_seconds"]
                         .as_f64()
@@ -107,6 +111,19 @@ pub(crate) fn analyze(root: &Path, output: &Path) -> Result<()> {
                         })
                     {
                         return Err("malformed prediction rows".into());
+                    }
+                    let mut worlds: BTreeMap<u64, BTreeSet<usize>> = BTreeMap::new();
+                    for row in &rows {
+                        if !worlds.entry(row.world).or_default().insert(row.branch) {
+                            return Err("duplicate world/branch prediction".into());
+                        }
+                    }
+                    if worlds.len() != 512
+                        || worlds
+                            .values()
+                            .any(|branches| *branches != BTreeSet::from([0, 1, 2, 3]))
+                    {
+                        return Err("expected512 unique complete world clusters per stratum".into());
                     }
                     for row in &rows {
                         let sum = row.probabilities.iter().sum::<f64>();
@@ -148,8 +165,19 @@ pub(crate) fn analyze(root: &Path, output: &Path) -> Result<()> {
     let get = |seed: u64, policy: &str, mode: &str| {
         &conditions[&(seed, policy.to_owned(), mode.to_owned())]
     };
+    let reference = get(17, "metadata-only", "float");
+    for condition in conditions.values() {
+        for group in 0..5 {
+            for (a, b) in reference[group].iter().zip(&condition[group]) {
+                if (a.world, a.branch, a.label) != (b.world, b.branch, b.label) {
+                    return Err("cross-seed paired prediction order/identity mismatch".into());
+                }
+            }
+        }
+    }
     let mut seed_results = Vec::new();
     let mut gate = true;
+    let mut controls_pass = true;
     let mut gains = Vec::new();
     let mut world_differences = vec![vec![0.; 512]; 4];
     for seed in [17, 29, 43] {
@@ -169,6 +197,7 @@ pub(crate) fn analyze(root: &Path, output: &Path) -> Result<()> {
             }
         }
         let ordinary_float = accuracy(&float[0]);
+        controls_pass &= ordinary_float >= 0.9;
         let ordinary = accuracy(&enforced[0]);
         let ordinary_delta = ordinary - accuracy(&metadata[0]);
         let stress_enforced = enforced[1..].iter().map(|r| accuracy(r)).sum::<f64>() / 4.;
@@ -228,7 +257,7 @@ pub(crate) fn analyze(root: &Path, output: &Path) -> Result<()> {
     let high = percentile(&bootstrap, 0.975);
     gate &= mean_gain >= 0.05 && low > 0.;
     let seed_variance = gains.iter().map(|g| (g - mean_gain).powi(2)).sum::<f64>() / 2.;
-    let result = json!({"schema":1,"identity":identity,"conditions_present":12,"status":"completed","gate_open":gate,"seed_results":seed_results,"mean_ternary_stress_gain":mean_gain,"seed_sample_standard_deviation":seed_variance.sqrt(),"paired_world_bootstrap":{"resamples":10000,"rng_seed":20261025,"unit":"whole world within stress stratum; model seeds averaged inside world","two_sided_95_percentile_interval":[low,high],"percentile_rule":"linear interpolation at (n-1)*p"},"storage_pilot":"requires owner review of complete evidence even if numeric gate is true"});
+    let result = json!({"schema":1,"identity":identity,"conditions_present":12,"status":if controls_pass{"completed"}else{"inconclusive"},"control_pass":controls_pass,"conclusion":if !controls_pass{"competent baseline control failed"}else if gate{"numeric storage-pilot gate passed"}else{"completed negative gate result"},"gate_open":gate,"seed_results":seed_results,"mean_ternary_stress_gain":mean_gain,"seed_sample_standard_deviation":seed_variance.sqrt(),"paired_world_bootstrap":{"resamples":10000,"rng_seed":20261025,"unit":"whole world within stress stratum; model seeds averaged inside world","two_sided_95_percentile_interval":[low,high],"percentile_rule":"linear interpolation at (n-1)*p"}});
     write_output(output, &result)
 }
 fn percentile(sorted: &[f64], p: f64) -> f64 {
@@ -255,6 +284,84 @@ mod tests {
     fn percentile_is_predeclared_linear_interpolation() {
         assert_eq!(percentile(&[0., 1., 2., 3.], 0.25), 0.75);
         assert_eq!(percentile(&[0., 1., 2., 3.], 1.), 3.);
+    }
+    fn fixture_json(path: &Path, value: &impl serde::Serialize) {
+        let bytes = serde_json::to_vec(value).unwrap();
+        fs::write(path.with_extension("sha256"), crate::hash(&bytes)).unwrap();
+        fs::write(path, bytes).unwrap();
+    }
+    #[test]
+    fn complete_paired_study_opens_gate_but_incomplete_or_duplicate_cannot() {
+        let dir =
+            std::env::temp_dir().join(format!("state-analysis-complete-{}", std::process::id()));
+        fs::create_dir(&dir).unwrap();
+        let mut runs = Vec::new();
+        for seed in [17_u64, 29, 43] {
+            for policy in ["metadata-only", "enforced"] {
+                for mode in ["float", "ternary"] {
+                    let condition = dir.join(format!("{seed}-{policy}-{mode}"));
+                    fs::create_dir(&condition).unwrap();
+                    for (group, name) in GROUPS.iter().enumerate().skip(2) {
+                        let rows: Vec<_> = (0..2048)
+                            .map(|index| {
+                                let branch = index % 4;
+                                let label = [0, 1, 16, 17][branch];
+                                let wrong = policy == "metadata-only"
+                                    && mode == "ternary"
+                                    && group > 2
+                                    && index % 10 == 0;
+                                let predicted = if wrong { (label + 1) % 18 } else { label };
+                                let mut probabilities = vec![0.; 18];
+                                probabilities[predicted] = 1.;
+                                Prediction {
+                                    group: (*name).into(),
+                                    world: ((group as u64) << 48) | (index / 4) as u64,
+                                    branch,
+                                    hops: 1 + index / 4 % 3,
+                                    label,
+                                    predicted,
+                                    probabilities,
+                                    brier: if wrong { 2. } else { 0. },
+                                    confidently_unsupported: wrong && predicted < 16,
+                                    renamed_consistent: true,
+                                    reordered_consistent: true,
+                                }
+                            })
+                            .collect();
+                        fixture_json(&condition.join(format!("{name}-predictions.json")), &rows);
+                    }
+                    runs.push(json!({"seed":seed,"policy":policy,"mode":mode,"completed":true,"epochs":20,"updates":5120,"elapsed_seconds":100.,"serialized_replay":{"completed":true,"updates":50,"batch_size":128,"last_step":250}}));
+                }
+            }
+        }
+        let mut receipt = json!({"experiment":"typed-state-v1","source_revision":"fixture","source_dirty":false,"config_sha256":"config","dataset_sha256":["train","val","a","b","c","d","e"],"runs":runs});
+        fixture_json(&dir.join("receipt.json"), &receipt);
+        let out = dir.join("complete.json");
+        analyze(&dir, &out).unwrap();
+        let result: Value = serde_json::from_slice(&fs::read(&out).unwrap()).unwrap();
+        assert_eq!(result["gate_open"], true);
+        assert_eq!(result["status"], "completed");
+        assert!(
+            (result["mean_ternary_stress_gain"].as_f64().unwrap() - 0.10009765625).abs() < 1e-12
+        );
+        assert!(
+            result["paired_world_bootstrap"]["two_sided_95_percentile_interval"][0]
+                .as_f64()
+                .unwrap()
+                > 0.
+        );
+        receipt["runs"][0]["completed"] = json!(false);
+        fixture_json(&dir.join("receipt.json"), &receipt);
+        let out = dir.join("incomplete.json");
+        analyze(&dir, &out).unwrap();
+        let result: Value = serde_json::from_slice(&fs::read(&out).unwrap()).unwrap();
+        assert_eq!(result["gate_open"], false);
+        assert_eq!(result["status"], "inconclusive");
+        let duplicate = dir.join("duplicate");
+        fs::create_dir(&duplicate).unwrap();
+        fixture_json(&duplicate.join("receipt.json"), &receipt);
+        assert!(analyze(&dir, &dir.join("duplicate-result.json")).is_err());
+        fs::remove_dir_all(dir).unwrap();
     }
     #[test]
     fn missing_conditions_cannot_open_gate() {

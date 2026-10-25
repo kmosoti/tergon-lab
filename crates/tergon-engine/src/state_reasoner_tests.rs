@@ -105,6 +105,44 @@ fn near(actual: &[f32], expected: &[f64], gpu: bool) {
         );
     }
 }
+// NVIDIA cvt.rna.tf32.f32: discard13fraction bits, nearest with ties away.
+fn tf32(value: f64) -> f64 {
+    let bits = (value as f32).to_bits();
+    let magnitude = bits & 0x7fff_ffff;
+    let rounded = magnitude.wrapping_add(0x1000) & !0x1fff;
+    f32::from_bits((bits & 0x8000_0000) | rounded) as f64
+}
+fn stored(value: f64, gpu: bool) -> f64 {
+    if gpu { value as f32 as f64 } else { value }
+}
+fn operand(value: f64, gpu: bool) -> f64 {
+    if gpu { tf32(value) } else { value }
+}
+fn precision_linear(x: &[f64], w: &[f64], bias: &[f64], gpu: bool) -> Vec<f64> {
+    if !gpu {
+        return linear(x, w, bias);
+    }
+    let n = x.len();
+    bias.iter()
+        .enumerate()
+        .map(|(i, b)| {
+            stored(
+                stored((0..n).map(|j| tf32(x[j]) * tf32(w[i * n + j])).sum(), true) + b,
+                true,
+            )
+        })
+        .collect()
+}
+#[test]
+fn tf32_halfway_rounds_away_from_zero() {
+    let half = f32::from_bits(1.0_f32.to_bits() + 0x1000);
+    let next = f32::from_bits(1.0_f32.to_bits() + 0x2000);
+    assert_eq!(tf32(half as f64), next as f64);
+    assert_eq!(tf32(-half as f64), -next as f64);
+    assert_eq!(tf32(f32::from_bits(half.to_bits() - 1) as f64), 1.);
+    assert_eq!(tf32(-f32::from_bits(half.to_bits() - 1) as f64), -1.);
+    assert_eq!((tf32(-0.) as f32).to_bits(), (-0.0_f32).to_bits());
+}
 fn linear(x: &[f64], w: &[f64], bias: &[f64]) -> Vec<f64> {
     let n = x.len();
     bias.iter()
@@ -120,6 +158,35 @@ fn backward_linear(x: &[f64], w: &[f64], dy: &[f64], dw: &mut [f64], db: &mut [f
         for j in 0..n {
             dw[i * n + j] += dy[i] * x[j];
             dx[j] += dy[i] * w[i * n + j];
+        }
+    }
+    dx
+}
+fn precision_backward_linear(
+    x: &[f64],
+    w: &[f64],
+    dy: &[f64],
+    dw: &mut [f64],
+    db: &mut [f64],
+    gpu: bool,
+) -> Vec<f64> {
+    if !gpu {
+        return backward_linear(x, w, dy, dw, db);
+    }
+    let n = x.len();
+    let mut dx = vec![0.; n];
+    for j in 0..n {
+        dx[j] = stored(
+            (0..dy.len())
+                .map(|i| tf32(dy[i]) * tf32(w[i * n + j]))
+                .sum(),
+            true,
+        );
+    }
+    for i in 0..dy.len() {
+        db[i] = stored(db[i] + dy[i], true);
+        for j in 0..n {
+            dw[i * n + j] = stored(dw[i * n + j] + stored(tf32(dy[i]) * tf32(x[j]), true), true);
         }
     }
     dx
@@ -149,6 +216,7 @@ fn scalar(
     query: &Query,
     policy: ReadPolicy,
     ternary: bool,
+    gpu: bool,
 ) -> (Vec<f64>, Vec<Vec<f64>>) {
     let w: Vec<_> = SHAPES
         .iter()
@@ -180,18 +248,28 @@ fn scalar(
         x[slot][83] = f64::from(a.evidence == Evidence::Observed);
     }
     x[32][84] = 1.;
-    let k: Vec<_> = x.iter().map(|x| linear(x, &w[0], &bias[0])).collect();
-    let v: Vec<_> = x.iter().map(|x| linear(x, &w[1], &bias[1])).collect();
+    let k: Vec<_> = x
+        .iter()
+        .map(|x| precision_linear(x, &w[0], &bias[0], gpu))
+        .collect();
+    let v: Vec<_> = x
+        .iter()
+        .map(|x| precision_linear(x, &w[1], &bias[1], gpu))
+        .collect();
     let mut start = vec![0.; 20];
     start[query.start] = 1.;
     start[16 + state.types[query.start].index()] = 1.;
-    let mut h = linear(&start, &w[2], &bias[2]);
+    let mut h = precision_linear(&start, &w[2], &bias[2], gpu);
     let mut caches = Vec::new();
     for relation in &query.relations {
         let mut op = vec![0.; 5];
         op[relation.index()] = 1.;
-        let projected = linear(&op, &w[3], &bias[3]);
-        let z: Vec<_> = h.iter().zip(projected).map(|(h, r)| h + r).collect();
+        let projected = precision_linear(&op, &w[3], &bias[3], gpu);
+        let z: Vec<_> = h
+            .iter()
+            .zip(projected)
+            .map(|(h, r)| stored(h + r, gpu))
+            .collect();
         let eligible: Vec<_> = (0..33)
             .map(|slot| {
                 slot == 32
@@ -207,7 +285,12 @@ fn scalar(
         let scores: Vec<_> = (0..33)
             .map(|i| {
                 if eligible[i] {
-                    (0..64).map(|j| k[i][j] * z[j]).sum::<f64>() / 8.
+                    stored(
+                        (0..64)
+                            .map(|j| operand(k[i][j], gpu) * operand(z[j], gpu))
+                            .sum::<f64>(),
+                        gpu,
+                    ) / 8.
                 } else {
                     f64::NEG_INFINITY
                 }
@@ -215,15 +298,27 @@ fn scalar(
             .collect();
         let max = scores.iter().copied().fold(f64::NEG_INFINITY, f64::max);
         let sum = scores.iter().map(|s| (s - max).exp()).sum::<f64>();
-        let p: Vec<_> = scores.iter().map(|s| (s - max).exp() / sum).collect();
-        let mut pre = linear(&z, &w[4], &bias[4]);
+        let p: Vec<_> = scores
+            .iter()
+            .map(|s| stored((s - max).exp() / sum, gpu))
+            .collect();
+        let mut pre = precision_linear(&z, &w[4], &bias[4], gpu);
         for j in 0..64 {
-            pre[j] += (0..33).map(|i| p[i] * v[i][j]).sum::<f64>();
+            pre[j] = stored(
+                pre[j]
+                    + stored(
+                        (0..33)
+                            .map(|i| operand(p[i], gpu) * operand(v[i][j], gpu))
+                            .sum::<f64>(),
+                        gpu,
+                    ),
+                gpu,
+            );
         }
         h = pre.iter().map(|a| a.max(0.)).collect();
         caches.push((z, op, p, pre));
     }
-    let logits = linear(&h, &w[5], &bias[5]);
+    let logits = precision_linear(&h, &w[5], &bias[5], gpu);
     let mut grads: Vec<_> = snapshot
         .parameters
         .iter()
@@ -232,9 +327,11 @@ fn scalar(
     let mut apply = |layer: usize, input: &[f64], dy: &[f64]| {
         let split = 2 * layer + 1;
         let (a, b) = grads.split_at_mut(split);
-        backward_linear(input, &w[layer], dy, &mut a[split - 1], &mut b[0])
+        precision_backward_linear(input, &w[layer], dy, &mut a[split - 1], &mut b[0], gpu)
     };
-    let upstream: Vec<_> = (0..18).map(|i| (i as f64 - 8.) / 10.).collect();
+    let upstream: Vec<_> = (0..18)
+        .map(|i| stored((i as f64 - 8.) / 10., gpu))
+        .collect();
     let mut dh = apply(5, &h, &upstream);
     let mut dk = vec![vec![0.; 64]; 33];
     let mut dv = dk.clone();
@@ -246,16 +343,42 @@ fn scalar(
             .collect();
         let mut dz = apply(4, &z, &dt);
         let dp: Vec<_> = (0..33)
-            .map(|i| (0..64).map(|j| dt[j] * v[i][j]).sum::<f64>())
+            .map(|i| {
+                stored(
+                    (0..64)
+                        .map(|j| operand(dt[j], gpu) * operand(v[i][j], gpu))
+                        .sum::<f64>(),
+                    gpu,
+                )
+            })
             .collect();
-        let pdp = (0..33).map(|i| p[i] * dp[i]).sum::<f64>();
+        let pdp = stored((0..33).map(|i| stored(p[i] * dp[i], gpu)).sum::<f64>(), gpu);
+        let ds: Vec<_> = (0..33)
+            .map(|i| stored(stored(p[i] * stored(dp[i] - pdp, gpu), gpu) / 8., gpu))
+            .collect();
         for i in 0..33 {
-            let ds = p[i] * (dp[i] - pdp);
             for j in 0..64 {
-                dv[i][j] += p[i] * dt[j];
-                dk[i][j] += ds * z[j] / 8.;
-                dz[j] += ds * k[i][j] / 8.;
+                dv[i][j] = stored(
+                    dv[i][j] + stored(operand(p[i], gpu) * operand(dt[j], gpu), gpu),
+                    gpu,
+                );
+                dk[i][j] = stored(
+                    dk[i][j] + stored(operand(ds[i], gpu) * operand(z[j], gpu), gpu),
+                    gpu,
+                );
             }
+        }
+        for j in 0..64 {
+            dz[j] = stored(
+                dz[j]
+                    + stored(
+                        (0..33)
+                            .map(|i| operand(ds[i], gpu) * operand(k[i][j], gpu))
+                            .sum::<f64>(),
+                        gpu,
+                    ),
+                gpu,
+            );
         }
         apply(3, &op, &dz);
         dh = dz;
@@ -275,7 +398,7 @@ fn scalar_fixture(compute: ComputeDevice) {
         for policy in [ReadPolicy::MetadataOnly, ReadPolicy::Enforced] {
             let model = StateReasoner::restore(&snapshot, ternary, policy, plan).unwrap();
             let (state, query) = context();
-            let (expected, gradients) = scalar(&snapshot, &state, &query, policy, ternary);
+            let (expected, gradients) = scalar(&snapshot, &state, &query, policy, ternary, gpu);
             let public_logits = model.logits(&[(state.clone(), query.clone())]).unwrap();
             let output = model.forward(&[(state, query)], true, &mut 0.).unwrap();
             near(&public_logits, &expected, gpu);
@@ -385,7 +508,7 @@ fn mixed_batch_fixture(compute: ComputeDevice) {
             let mut model = StateReasoner::restore(&snapshot, ternary, policy, plan).unwrap();
             let expected: Vec<_> = batch
                 .iter()
-                .flat_map(|(s, q)| scalar(&snapshot, s, q, policy, ternary).0)
+                .flat_map(|(s, q)| scalar(&snapshot, s, q, policy, ternary, gpu).0)
                 .collect();
             near(&model.logits(&batch).unwrap(), &expected, gpu);
             let labels = [3, 7, 16];
@@ -429,16 +552,29 @@ fn partial_mask_fixture(compute: ComputeDevice) {
     let mask =
         Tensor::<2, Bool>::from_data(TensorData::new(vec![true, false, true], [1, 3]), &device);
     let output = attention_read(keys.clone(), values.clone(), query.clone(), mask);
+    let scale = stored(2_f64.sqrt(), gpu);
     let score = |i: usize| {
-        (0..2)
-            .map(|j| kh[2 * i + j] as f64 * qh[j] as f64)
-            .sum::<f64>()
-            / 2_f64.sqrt()
+        stored(
+            stored(
+                (0..2)
+                    .map(|j| operand(kh[2 * i + j] as f64, gpu) * operand(qh[j] as f64, gpu))
+                    .sum::<f64>(),
+                gpu,
+            ) / scale,
+            gpu,
+        )
     };
     let p0 = 1. / (1. + (score(2) - score(0)).exp());
-    let p = [p0, 0., 1. - p0];
+    let p = [stored(p0, gpu), 0., stored(1. - p0, gpu)];
     let expected: Vec<_> = (0..2)
-        .map(|j| (0..3).map(|i| p[i] * vh[2 * i + j] as f64).sum::<f64>())
+        .map(|j| {
+            stored(
+                (0..3)
+                    .map(|i| operand(p[i], gpu) * operand(vh[2 * i + j] as f64, gpu))
+                    .sum::<f64>(),
+                gpu,
+            )
+        })
         .collect();
     near(&floats(output.clone()).unwrap(), &expected, gpu);
     let upstream = [0.7_f32, -0.2];
@@ -448,22 +584,42 @@ fn partial_mask_fixture(compute: ComputeDevice) {
     .backward();
     let dp: Vec<_> = (0..3)
         .map(|i| {
-            (0..2)
-                .map(|j| upstream[j] as f64 * vh[2 * i + j] as f64)
-                .sum::<f64>()
+            stored(
+                (0..2)
+                    .map(|j| operand(upstream[j] as f64, gpu) * operand(vh[2 * i + j] as f64, gpu))
+                    .sum::<f64>(),
+                gpu,
+            )
         })
         .collect();
-    let mean = (0..3).map(|i| p[i] * dp[i]).sum::<f64>();
-    let ds: Vec<_> = (0..3).map(|i| p[i] * (dp[i] - mean)).collect();
-    let dk: Vec<_> = (0..6)
-        .map(|n| ds[n / 2] * qh[n % 2] as f64 / 2_f64.sqrt())
+    let mean = stored((0..3).map(|i| stored(p[i] * dp[i], gpu)).sum::<f64>(), gpu);
+    let ds: Vec<_> = (0..3)
+        .map(|i| stored(stored(p[i] * stored(dp[i] - mean, gpu), gpu) / scale, gpu))
         .collect();
-    let dv: Vec<_> = (0..6).map(|n| p[n / 2] * upstream[n % 2] as f64).collect();
+    let dk: Vec<_> = (0..6)
+        .map(|n| {
+            stored(
+                operand(ds[n / 2], gpu) * operand(qh[n % 2] as f64, gpu),
+                gpu,
+            )
+        })
+        .collect();
+    let dv: Vec<_> = (0..6)
+        .map(|n| {
+            stored(
+                operand(p[n / 2], gpu) * operand(upstream[n % 2] as f64, gpu),
+                gpu,
+            )
+        })
+        .collect();
     let dq: Vec<_> = (0..2)
         .map(|j| {
-            (0..3)
-                .map(|i| ds[i] * kh[2 * i + j] as f64 / 2_f64.sqrt())
-                .sum::<f64>()
+            stored(
+                (0..3)
+                    .map(|i| operand(ds[i], gpu) * operand(kh[2 * i + j] as f64, gpu))
+                    .sum::<f64>(),
+                gpu,
+            )
         })
         .collect();
     near(
@@ -517,7 +673,12 @@ fn cuda_stage_precision_probe() {
                 let expected: Vec<_> = host
                     .chunks(dims[1])
                     .flat_map(|row| {
-                        linear(&row.iter().map(|x| *x as f64).collect::<Vec<_>>(), &w, &b)
+                        precision_linear(
+                            &row.iter().map(|x| *x as f64).collect::<Vec<_>>(),
+                            &w,
+                            &b,
+                            true,
+                        )
                     })
                     .collect();
                 let output = model.layers[index]
@@ -555,7 +716,7 @@ fn cuda_stage_precision_probe() {
                     .map(|i| {
                         if f.eligible[hop][i] {
                             (0..64)
-                                .map(|j| k[64 * i + j] as f64 * q[j] as f64)
+                                .map(|j| tf32(k[64 * i + j] as f64) * tf32(q[j] as f64))
                                 .sum::<f64>()
                                 / 8.
                         } else {
@@ -567,7 +728,11 @@ fn cuda_stage_precision_probe() {
                 let denom = scores.iter().map(|x| (x - max).exp()).sum::<f64>();
                 let p: Vec<_> = scores.iter().map(|x| (x - max).exp() / denom).collect();
                 let expected: Vec<_> = (0..64)
-                    .map(|j| (0..33).map(|i| p[i] * v[64 * i + j] as f64).sum::<f64>())
+                    .map(|j| {
+                        (0..33)
+                            .map(|i| tf32(p[i]) * tf32(v[64 * i + j] as f64))
+                            .sum::<f64>()
+                    })
                     .collect();
                 let read = attention_read(
                     keys.clone(),
@@ -587,7 +752,15 @@ fn cuda_stage_precision_probe() {
                 h = activation::relu(stage(4, z) + read);
             }
             let output = stage(5, h);
-            let expected = scalar(&snapshot, &context().0, &context().1, policy, ternary).0;
+            let expected = scalar(
+                &snapshot,
+                &context().0,
+                &context().1,
+                policy,
+                ternary,
+                false,
+            )
+            .0;
             let error = floats(output)
                 .unwrap()
                 .iter()

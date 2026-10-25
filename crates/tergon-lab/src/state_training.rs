@@ -8,7 +8,7 @@ use serde_json::{Value, json};
 use std::{error::Error, fs, io::Write, path::Path, time::Instant};
 use tergon_engine::{
     ComputeDevice, ParameterSnapshot, PlacementPlan,
-    state::ReadPolicy,
+    state::{Query, ReadPolicy, State},
     state_reasoner::{ReasonerSnapshot, SHAPES, StateReasoner},
 };
 type Result<T> = std::result::Result<T, Box<dyn Error>>;
@@ -66,6 +66,7 @@ struct Checkpoint {
     epoch_loss: f64,
     epoch_examples: usize,
     curves: Vec<Value>,
+    replay: Option<Value>,
 }
 fn write_new(path: &Path, bytes: &[u8]) -> Result<()> {
     let mut f = fs::OpenOptions::new()
@@ -141,6 +142,10 @@ fn validate(cp: &Checkpoint, source: &str, config: &str, data: &[String]) -> Res
         || !cp.elapsed_seconds.is_finite()
         || !cp.epoch_loss.is_finite()
         || cp.epoch_examples != cp.next_batch
+        || cp
+            .replay
+            .as_ref()
+            .is_some_and(|r| r["completed"] != true || cp.step < 250)
         || cp.parameters.len() != 12
         || cp.parameters.iter().any(|p| p.time != cp.step)
     {
@@ -163,6 +168,148 @@ fn policy(name: &str) -> ReadPolicy {
         ReadPolicy::MetadataOnly
     }
 }
+fn check_resume_values(
+    reference: &[f32],
+    restored: &[f32],
+    gpu: bool,
+    max_error: &mut f64,
+) -> Result<()> {
+    if reference.len() != restored.len() {
+        return Err("replay shape mismatch".into());
+    }
+    for (a, b) in reference.iter().zip(restored) {
+        let error = (*a as f64 - *b as f64).abs();
+        *max_error = max_error.max(error);
+        if !error.is_finite()
+            || if gpu {
+                error > 1e-5 + 1e-4 * (*a as f64).abs()
+            } else {
+                a.to_bits() != b.to_bits()
+            }
+        {
+            return Err(format!(
+                "serialized replay diverged: reference={a}, restored={b}, absolute_error={error}"
+            )
+            .into());
+        }
+    }
+    Ok(())
+}
+fn replay50(
+    model: &mut StateReasoner,
+    cp: &mut Checkpoint,
+    checkpoint: &Path,
+    data: (&[Example], &[(State, Query)]),
+    plan: PlacementPlan,
+    clock: (&Instant, f64),
+) -> Result<Value> {
+    let started = Instant::now();
+    let (examples, contexts) = data;
+    let mut actual_host_wait = 0.;
+    let gpu = matches!(plan.compute, ComputeDevice::Cuda(_));
+    let mut loaded = load(checkpoint)?;
+    validate(
+        &loaded,
+        &cp.source_revision,
+        &cp.config_sha256,
+        &cp.dataset_sha256,
+    )?;
+    if loaded.step != 200 || loaded.next_batch != 25600 || loaded.epoch != 0 {
+        return Err("replay must begin at frozen step200".into());
+    }
+    let mut restored = StateReasoner::restore(
+        &snapshot(&loaded.parameters),
+        loaded.mode == "ternary",
+        policy(&loaded.policy),
+        plan,
+    )?;
+    let mut max_loss_error = 0_f64;
+    let mut max_parameter_error = 0_f64;
+    let mut max_logit_error = 0_f64;
+    let mut replay_host_wait = 0.;
+    let mut replay_gpu_peak = training::gpu_memory_mib();
+    let mut final_batch = Vec::new();
+    for _ in 0..50 {
+        if clock.1 + clock.0.elapsed().as_secs_f64() >= 600. {
+            return Err("600-second budget exhausted during serialized replay".into());
+        }
+        let actual_indices = &cp.order[cp.next_batch..cp.next_batch + 128];
+        // Reconstruct only from deserialized cursor/order and raw events; do not use
+        // the actual model's cached contexts or a shared batch-generation closure.
+        let replay_indices = loaded.order[loaded.next_batch..loaded.next_batch + 128].to_vec();
+        if actual_indices != replay_indices
+            || cp.step != loaded.step
+            || cp.next_batch != loaded.next_batch
+            || cp.shuffle_state != loaded.shuffle_state
+        {
+            return Err("replay batch indices/cursor/order disagree".into());
+        }
+        let actual_batch: Vec<_> = actual_indices
+            .iter()
+            .map(|i| contexts[*i].clone())
+            .collect();
+        let actual_labels: Vec<_> = actual_indices.iter().map(|i| examples[*i].label).collect();
+        let replay_batch: Vec<_> = replay_indices
+            .iter()
+            .map(|i| examples[*i].materialize())
+            .collect();
+        let replay_labels: Vec<_> = replay_indices
+            .iter()
+            .map(|i| examples[*i].oracle())
+            .collect();
+        if actual_batch != replay_batch || actual_labels != replay_labels {
+            return Err("replay raw-event batches/labels disagree".into());
+        }
+        let actual_loss = model.step(&actual_batch, &actual_labels)?;
+        actual_host_wait += model.last_host_read_wait_seconds();
+        let restored_loss = restored.step(&replay_batch, &replay_labels)?;
+        replay_host_wait += restored.last_host_read_wait_seconds();
+        check_resume_values(&[actual_loss], &[restored_loss], gpu, &mut max_loss_error)?;
+        cp.epoch_loss += actual_loss as f64 * 128.;
+        cp.epoch_examples += 128;
+        cp.step += 1;
+        cp.next_batch += 128;
+        loaded.epoch_loss += restored_loss as f64 * 128.;
+        loaded.epoch_examples += 128;
+        loaded.step += 1;
+        loaded.next_batch += 128;
+        if let Some(memory) = training::gpu_memory_mib() {
+            replay_gpu_peak = Some(replay_gpu_peak.map_or(memory, |p| p.max(memory)));
+        }
+        final_batch = replay_batch;
+    }
+    let actual = model.snapshot()?;
+    let replayed = restored.snapshot()?;
+    for (a, b) in actual.parameters.iter().zip(&replayed.parameters) {
+        if a.time != b.time || a.time != 250 {
+            return Err("replay optimizer counter mismatch".into());
+        }
+        for (a, b) in [
+            (&a.values, &b.values),
+            (&a.moment_1, &b.moment_1),
+            (&a.moment_2, &b.moment_2),
+        ] {
+            check_resume_values(a, b, gpu, &mut max_parameter_error)?;
+        }
+    }
+    check_resume_values(
+        &model.logits(&final_batch)?,
+        &restored.logits(&final_batch)?,
+        gpu,
+        &mut max_logit_error,
+    )?;
+    loaded.parameters = saved(replayed);
+    validate(
+        &loaded,
+        &cp.source_revision,
+        &cp.config_sha256,
+        &cp.dataset_sha256,
+    )?;
+    Ok(
+        json!({"completed":true,"at_step":200,"updates":50,"batch_size":128,"last_step":250,"next_batch":loaded.next_batch,"indices_cursors_and_labels_match":true,"checkpoint_sha256":crate::hash(&fs::read(checkpoint)?),"max_loss_absolute_error":max_loss_error,"max_parameter_moment_absolute_error":max_parameter_error,"max_logit_absolute_error":max_logit_error,"tolerance":if gpu{"1e-5+1e-4*abs(reference)"}else{"bitwise"},"wall_seconds":started.elapsed().as_secs_f64(),"actual_model_host_read_wait_seconds":actual_host_wait,"restored_model_host_read_wait_seconds":replay_host_wait,"sampled_gpu_process_peak_mib":replay_gpu_peak,"peak_process_rss_kib":training::peak_rss_kib(),"additional_model_payload_bytes":SHAPES.iter().map(|(a,b)|(a*b+a)*12).sum::<usize>(),"memory_note":"extra latent/bias+two moments payload; excludes temporary gradients/activations/allocator; sampled process peak reported"}),
+    )
+}
+
 fn probabilities(logits: &[f32]) -> Result<Vec<f64>> {
     if logits.len() != 18 || logits.iter().any(|x| !x.is_finite()) {
         return Err("nonfinite or malformed logits".into());
@@ -267,12 +414,12 @@ fn evaluate(
             });
         }
     }
-    Ok((metrics(&rows), rows))
+    Ok((metrics(&rows, metamorphic), rows))
 }
-fn metrics(rows: &[Prediction]) -> Value {
+fn metrics(rows: &[Prediction], metamorphic: bool) -> Value {
     let summarize = |subset: Vec<&Prediction>| {
         let n = subset.len();
-        json!({"examples":n,"accuracy":subset.iter().filter(|p|p.label==p.predicted).count()as f64/n as f64,"brier":subset.iter().map(|p|p.brier).sum::<f64>()/n as f64,"confidently_unsupported":subset.iter().filter(|p|p.confidently_unsupported).count(),"renaming_consistency":subset.iter().filter(|p|p.renamed_consistent).count()as f64/n as f64,"order_consistency":subset.iter().filter(|p|p.reordered_consistent).count()as f64/n as f64})
+        json!({"examples":n,"accuracy":subset.iter().filter(|p|p.label==p.predicted).count()as f64/n as f64,"brier":subset.iter().map(|p|p.brier).sum::<f64>()/n as f64,"confidently_unsupported":subset.iter().filter(|p|p.confidently_unsupported).count(),"renaming_consistency":if metamorphic{json!(subset.iter().filter(|p|p.renamed_consistent).count()as f64/n as f64)}else{Value::Null},"order_consistency":if metamorphic{json!(subset.iter().filter(|p|p.reordered_consistent).count()as f64/n as f64)}else{Value::Null}})
     };
     let mut by_hop = serde_json::Map::new();
     for hop in 1..=3 {
@@ -297,6 +444,25 @@ fn metrics(rows: &[Prediction]) -> Value {
             by_outcome.insert(name.into(), summarize(subset));
         }
     }
+    let mut by_hop_outcome = serde_json::Map::new();
+    for hop in 1..=3 {
+        for (name, class) in [("known", 0), ("unknown", 16), ("conflict", 17)] {
+            let subset = rows
+                .iter()
+                .filter(|p| {
+                    p.hops == hop
+                        && if class == 0 {
+                            p.label < 16
+                        } else {
+                            p.label == class
+                        }
+                })
+                .collect::<Vec<_>>();
+            if !subset.is_empty() {
+                by_hop_outcome.insert(format!("{hop}/{name}"), summarize(subset));
+            }
+        }
+    }
     let mut counterfactual_pairs = 0;
     let mut changed = 0;
     let mut correct = 0;
@@ -307,7 +473,23 @@ fn metrics(rows: &[Prediction]) -> Value {
         changed += usize::from(a.predicted != b.predicted);
         correct += usize::from(a.predicted == a.label && b.predicted == b.label);
     }
-    json!({"all":summarize(rows.iter().collect()),"by_hop":by_hop,"by_outcome":by_outcome,"known_counterfactual_pairs":counterfactual_pairs,"prediction_changed_pairs":changed,"both_changed_answers_correct":correct})
+    let mut transitions = serde_json::Map::new();
+    for branch in 1..=3 {
+        let mut pairs = 0;
+        let mut changes = 0;
+        let mut both_correct = 0;
+        let mut updated_correct = 0;
+        for world in rows.as_chunks::<4>().0 {
+            let a = world.iter().find(|p| p.branch == 0).unwrap();
+            let b = world.iter().find(|p| p.branch == branch).unwrap();
+            pairs += 1;
+            changes += usize::from(a.predicted != b.predicted);
+            both_correct += usize::from(a.predicted == a.label && b.predicted == b.label);
+            updated_correct += usize::from(b.predicted == b.label);
+        }
+        transitions.insert(format!("known-to-{}",["","known","unknown","conflict"][branch]),json!({"world_pairs":pairs,"prediction_changed_pairs":changes,"both_answers_correct":both_correct,"updated_answer_correct":updated_correct}));
+    }
+    json!({"counterfactual_transitions":transitions,"all":summarize(rows.iter().collect()),"by_hop":by_hop,"by_outcome":by_outcome,"by_hop_outcome":by_hop_outcome,"known_counterfactual_pairs":counterfactual_pairs,"prediction_changed_pairs":changed,"both_changed_answers_correct":correct})
 }
 /// Run frozen paired conditions; an optional condition selection never changes the recipe.
 pub(crate) fn train(config_path: &Path, directory: &Path, resume: Option<&Path>) -> Result<()> {
@@ -363,7 +545,11 @@ pub(crate) fn train(config_path: &Path, directory: &Path, resume: Option<&Path>)
         return Err("invalid condition selection/resume combination".into());
     }
     fs::create_dir(directory)?;
-    write_json(&directory.join("config.json"), &config)?;
+    write_new(&directory.join("config.json"), &bytes)?;
+    write_new(
+        &directory.join("config.sha256"),
+        format!("{config_hash}\n").as_bytes(),
+    )?;
     state_data::audit(&directory.join("data"))?;
     let datasets: Vec<Vec<Example>> = (0..7)
         .map(|group| {
@@ -384,7 +570,7 @@ pub(crate) fn train(config_path: &Path, directory: &Path, resume: Option<&Path>)
         .map(|data| serde_json::to_vec(data).map(|b| crate::hash(&b)))
         .collect::<std::result::Result<_, _>>()?;
     let data_contexts: Vec<_> = datasets[0].iter().map(Example::materialize).collect();
-    let mut receipt = json!({"schema":1,"experiment":"typed-state-v1","source_revision":source,"source_dirty":dirty,"config_sha256":config_hash,"dataset_sha256":hashes,"selection":selected,"selection_parsed":conditions.iter().map(|(seed,policy,mode)|json!({"seed":seed,"policy":policy,"mode":mode})).collect::<Vec<_>>(),"device":"cuda:0","hardware":crate::command("nvidia-smi",&["--query-gpu=name,uuid,driver_version,memory.total","--format=csv,noheader"] )?,"rustc":crate::command("rustc",&["--version"])?,"runs":[],"limitations":["host canonical quantization and decoded GPU uploads; no packed training kernel","sampled GPU process memory is not guaranteed allocator peak","no energy sensor; no joule claim"]});
+    let mut receipt = json!({"schema":1,"experiment":"typed-state-v1","source_revision":source,"source_dirty":dirty,"config_sha256":config_hash,"dataset_sha256":hashes,"selection":selected,"selection_parsed":conditions.iter().map(|(seed,policy,mode)|json!({"seed":seed,"policy":policy,"mode":mode})).collect::<Vec<_>>(),"device":"cuda:0","cuda_arithmetic":config["cuda_arithmetic"],"hardware":crate::command("nvidia-smi",&["--query-gpu=name,uuid,driver_version,memory.total","--format=csv,noheader"] )?,"rustc":crate::command("rustc",&["--version"])?,"runs":[],"limitations":["host canonical quantization and decoded GPU uploads; no packed training kernel","sampled GPU process memory is not guaranteed allocator peak","no energy sensor; no joule claim"]});
     for (seed, policy_name, mode) in conditions {
         let run_dir = directory.join(format!("{seed}-{policy_name}-{mode}"));
         fs::create_dir(&run_dir)?;
@@ -415,6 +601,7 @@ pub(crate) fn train(config_path: &Path, directory: &Path, resume: Option<&Path>)
                 epoch_loss: 0.,
                 epoch_examples: 0,
                 curves: vec![],
+                replay: None,
             }
         };
         let elapsed_before = cp.elapsed_seconds;
@@ -433,6 +620,26 @@ pub(crate) fn train(config_path: &Path, directory: &Path, resume: Option<&Path>)
                     if elapsed_before + started.elapsed().as_secs_f64() >= 600. {
                         return Err("600-second budget exhausted".into());
                     }
+                    if cp.step == 200 && cp.replay.is_none() {
+                        cp.parameters = saved(model.snapshot()?);
+                        cp.elapsed_seconds = elapsed_before + started.elapsed().as_secs_f64();
+                        let checkpoint = run_dir.join("step-200.json");
+                        write_json(&checkpoint, &cp)?;
+                        let replay = replay50(
+                            &mut model,
+                            &mut cp,
+                            &checkpoint,
+                            (&datasets[0], &data_contexts),
+                            plan,
+                            (&started, elapsed_before),
+                        )?;
+                        host_wait += replay["actual_model_host_read_wait_seconds"]
+                            .as_f64()
+                            .ok_or("missing replay host timing")?;
+                        write_json(&run_dir.join("replay.json"), &replay)?;
+                        cp.replay = Some(replay);
+                        continue;
+                    }
                     let indices = &cp.order[cp.next_batch..cp.next_batch + 128];
                     let batch: Vec<_> = indices.iter().map(|i| data_contexts[*i].clone()).collect();
                     let labels: Vec<_> = indices.iter().map(|i| datasets[0][*i].label).collect();
@@ -446,11 +653,6 @@ pub(crate) fn train(config_path: &Path, directory: &Path, resume: Option<&Path>)
                         && let Some(memory) = training::gpu_memory_mib()
                     {
                         gpu_peak = Some(gpu_peak.map_or(memory, |p: u64| p.max(memory)));
-                    }
-                    if cp.step == 200 {
-                        cp.parameters = saved(model.snapshot()?);
-                        cp.elapsed_seconds = elapsed_before + started.elapsed().as_secs_f64();
-                        write_json(&run_dir.join("step-200.json"), &cp)?;
                     }
                 }
                 let (validation, _) = evaluate(&model, &datasets[1], false)?;
@@ -496,13 +698,14 @@ pub(crate) fn train(config_path: &Path, directory: &Path, resume: Option<&Path>)
         cp.parameters = saved(model.snapshot()?);
         cp.elapsed_seconds = elapsed_before + started.elapsed().as_secs_f64();
         let checkpoint_hash = write_json(&run_dir.join("final.json"), &cp)?;
-        if cp.elapsed_seconds > 600. && failure.is_none() {
+        let actual_elapsed = elapsed_before + started.elapsed().as_secs_f64();
+        if actual_elapsed > 600. && failure.is_none() {
             failure =
                 Some("600-second budget exceeded during evaluation/checkpoint finalization".into());
         }
         let matrix_weights: usize = SHAPES.iter().map(|(a, b)| a * b).sum();
         let biases: usize = SHAPES.iter().map(|(a, _)| a).sum();
-        let result = json!({"seed":seed,"policy":policy_name,"mode":mode,"completed":failure.is_none() && cp.epoch==20 && groups.len()==5,"failure":failure,"updates":cp.step,"epochs":cp.epoch,"elapsed_seconds":cp.elapsed_seconds,"host_read_wait_seconds":host_wait,"checkpoint_sha256":checkpoint_hash,"groups":groups,"curves":cp.curves,"peak_rss_kib":training::peak_rss_kib(),"sampled_gpu_process_peak_mib":gpu_peak,"gpu_sample_interval_steps":20,"model_memory":{"latent_matrix_bytes":matrix_weights*4,"floating_bias_bytes":biases*4,"adam_moment_bytes":(matrix_weights+biases)*8,"gradient_payload_bytes":(matrix_weights+biases)*4,"packed_matrix_payload_bytes":SHAPES.iter().map(|(a,b)|(a*b).div_ceil(4)+a*4).sum::<usize>(),"excludes":"activations, decoded weights, tensors, allocator and runtime; actual sampled process memory reported separately"},"transfer_accounting":{"f32_input_features_uploaded_bytes_per_forward_batch128":128*(33*85+20+3*5+3)*4,"boolean_mask_values_uploaded_per_forward_batch128":128*33*3,"ternary_activation_host_read_bytes_per_forward_batch128":if mode=="ternary"{128*(2*33*85+20+3*5+3*64+64)*4}else{0},"ternary_matrix_host_read_and_decoded_upload_bytes_each_per_forward":if mode=="ternary"{(2*64*85+64*20+3*64*5+3*64*64+18*64)*4}else{0},"limitation":"explicit payload accounting, not PCIe instrumentation; excludes finite reductions, logits, snapshots and allocator transfers"}});
+        let result = json!({"seed":seed,"policy":policy_name,"mode":mode,"completed":failure.is_none() && cp.epoch==20 && groups.len()==5 && cp.replay.as_ref().is_some_and(|r|r["completed"]==true),"failure":failure,"updates":cp.step,"epochs":cp.epoch,"elapsed_seconds":actual_elapsed,"serialized_replay":cp.replay,"host_read_wait_seconds":host_wait,"checkpoint_sha256":checkpoint_hash,"groups":groups,"curves":cp.curves,"peak_rss_kib":training::peak_rss_kib(),"sampled_gpu_process_peak_mib":gpu_peak,"gpu_sample_interval_steps":20,"model_memory":{"latent_matrix_bytes":matrix_weights*4,"floating_bias_bytes":biases*4,"adam_moment_bytes":(matrix_weights+biases)*8,"gradient_payload_bytes":(matrix_weights+biases)*4,"hypothetical_ternary_export_payload_bytes":if mode=="ternary"{Some(SHAPES.iter().map(|(a,b)|(a*b).div_ceil(4)+a*4).sum::<usize>())}else{None},"packed_export_residency":"not retained as model storage","excludes":"activations, decoded weights, tensors, allocator and runtime; actual sampled process memory reported separately"},"transfer_accounting":{"f32_input_features_uploaded_bytes_per_forward_batch128":128*(33*85+20+3*5+3)*4,"boolean_mask_values_uploaded_per_forward_batch128":128*33*3,"ternary_activation_host_read_bytes_per_forward_batch128":if mode=="ternary"{128*(2*33*85+20+3*5+3*64+64)*4}else{0},"ternary_matrix_host_read_and_decoded_upload_bytes_each_per_forward":if mode=="ternary"{(2*64*85+64*20+3*64*5+3*64*64+18*64)*4}else{0},"limitation":"explicit payload accounting, not PCIe instrumentation; excludes finite reductions, logits, snapshots and allocator transfers"}});
         write_json(&run_dir.join("run.json"), &result)?;
         receipt["runs"].as_array_mut().unwrap().push(result);
         write_json(
@@ -514,6 +717,14 @@ pub(crate) fn train(config_path: &Path, directory: &Path, resume: Option<&Path>)
         )?;
     }
     write_json(&directory.join("receipt.json"), &receipt)?;
+    if receipt["runs"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .any(|run| run["completed"] != true)
+    {
+        return Err("one or more selected conditions incomplete; preserved receipts".into());
+    }
     Ok(())
 }
 
@@ -574,6 +785,7 @@ mod tests {
                     epoch_loss: 1.,
                     epoch_examples: 25600,
                     curves: vec![],
+                    replay: None,
                 };
                 validate(&cp, source, "config", &data).unwrap();
                 let path = directory.join(format!("{mode}-{policy_name}.json"));
@@ -651,6 +863,121 @@ mod tests {
     #[test]
     fn serialized_cuda_replay_step200_next50() {
         replay(ComputeDevice::Cuda(0));
+    }
+    fn full_batch_replay_fixture(compute: ComputeDevice) {
+        let gpu = matches!(compute, ComputeDevice::Cuda(_));
+        let directory = std::env::temp_dir().join(format!(
+            "state-full-batch-replay-{}-{gpu}",
+            std::process::id()
+        ));
+        fs::create_dir(&directory).unwrap();
+        let examples = state_data::dataset(0, 8192);
+        let contexts: Vec<_> = examples.iter().map(Example::materialize).collect();
+        let mut parameters = initial(17);
+        for p in &mut parameters.parameters {
+            p.moment_1 = vec![0.; p.values.len()];
+            p.moment_2 = vec![0.; p.values.len()];
+            p.time = 200;
+        }
+        let mut rng = Rng(17 ^ 0x53485546464c45);
+        let mut order = (0..32768).collect::<Vec<_>>();
+        rng.shuffle(&mut order);
+        // A valid synthetic optimizer state at200 isolates the full-batch replay
+        // mechanism. Measured runs independently exercise their actually trained200 state.
+        for mode in if gpu {
+            vec!["float", "ternary"]
+        } else {
+            vec!["float"]
+        } {
+            let plan = PlacementPlan { compute };
+            let mut model =
+                StateReasoner::restore(&parameters, mode == "ternary", ReadPolicy::Enforced, plan)
+                    .unwrap();
+            let mut cp = Checkpoint {
+                schema: 1,
+                source_revision: "fixture".into(),
+                config_sha256: "fixture-config".into(),
+                dataset_sha256: vec!["data".into(); 7],
+                seed: 17,
+                selection: None,
+                mode: mode.into(),
+                policy: "enforced".into(),
+                epoch: 0,
+                next_batch: 25600,
+                step: 200,
+                shuffle_state: rng.0,
+                order: order.clone(),
+                parameters: saved(parameters.clone()),
+                elapsed_seconds: 0.,
+                epoch_loss: 0.,
+                epoch_examples: 25600,
+                curves: vec![],
+                replay: None,
+            };
+            let path = directory.join(format!("{mode}.json"));
+            write_json(&path, &cp).unwrap();
+            let started = Instant::now();
+            let result = replay50(
+                &mut model,
+                &mut cp,
+                &path,
+                (&examples, &contexts),
+                plan,
+                (&started, 0.),
+            )
+            .unwrap();
+            assert_eq!(result["completed"], true);
+            assert_eq!(cp.step, 250);
+            assert_eq!(cp.next_batch, 32000);
+            assert_eq!(result["indices_cursors_and_labels_match"], true);
+            if !gpu {
+                assert_eq!(result["max_parameter_moment_absolute_error"], 0.);
+                assert_eq!(result["max_logit_absolute_error"], 0.);
+            }
+        }
+        fs::remove_dir_all(directory).unwrap();
+    }
+    #[test]
+    fn full_batch_serialized_replay_cpu() {
+        full_batch_replay_fixture(ComputeDevice::Cpu);
+    }
+    #[cfg(feature = "cuda")]
+    #[test]
+    fn full_batch_serialized_replay_cuda() {
+        full_batch_replay_fixture(ComputeDevice::Cuda(0));
+    }
+    #[cfg(feature = "cuda")]
+    #[test]
+    #[ignore = "explicit release-mode development timing, no held-out metrics"]
+    fn release_cuda_batch128_timing() {
+        let data = state_data::dataset(0, 32);
+        let batch: Vec<_> = data.iter().map(Example::materialize).collect();
+        let labels: Vec<_> = data.iter().map(|e| e.label).collect();
+        for mode in ["float", "ternary"] {
+            for name in ["metadata-only", "enforced"] {
+                let mut model = StateReasoner::restore(
+                    &initial(17),
+                    mode == "ternary",
+                    policy(name),
+                    PlacementPlan {
+                        compute: ComputeDevice::Cuda(0),
+                    },
+                )
+                .unwrap();
+                for _ in 0..10 {
+                    model.step(&batch, &labels).unwrap();
+                }
+                let start = Instant::now();
+                for _ in 0..30 {
+                    model.step(&batch, &labels).unwrap();
+                }
+                let seconds = start.elapsed().as_secs_f64();
+                println!(
+                    "condition=17:{name}:{mode} batch=128 warmup_updates=10 timed_updates=30 seconds={seconds:.6} projected5120_training_seconds={:.3}",
+                    seconds * 5120. / 30.
+                );
+            }
+        }
     }
     #[test]
     fn brier_definition_and_tie_rule() {
