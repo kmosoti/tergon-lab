@@ -1,5 +1,9 @@
 # Publication status and remaining setup
 
+The foundation PR is merged. See the [2026-10-25 administration receipt](setup/2026-10-25-github-administration.md) for the later configuration, publication, verification, and pending App work.
+
+## Historical foundation publication receipt (2026-10-24)
+
 The owner created the public repository and Wiki on 2026-10-24. Source and
 history are pushed, eight component/experiment issues are open, and the
 [foundation PR #9](https://github.com/kmosoti/tergon-lab/pull/9) is ready for review.
