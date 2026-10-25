@@ -17,7 +17,7 @@ flowchart LR
 | tergon-lab | CLI, RunManifest receipts, IDX datasets, checkpoints and reports | All external I/O belongs here |
 | xtask | Architecture, evidence, documentation, contribution checks | Never a runtime dependency |
 
-Packed weights are immutable inference values. Future trainable latent weights
+Packed weights are immutable inference values. Trainable latent weights
 are floating-point parameters with a separate lifecycle. Experiment metadata is
 neither a tensor nor model state. An optimizer must not silently move tensors
 between host and GPU or turn packed values into mutable training state.
