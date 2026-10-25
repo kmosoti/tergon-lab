@@ -39,8 +39,9 @@ prevents learning Conflict from claim count alone.
 All four branches share the query and common distractors; they have identical
 record counts and exactly identical per-slot relation/type/status/source/time/ID
 metadata, apart from the subject/object ID changes being tested. One branch redirects a
-critical subject; another redirects an irrelevant compatible assertion to create
-conflict. Random branch order prevents positions from revealing outcomes.
+critical subject; the conflict branch changes the destination of an existing
+duplicate support. Known and Conflict have exactly equal active-observed degree
+by (subject,relation), so claim count cannot disclose agreement. Random branch order prevents positions from revealing outcomes.
 Assertion IDs, initial chronology and memory slot ordering are randomized
 independently of paths. A world and every branch/metamorphic variant stay in the
 same split and bootstrap cluster. No branch/world/outcome identity enters model
@@ -86,7 +87,9 @@ Six linear maps with floating biases project keys/values 85->64, query20->64,
 relation5->64, shared update64->64, decoder64->18. At each requested operation,
 `z = h + R(operation)`, `p = softmax(K z / sqrt(64))`,
 `read = sum_slot p_slot V_slot`, `h = ReLU(U z + read)`.
-There is one hop per relation. The same decoder produces 18 unrestricted logits.
+There is one semantic hop per relation. Fixed-shape execution computes three
+candidate hops for every batch and freezes state after each query’s actual
+length; timings include this padding work. The same decoder produces 18 unrestricted logits.
 No answer/type restriction is applied to output. Padding is always masked; NULL
 has its own input bit and is always eligible. Metadata-only attends every present
 record; enforced additionally excludes inactive, hypothetical and current-relation
@@ -95,13 +98,44 @@ incompatible records. Neither policy masks by a predicted/ground-truth subject.
 Each of seeds17,29,43 has metadata-only/enforced x float/ternary conditions with
 identical initial latent matrices, biases and batch ordering. All matrices use
 the existing rowwise quantization/identity STE or all use f32; activations remain
-f32. Existing numerical tolerances and MNIST behavior remain unchanged. Mean
+f32. Existing numerical tolerances and MNIST behavior remain unchanged.
+The pinned CUDA Auto matmul uses TF32-rounded operands with f32 storage and
+accumulation. The independent GPU scalar reference rounds each matmul operand
+using [NVIDIA PTX](https://docs.nvidia.com/cuda/parallel-thread-execution/index.html#data-movement-and-conversion-instructions-cvt)
+`cvt.rna.tf32.f32` (nearest, ties away; discard13fraction bits),
+accumulates in f64 and marks f32 storage boundaries. Analytic backward uses the
+same operand arithmetic as backend autodiff; it is not the derivative of operand
+rounding. CPU scalar equations remain ideal f64. New-model fixtures retain
+`1e-6 + 1e-6*abs(reference)` CPU and `1e-5 + 1e-5*abs(reference)` GPU against
+their declared arithmetic. Initial ideal-f64 GPU failures and stage probes are
+preserved: direct stage differences of up to~4.7e-5 collapsed to~3e-8 with the
+precision-aware reference. This diagnoses arithmetic; it does not relax a
+threshold or claim GPU agreement with ideal-f64 computation. Mean
 final-answer cross entropy is the only training objective. AdamW lr .001, betas
 .9/.999, epsilon1e-8, matrix decay .01, bias decay0, no clipping/schedule.
 Batch128,20 epochs, final checkpoints, no best-validation selection.
 
+`state-train <config> <new-run-dir> [--resume <checkpoint>]` executes the twelve
+frozen conditions. Optional `TERGON_STATE_RUN=17:metadata-only:float` selects one
+exact approved seed/policy/mode, is strictly validated and recorded verbatim and
+parsed, and changes no data/order/initialization/hyperparameter. Aggregate analysis
+requires all twelve distinct matching source/config/data conditions and successful
+full-batch replay. It enforces512 unique four-branch worlds per stratum and exact
+world/branch/label order across all model seeds before averaging. A failed
+metadata-only float competence control makes the study inconclusive. Resume rejects
+conflicting selection and carries elapsed execution budget across processes.
+
 Each run has 600 seconds excluding compilation and dataset generation. Record
 incomplete runs and errors; do not extend budgets after observing outcomes.
+Every measured condition reloads its actual step200 checkpoint from disk and
+replays the next50 full128 batches alongside the uninterrupted model. Replay
+reconstructs cursor/order and materializes raw events independently, compares
+indices/labels, each loss, final moments/parameters/counters/logits, and records
+maximum absolute errors, replay wall time and memory. Checkpoints retain the
+condition selector and completed replay proof; receipts record elapsed execution
+after final checkpoint write/fsync. Incomplete selected conditions preserve
+receipts and return nonzero; a completed negative accuracy result returns normally. Its time counts against
+600s and successful replay is required for run/study completion.
 Checkpoints carry parameters, moments, counters, data/config/source identity,
 shuffle RNG state/order and training position. Serialized replay after step200
 covers the next50 updates: CPU bitwise; NVIDIA GPU `1e-5 + 1e-4*abs(reference)`.
@@ -134,3 +168,19 @@ malformed-input tests, serialized replay, all five repository checks and explici
 RTX3060 Laptop CUDA fixtures precede formal execution. Incomplete runs cannot
 open the gate. Learned storage, HDC, learned type discovery, ternary activations,
 optimizers/kernels/offload/distribution remain excluded from this main experiment.
+
+## Reproduction commands
+
+```bash
+cargo run --release --locked -p tergon-lab -- state-audit <new-data-dir>
+TERGON_STATE_RUN=17:metadata-only:float cargo run --release --locked -p tergon-lab --features cuda -- state-train experiments/typed-state-v1.json <new-condition-dir>
+cargo run --release --locked -p tergon-lab -- state-analyze <runs-root> <new-report.json>
+```
+
+Run each of the twelve selectors in a new process for condition-specific process
+RSS. The CUDA build/runtime environment is provisioned outside the repository.
+Explicit developer probes (excluded from formal results) are
+`cargo test --locked -p tergon-engine --features cuda cuda_stage_precision_probe -- --ignored --nocapture`
+and `cargo test --release --locked -p tergon-lab --features cuda release_cuda_batch128_timing -- --ignored --nocapture`.
+The latter uses training worlds, ten warm updates and thirty timed batch128
+updates per condition; it reports timing only, with no held-out learning metric.

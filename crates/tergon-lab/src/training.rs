@@ -243,7 +243,7 @@ fn evaluate(
         ce / (end - start) as f64,
     ))
 }
-fn peak_rss_kib() -> Option<u64> {
+pub(crate) fn peak_rss_kib() -> Option<u64> {
     fs::read_to_string("/proc/self/status")
         .ok()?
         .lines()
@@ -255,7 +255,7 @@ fn peak_rss_kib() -> Option<u64> {
                 .ok()
         })
 }
-fn gpu_memory_mib() -> Option<u64> {
+pub(crate) fn gpu_memory_mib() -> Option<u64> {
     let out = Command::new("nvidia-smi")
         .args([
             "--query-compute-apps=pid,used_gpu_memory",

@@ -4,6 +4,7 @@
 //! a reference path; it does not implement packed GEMM.
 
 pub mod state;
+pub mod state_reasoner;
 mod ternary;
 mod training;
 pub use ternary::TernaryLinear;

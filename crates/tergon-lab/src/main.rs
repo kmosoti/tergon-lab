@@ -1,5 +1,7 @@
 //! Reproducible component experiments.
+mod state_analysis;
 mod state_data;
+mod state_training;
 mod training;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
@@ -172,6 +174,9 @@ fn smoke(config: &Path, out: &Path) -> Result<(), Box<dyn Error>> {
 fn main() -> Result<(), Box<dyn Error>> {
     let args: Vec<_> = std::env::args().skip(1).collect();
     match args.as_slice() {
+        [cmd,root,out] if cmd=="state-analyze"=>state_analysis::analyze(Path::new(root),Path::new(out)),
+        [cmd,config,out] if cmd=="state-train"=>state_training::train(Path::new(config),Path::new(out),None),
+        [cmd,config,out,flag,checkpoint] if cmd=="state-train" && flag=="--resume"=>state_training::train(Path::new(config),Path::new(out),Some(Path::new(checkpoint))),
         [cmd, out] if cmd=="state-audit" => state_data::audit(Path::new(out)),
         [cmd, config, out] if cmd == "smoke" => smoke(Path::new(config), Path::new(out)),
         [cmd, config, dataset, out] if cmd == "train" => training::train(Path::new(config), Path::new(dataset), Path::new(out), None),
