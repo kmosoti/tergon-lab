@@ -15,3 +15,4 @@ quality, memory use, or execution cost on accessible hardware.
 
 These pages are canonical in docs/wiki in the source repository. The GitHub Wiki
 is a published mirror of a reviewed main revision, identified in its footer.
+The topic links above open published Wiki pages.
